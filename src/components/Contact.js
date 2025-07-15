@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -50,12 +50,7 @@ const Contact = () => {
       value: "siddhantamohanty22@gmail.com",
       link: "mailto:siddhantamohanty22@gmail.com"
     },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+1 (814) 280-7096",
-      link: "tel:+18142807096"
-    },
+
     {
       icon: MapPin,
       label: "Location",
