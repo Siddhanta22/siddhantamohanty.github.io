@@ -45,13 +45,6 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: Mail,
-      label: "Email",
-      value: "siddhantamohanty22@gmail.com",
-      link: "mailto:siddhantamohanty22@gmail.com"
-    },
-
-    {
       icon: MapPin,
       label: "Location",
       value: "State College, PA, USA",
@@ -113,12 +106,37 @@ const Contact = () => {
 
             {/* Contact Details */}
             <div className="space-y-6">
+              {/* Email Icon */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex items-center space-x-4"
+              >
+                <motion.a
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="mailto:siddhantamohanty22@gmail.com"
+                  className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200"
+                >
+                  <Mail className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                </motion.a>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    Email
+                  </p>
+                  <p className="text-gray-900 dark:text-white">
+                    Click to send me an email
+                  </p>
+                </div>
+              </motion.div>
+
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   className="flex items-center space-x-4"
                 >
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
