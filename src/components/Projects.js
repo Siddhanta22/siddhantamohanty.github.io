@@ -58,22 +58,7 @@ const Projects = () => {
       production: true,
       highlights: ["Cinematic UI Design", "Swipe Gestures", "Personalized Recommendations", "Production Deployed"]
     },
-    {
-      id: 4,
-      title: "CourseScheduler",
-      description: "A smart academic planning tool that helps students navigate complex degree requirements and optimize their course schedules using NLP.",
-      longDescription: "Production application that simplifies academic planning for students with multiple majors/minors. Features include: intelligent course conflict detection, personalized graduation planning, degree requirement tracking, and an intuitive drag-and-drop interface. Built with modern web technologies and designed for university-scale deployment.",
-      technologies: ["Node.js", "MongoDB", "React", "Tailwind CSS", "NLP", "Python", "Production"],
-      icon: Calendar,
-      color: "from-orange-500 to-yellow-600",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      date: "October 2024",
-      github: "https://github.com/siddhantamohanty/course-scheduler",
-      live: null,
-      featured: true,
-      production: true,
-      highlights: ["NLP-Powered Planning", "Conflict Detection", "Multi-Major Support", "University Ready"]
-    }
+
   ];
 
   const containerVariants = {
