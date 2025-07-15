@@ -1,0 +1,164 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { GraduationCap, MapPin, Calendar, Award } from 'lucide-react';
+
+const About = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const education = {
+    institution: "Pennsylvania State University - University Park",
+    degree: "Bachelor's in Computer Science",
+    minor: "Mathematics",
+    dates: "August 2022 - May 2026",
+    location: "State College, PA, USA",
+    relevantCourses: [
+      "CMPSC465: Data Structures and Algorithms",
+      "CMPSC461: Programming Language Concepts", 
+      "CMPEN331: Computer Organization & Design",
+      "CMPSC442: Artificial Intelligence"
+    ]
+  };
+
+  const honors = [
+    "Dean's List Fall 2023",
+    "Dean's List Spring 2024"
+  ];
+
+  return (
+    <section id="about" className="py-20 bg-gray-50 dark:bg-dark-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            My <span className="gradient-text">Journey</span>
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            A curious mind exploring the intersection of technology and human potential
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Personal Story */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              From AI Systems to Creative Apps
+            </h3>
+            
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p>
+                As a senior at Penn State majoring in Computer Science with a Mathematics minor, 
+                I'm obsessed with creating systems that don't just work—they think, adapt, and 
+                solve real problems intelligently. I love the challenge of making complex things simple.
+              </p>
+              
+              <p>
+                My work spans from developing a <span className="font-semibold text-primary-600 dark:text-primary-400">
+                self-healing backend</span> that uses GPT-4o and vector search to convert raw error 
+                logs into human-readable insights, to exploring how AI tools can simplify everyday 
+                decisions through projects like "Photobot"—an intelligent camera assistant, to creating 
+                engaging user experiences like "Swipeflix"—a movie discovery app that makes finding 
+                your next watch as fun as dating apps make finding love.
+              </p>
+              
+              <p>
+                I'm drawn to challenges that require structure, curiosity, and creativity—whether 
+                that's refining autonomous vehicle perception modules or collaborating on innovative 
+                side projects. I believe the best technology feels invisible while solving problems 
+                that matter. When I'm not coding, you'll find me exploring new ideas, keeping up with 
+                technological breakthroughs, and thinking about how we can build a more intelligent future together.
+              </p>
+              
+
+            </div>
+          </motion.div>
+
+          {/* Education & Honors */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="space-y-8"
+          >
+            {/* Education Card */}
+            <div className="bg-white dark:bg-dark-700 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-dark-600">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mr-4">
+                  <GraduationCap className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Education</h4>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Penn State University</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                  <MapPin className="w-4 h-4 mr-2 text-primary-500" />
+                  {education.location}
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                  <Calendar className="w-4 h-4 mr-2 text-primary-500" />
+                  {education.dates}
+                </div>
+                <div className="pt-2">
+                  <p className="font-medium text-gray-900 dark:text-white">{education.degree}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Minor in {education.minor}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Honors Card */}
+            <div className="bg-white dark:bg-dark-700 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-dark-600">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-accent-100 dark:bg-accent-900/30 rounded-lg flex items-center justify-center mr-4">
+                  <Award className="w-6 h-6 text-accent-600 dark:text-accent-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Honors & Awards</h4>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Academic Excellence</p>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                {honors.map((honor, index) => (
+                  <div key={index} className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                    <div className="w-2 h-2 bg-accent-500 rounded-full mr-3"></div>
+                    {honor}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Relevant Coursework */}
+            <div className="bg-white dark:bg-dark-700 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-dark-600">
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Relevant Coursework</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {education.relevantCourses.map((course, index) => (
+                  <div key={index} className="text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-dark-600 rounded-lg p-3">
+                    {course}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About; 
