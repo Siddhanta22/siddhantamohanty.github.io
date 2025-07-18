@@ -6,9 +6,9 @@
 // 4. Get your service ID, template ID, and public key
 
 export const emailjsConfig = {
-  serviceId: process.env.REACT_APP_EMAILJS_SERVICE_ID || 'YOUR_EMAILJS_SERVICE_ID',
-  templateId: process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'YOUR_EMAILJS_TEMPLATE_ID',
-  publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_EMAILJS_PUBLIC_KEY',
+  serviceId: 'service_pvqs3hx',
+  templateId: 'template_ch7vrmq',
+  publicKey: 'NJVUxvcGu_QqCNhPZ',
   toEmail: 'siddhantamohanty22@gmail.com'
 };
 
