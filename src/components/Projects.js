@@ -20,7 +20,7 @@ const Projects = () => {
       color: "from-blue-500 to-purple-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
       date: "June 2025 - Present",
-      github: "https://github.com/Siddhanta22/self-healing-backend",
+      github: "https://github.com/Siddhanta22/Self-Healing-System",
       live: null,
       featured: true,
       production: true,
@@ -73,6 +73,22 @@ const Projects = () => {
       featured: true,
       production: true,
       highlights: ["NLP-Powered Planning", "Conflict Detection", "Multi-Major Support", "University Ready"]
+    },
+    {
+      id: 5,
+      title: "yourAIbrief",
+      description: "A comprehensive AI newsletter platform delivering curated, up-to-date artificial intelligence news with superior coverage and personalization.",
+      longDescription: "Built to help users stay ahead in the fast-moving world of AI. Features include: personalized content curation, automated news aggregation, intelligent content filtering, responsive design, and seamless user experience. The platform provides daily insights into the latest AI developments, research breakthroughs, and industry trends.",
+      technologies: ["TypeScript", "React", "Node.js", "AI News", "Newsletter", "Content Curation", "Production"],
+      icon: Brain,
+      color: "from-indigo-500 to-purple-600",
+      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
+      date: "December 2024 - Present",
+      github: "https://github.com/Siddhanta22/yourAIbrief",
+      live: null,
+      featured: true,
+      production: true,
+      highlights: ["AI News Curation", "Personalized Content", "Daily Updates", "Industry Insights"]
     }
 
   ];
