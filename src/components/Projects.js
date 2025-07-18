@@ -36,7 +36,7 @@ const Projects = () => {
       color: "from-green-500 to-teal-600",
       bgColor: "bg-green-50 dark:bg-green-900/20",
       date: "May 2025 - Present",
-      github: "https://github.com/Siddhanta22/photobot",
+      github: null,
       live: null,
       featured: true,
       production: true,
@@ -53,7 +53,7 @@ const Projects = () => {
       bgColor: "bg-red-50 dark:bg-red-900/20",
       date: "January 2025 - Present",
       github: "https://github.com/Siddhanta22/swipeflix",
-      live: "https://swipeflix.siddhantamohanty.com",
+      live: "https://swipeflix-hs29t5f63-siddhantas-projects-3ab40877.vercel.app/",
       featured: true,
       production: true,
       highlights: ["Cinematic UI Design", "Swipe Gestures", "Personalized Recommendations", "Production Deployed"]
