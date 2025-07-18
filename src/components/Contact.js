@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { emailjsConfig } from '../config/emailjs';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -18,29 +20,51 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+    setError('');
+
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: emailjsConfig.toEmail
+      };
+
+      await emailjs.send(
+        emailjsConfig.serviceId, 
+        emailjsConfig.templateId, 
+        templateParams, 
+        emailjsConfig.publicKey
+      );
+      
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
       
-      // Reset success message after 3 seconds
+      // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
-      }, 3000);
-    }, 1000);
+      }, 5000);
+    } catch (err) {
+      console.error('Email sending failed:', err);
+      setIsSubmitting(false);
+      setError('Failed to send message. Please try again or contact me directly via email.');
+    }
   };
 
   const contactInfo = [
@@ -276,6 +300,17 @@ const Contact = () => {
                     placeholder="Tell me about your project, opportunity, or just say hello!"
                   ></textarea>
                 </div>
+
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center text-red-500"
+                  >
+                    <AlertCircle className="w-6 h-6 mb-2" />
+                    <p>{error}</p>
+                  </motion.div>
+                )}
 
                 <motion.button
                   whileHover={{ scale: 1.02 }}
