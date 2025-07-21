@@ -60,6 +60,22 @@ const Projects = () => {
     },
     {
       id: 4,
+      title: "Prompt Tracer",
+      description: "Browser extension for analyzing and optimizing AI prompts across ChatGPT, Claude, Grok, and Gemini with real-time scoring and privacy-first design.",
+      longDescription: "A sophisticated Chrome extension that transforms AI interactions through intelligent prompt analysis and optimization. Features real-time scoring, privacy-first local processing, cross-platform support, and an interactive analytics dashboard for progress tracking.",
+      technologies: ["JavaScript", "Chrome Extension", "Prompt Engineering", "Privacy", "Analytics", "AI", "Cross-Platform"],
+      icon: Zap,
+      color: "from-yellow-500 to-amber-600",
+      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+      date: "July 2025 - Present",
+      github: "https://github.com/Siddhanta22/prompt_tracer",
+      live: null,
+      featured: true,
+      production: true,
+      highlights: ["Real-time Prompt Analysis", "Privacy-First", "Cross-Platform", "Interactive Analytics"]
+    },
+    {
+      id: 5,
       title: "CourseScheduler",
       description: "A smart academic planning tool that helps students navigate complex degree requirements and optimize their course schedules using NLP.",
       longDescription: "Production application that simplifies academic planning for students with multiple majors/minors. Features include: intelligent course conflict detection, personalized graduation planning, degree requirement tracking, and an intuitive drag-and-drop interface. Built with modern web technologies and designed for university-scale deployment.",
@@ -75,7 +91,7 @@ const Projects = () => {
       highlights: ["NLP-Powered Planning", "Conflict Detection", "Multi-Major Support", "University Ready"]
     },
     {
-      id: 5,
+      id: 6,
       title: "yourAIbrief",
       description: "A comprehensive AI newsletter platform delivering curated, up-to-date artificial intelligence news with superior coverage and personalization.",
       longDescription: "Built to help users stay ahead in the fast-moving world of AI. Features include: personalized content curation, automated news aggregation, intelligent content filtering, responsive design, and seamless user experience. The platform provides daily insights into the latest AI developments, research breakthroughs, and industry trends.",
