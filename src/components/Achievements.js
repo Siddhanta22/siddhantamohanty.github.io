@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Trophy, Award, Target, TrendingUp, Users, Zap, Star } from 'lucide-react';
+import { Trophy, Target, Zap, Star } from 'lucide-react';
 
 const Achievements = () => {
   const [ref, inView] = useInView({
@@ -35,26 +35,18 @@ const Achievements = () => {
       bgColor: "bg-blue-50 dark:bg-blue-900/20"
     },
     {
-      icon: Users,
-      title: "2K+ Users",
-      description: "Active Users",
-      period: "Swipeflix Platform",
-      color: "from-purple-400 to-pink-500",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20"
-    },
-    {
       icon: Zap,
-      title: "99.9% Uptime",
-      description: "System Reliability",
-      period: "Production Systems",
+      title: "60% Faster",
+      description: "Configuration Decisions",
+      period: "Photobot AI Assistant",
       color: "from-indigo-400 to-purple-500",
       bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
     },
     {
       icon: Star,
-      title: "4.8★ Rating",
-      description: "User Satisfaction",
-      period: "Swipeflix App",
+      title: "Dean's List",
+      description: "Academic Excellence",
+      period: "Fall 2023 & Spring 2024",
       color: "from-rose-400 to-pink-500",
       bgColor: "bg-rose-50 dark:bg-rose-900/20"
     }
@@ -160,34 +152,34 @@ const Achievements = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
-                  6+
+                  6
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Production Apps
+                  Projects Built
                 </div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-accent-600 dark:text-accent-400 mb-2">
-                  15+
+                  3
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Technologies
+                  Internships
                 </div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                  3K+
+                  2
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Total Users
+                  Dean's List
                 </div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  2
+                  2026
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Years Experience
+                  Graduation Year
                 </div>
               </div>
             </div>

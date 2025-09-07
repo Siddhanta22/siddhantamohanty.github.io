@@ -4,7 +4,6 @@ import { ChevronDown, Download, Github, Linkedin, Mail, Sparkles, Code, Cpu } fr
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
   
   const roles = [
     "AI Engineer",
@@ -14,12 +13,11 @@ const Hero = () => {
   ];
 
   useEffect(() => {
-    setIsVisible(true);
     const interval = setInterval(() => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   const scrollToAbout = () => {
     document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
