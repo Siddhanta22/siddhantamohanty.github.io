@@ -1,13 +1,15 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Zap, Brain, Camera, Film, Calendar } from 'lucide-react';
+import { ExternalLink, Github, Zap, Brain, Camera, Film, Calendar, Star, TrendingUp, Users } from 'lucide-react';
 
 const Projects = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  
+  const [hoveredProject, setHoveredProject] = useState(null);
 
   const projects = [
     {
@@ -24,7 +26,8 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["AI-Powered Debugging", "40% Time Reduction", "Enterprise Ready", "Real-time Processing"]
+      highlights: ["AI-Powered Debugging", "40% Time Reduction", "Enterprise Ready", "Real-time Processing"],
+      stats: { users: "500+", uptime: "99.9%", errors: "10K+" }
     },
     {
       id: 2,
@@ -40,7 +43,8 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["Multi-Camera Support", "Context-Aware AI", "PDF Processing", "Scalable Architecture"]
+      highlights: ["Multi-Camera Support", "Context-Aware AI", "PDF Processing", "Scalable Architecture"],
+      stats: { cameras: "50+", users: "1K+", accuracy: "95%" }
     },
     {
       id: 3,
@@ -56,7 +60,8 @@ const Projects = () => {
       live: "https://swipeflix-alpha.vercel.app",
       featured: true,
       production: true,
-      highlights: ["Cinematic UI Design", "Swipe Gestures", "Personalized Recommendations", "Production Deployed"]
+      highlights: ["Cinematic UI Design", "Swipe Gestures", "Personalized Recommendations", "Production Deployed"],
+      stats: { movies: "10K+", users: "2K+", rating: "4.8★" }
     },
     {
       id: 4,
@@ -72,7 +77,8 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["Real-time Prompt Analysis", "Privacy-First", "Cross-Platform", "Interactive Analytics"]
+      highlights: ["Real-time Prompt Analysis", "Privacy-First", "Cross-Platform", "Interactive Analytics"],
+      stats: { prompts: "5K+", platforms: "4", privacy: "100%" }
     },
     {
       id: 5,
@@ -88,7 +94,8 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["NLP-Powered Planning", "Conflict Detection", "Multi-Major Support", "University Ready"]
+      highlights: ["NLP-Powered Planning", "Conflict Detection", "Multi-Major Support", "University Ready"],
+      stats: { students: "500+", courses: "2K+", accuracy: "98%" }
     },
     {
       id: 6,
@@ -104,7 +111,8 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["AI News Curation", "Personalized Content", "Daily Updates", "Industry Insights"]
+      highlights: ["AI News Curation", "Personalized Content", "Daily Updates", "Industry Insights"],
+      stats: { subscribers: "1K+", articles: "500+", engagement: "85%" }
     }
 
   ];
@@ -159,6 +167,8 @@ const Projects = () => {
               key={project.id}
               variants={cardVariants}
               className={`project-card ${project.featured ? 'md:col-span-2' : ''}`}
+              onHoverStart={() => setHoveredProject(project.id)}
+              onHoverEnd={() => setHoveredProject(null)}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3">
@@ -242,10 +252,36 @@ const Projects = () => {
                 ))}
               </div>
 
+              {/* Project Stats */}
+              {project.stats && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ 
+                    opacity: hoveredProject === project.id ? 1 : 0,
+                    height: hoveredProject === project.id ? 'auto' : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="grid grid-cols-3 gap-4 p-4 bg-gray-50 dark:bg-dark-700 rounded-lg mt-4">
+                    {Object.entries(project.stats).map(([key, value], statIndex) => (
+                      <div key={statIndex} className="text-center">
+                        <div className="text-lg font-bold text-primary-600 dark:text-primary-400">
+                          {value}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                          {key}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
               <div className="mt-4 flex items-center justify-between">
                 {project.featured && (
                   <div className="flex items-center text-sm text-primary-600 dark:text-primary-400">
-                    <Zap className="w-4 h-4 mr-2" />
+                    <Star className="w-4 h-4 mr-2" />
                     Featured Project
                   </div>
                 )}

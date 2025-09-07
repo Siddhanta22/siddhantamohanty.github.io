@@ -71,6 +71,12 @@ const Footer = () => {
                 Projects
               </a>
               <a
+                href="#achievements"
+                className="block text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+              >
+                Achievements
+              </a>
+              <a
                 href="#experience"
                 className="block text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >

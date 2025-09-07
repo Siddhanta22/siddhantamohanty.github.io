@@ -5,10 +5,14 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
+import Achievements from './components/Achievements';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ParticleBackground from './components/ParticleBackground';
+import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -53,7 +57,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 relative">
+      <ScrollProgress />
+      <ParticleBackground />
       {/* Theme Toggle Button */}
       <button
         onClick={toggleDarkMode}
@@ -140,6 +146,12 @@ function App() {
                 Projects
               </button>
               <button
+                onClick={() => scrollToSection('achievements')}
+                className="text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+              >
+                Achievements
+              </button>
+              <button
                 onClick={() => scrollToSection('experience')}
                 className="text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
               >
@@ -164,15 +176,17 @@ function App() {
 
       {/* Main Content */}
       <Header scrollToSection={scrollToSection} />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <Projects />
+        <Achievements />
         <Experience />
         <Skills />
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }
