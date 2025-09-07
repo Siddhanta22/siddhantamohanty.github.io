@@ -10,6 +10,7 @@ const Projects = () => {
   });
   
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [showPreview, setShowPreview] = useState(null);
 
   const projects = [
     {
@@ -161,8 +162,18 @@ const Projects = () => {
               key={project.id}
               variants={cardVariants}
               className={`project-card ${project.featured ? 'md:col-span-2' : ''}`}
-              onHoverStart={() => setHoveredProject(project.id)}
-              onHoverEnd={() => setHoveredProject(null)}
+              onHoverStart={() => {
+                setHoveredProject(project.id);
+                setShowPreview(project.id);
+              }}
+              onHoverEnd={() => {
+                setHoveredProject(null);
+                setShowPreview(null);
+              }}
+              whileHover={{ 
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3">
@@ -237,14 +248,37 @@ const Projects = () => {
 
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, techIndex) => (
-                  <span
+                  <motion.span
                     key={techIndex}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: techIndex * 0.1 }}
                     className={`skill-tag ${tech === 'Production Ready' || tech === 'Production' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 border-green-300 dark:border-green-700' : ''}`}
                   >
                     {tech}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
+
+              {/* Fun Preview Effect */}
+              {showPreview === project.id && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="mt-4 p-4 bg-gradient-to-r from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-lg border border-primary-200 dark:border-primary-800"
+                >
+                  <div className="flex items-center space-x-2 text-sm text-primary-700 dark:text-primary-300">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Zap className="w-4 h-4" />
+                    </motion.div>
+                    <span className="font-medium">✨ This project showcases cutting-edge AI and modern web technologies!</span>
+                  </div>
+                </motion.div>
+              )}
 
 
               <div className="mt-4 flex items-center justify-between">

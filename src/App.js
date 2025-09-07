@@ -6,11 +6,13 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Achievements from './components/Achievements';
+import FunFacts from './components/FunFacts';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ParticleBackground from './components/ParticleBackground';
+import MouseParticles from './components/MouseParticles';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
@@ -60,6 +62,7 @@ function App() {
     <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 relative">
       <ScrollProgress />
       <ParticleBackground />
+      <MouseParticles />
       {/* Theme Toggle Button */}
       <button
         onClick={toggleDarkMode}
@@ -181,6 +184,7 @@ function App() {
         <About />
         <Projects />
         <Achievements />
+        <FunFacts />
         <Experience />
         <Skills />
         <Contact />

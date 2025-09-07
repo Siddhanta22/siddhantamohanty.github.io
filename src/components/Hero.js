@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Download, Github, Linkedin, Mail, Sparkles, Code, Cpu } from 'lucide-react';
+import TypingAnimation from './TypingAnimation';
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
@@ -120,25 +121,21 @@ const Hero = () => {
             <span className="gradient-text">Siddhanta</span>
           </motion.h1>
 
-          {/* Dynamic Role Display */}
+          {/* Dynamic Role Display with Typing Animation */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             className="h-16 flex items-center justify-center"
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentRole}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="text-2xl md:text-3xl font-semibold text-primary-600 dark:text-primary-400"
-              >
-                {roles[currentRole]}
-              </motion.div>
-            </AnimatePresence>
+            <div className="text-2xl md:text-3xl font-semibold text-primary-600 dark:text-primary-400">
+              <TypingAnimation 
+                texts={roles}
+                speed={100}
+                deleteSpeed={50}
+                pauseTime={2000}
+              />
+            </div>
           </motion.div>
 
           {/* Subtitle */}
