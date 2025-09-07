@@ -17,18 +17,18 @@ import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Check for saved dark mode preference or default to system preference
+    // Check for saved dark mode preference or default to dark mode
     const savedMode = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (savedMode !== null) {
       setDarkMode(savedMode === 'true');
     } else {
-      setDarkMode(prefersDark);
+      // Default to dark mode instead of system preference
+      setDarkMode(true);
     }
   }, []);
 
