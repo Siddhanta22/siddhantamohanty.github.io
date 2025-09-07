@@ -23,6 +23,16 @@ const Hero = () => {
     document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
   };
 
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = 'https://siddhanta22.github.io/siddhantamohanty.github.io/Resume_main.pdf';
+    link.download = 'Siddhanta_Mohanty_Resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Elements */}
@@ -172,18 +182,15 @@ const Hero = () => {
               <ChevronDown className="w-5 h-5" />
             </motion.button>
 
-            <motion.a
+            <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              href="https://siddhanta22.github.io/siddhantamohanty.github.io/Resume_main.pdf"
-              download="Siddhanta_Mohanty_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={downloadResume}
               className="px-8 py-3 border-2 border-primary-600 text-primary-600 dark:text-primary-400 rounded-lg font-semibold hover:bg-primary-600 hover:text-white transition-all duration-300 flex items-center space-x-2 glass-effect"
             >
               <Download className="w-5 h-5" />
               <span>Download Resume</span>
-            </motion.a>
+            </motion.button>
           </motion.div>
 
           {/* Social Links */}
