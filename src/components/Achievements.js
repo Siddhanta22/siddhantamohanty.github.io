@@ -138,53 +138,6 @@ const Achievements = () => {
           ))}
         </motion.div>
 
-        {/* Fun Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-xl border border-gray-200 dark:border-dark-700 p-8">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              By the Numbers
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
-                  6
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Projects Built
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-accent-600 dark:text-accent-400 mb-2">
-                  3
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Internships
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                  2
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Dean's List
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  2026
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Graduation Year
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

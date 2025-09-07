@@ -176,7 +176,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               href="/Resume_main.pdf"
-              download
+              download="Siddhanta_Mohanty_Resume.pdf"
               className="px-8 py-3 border-2 border-primary-600 text-primary-600 dark:text-primary-400 rounded-lg font-semibold hover:bg-primary-600 hover:text-white transition-all duration-300 flex items-center space-x-2 glass-effect"
             >
               <Download className="w-5 h-5" />

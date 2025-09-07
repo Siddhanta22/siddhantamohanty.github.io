@@ -218,8 +218,8 @@ const Skills = () => {
                   <div className="flex flex-col items-end">
                     <span className="text-xs text-primary-600 dark:text-primary-400 font-medium">May 2024</span>
                     <a
-                      href="/Coursera%20.pdf"
-                      download
+                      href="/Coursera .pdf"
+                      download="AI_For_Everyone_Certificate.pdf"
                       className="mt-2 inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold rounded hover:bg-primary-200 dark:hover:bg-primary-800 transition"
                     >
                       Download Certificate
