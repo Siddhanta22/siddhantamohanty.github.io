@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Trophy, Target, Zap, Star } from 'lucide-react';
+import { Trophy, Target, TrendingUp, Zap, Star } from 'lucide-react';
 
 const Achievements = () => {
   const [ref, inView] = useInView({
