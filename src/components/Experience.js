@@ -12,6 +12,23 @@ const Experience = () => {
   const experiences = [
     {
       id: 1,
+      company: "Penn State University",
+      role: "Research Assistant",
+      location: "University Park, PA, USA",
+      dates: "September 2025 - Present",
+      description: "Research Assistant on a project integrating Reinforcement Learning (RL) into a multi-stage large language model (LLM) system for code and content verification.",
+      achievements: [
+        "Designed the RL layer that leverages reports from a secondary LLM to generate improved prompts and feedback signals for the primary LLM.",
+        "Worked within a pipeline where outputs from the main LLM are analyzed by compilers and static analysis tools (Compiler, Klee, CodeQL) before refinement through RL.",
+        "Contributed to competition-ready frameworks including CAN message integration and perception pipelines aligned with SAE Year 4/5 challenge requirements.",
+        "Developed advanced RL algorithms for multi-stage LLM optimization and code verification systems."
+      ],
+      technologies: ["Reinforcement Learning", "LLMs", "Python", "Compiler", "Klee", "CodeQL", "Research"],
+      logo: "PSU",
+      color: "from-blue-600 to-blue-800"
+    },
+    {
+      id: 2,
       company: "HCL Technologies",
       role: "GenAI Intern",
       location: "Remote",
@@ -28,7 +45,7 @@ const Experience = () => {
       color: "from-blue-600 to-blue-800"
     },
     {
-      id: 2,
+      id: 3,
       company: "Penn State Advanced Vehicle Team",
       role: "Member - Perception Team",
       location: "State College, PA, USA",
@@ -45,7 +62,7 @@ const Experience = () => {
       color: "from-blue-600 to-white"
     },
     {
-      id: 3,
+      id: 4,
       company: "Elevatoz Loyalty",
       role: "Data Analytics Intern",
       location: "Bengaluru, KA, India",
