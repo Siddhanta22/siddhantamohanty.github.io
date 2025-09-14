@@ -56,37 +56,39 @@ const About = () => {
             className="space-y-6"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              About Me
+              Hey there! 👋
             </h3>
             
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                Results-driven Computer Science senior specializing in AI/ML, backend development, and scalable software systems. 
-                Delivered production-ready LLM/RAG pipelines, computer vision algorithms, and backend architectures that cut 
-                resolution time by 50% and reduced debugging effort by 40%. Skilled in Python, C++, Flask, LangChain, and PostgreSQL, 
-                with a proven ability to turn complex problems into high-impact, maintainable solutions.
+                I'm Siddhanta, a Computer Science senior at Penn State who's absolutely <span className="font-semibold text-primary-600 dark:text-primary-400">obsessed</span> 
+                with turning complex problems into elegant solutions. Think of me as that friend who gets genuinely excited about 
+                debugging at 2 AM and considers a successful deployment the best kind of dopamine hit! 🚀
               </p>
               
               <p>
-                My journey spans from building <span className="font-semibold text-primary-600 dark:text-primary-400">self-healing backend systems</span> 
-                that automatically resolve errors to developing <span className="font-semibold text-accent-600 dark:text-accent-400">AI-powered camera assistants</span> 
-                that help photographers capture perfect shots. I've also created <span className="font-semibold text-accent-600 dark:text-accent-400">Swipeflix</span>—a 
-                movie discovery platform that makes finding your next watch as engaging as social media.
+                My superpower? Making AI systems that actually <span className="font-semibold text-accent-600 dark:text-accent-400">work in the real world</span>. 
+                I've built everything from self-healing backends that fix themselves (because who has time for manual debugging?) 
+                to AI camera assistants that help photographers nail that perfect shot. Oh, and I created Swipeflix—because 
+                finding your next movie should be as fun as swiping right! 🎬
               </p>
               
               <p>
-                What drives me is the intersection of technical excellence and measurable impact. 
-                I believe the best technology solves genuine problems while delivering quantifiable results. 
-                Whether I'm optimizing perception algorithms for autonomous vehicles or building 
-                intelligent error-handling systems, I'm always focused on creating solutions that 
-                make a real difference in how people work and interact with technology.
+                What gets me out of bed every morning? The thrill of <span className="font-semibold text-primary-600 dark:text-primary-400">solving puzzles</span> 
+                that matter. Whether I'm teaching cars to see the world through computer vision or building systems that 
+                learn from their mistakes, I'm always chasing that "aha!" moment when everything clicks into place.
               </p>
               
               <p>
-                When I'm not coding, you'll find me exploring the latest AI research, contributing 
-                to open-source projects, or thinking about how we can build more intelligent 
-                and efficient systems. I'm always excited to collaborate on projects that push 
-                the boundaries of what's possible with technology.
+                When I'm not deep in code, you'll find me geeking out over the latest AI research papers, 
+                contributing to open-source projects, or probably explaining to my friends why 
+                <span className="font-semibold text-accent-600 dark:text-accent-400"> "it's not a bug, it's a feature"</span> 
+                is actually a valid philosophy. I believe the best technology feels like magic—complex under the hood, 
+                but beautifully simple for the people who use it.
+              </p>
+              
+              <p>
+                Ready to build something amazing together? Let's turn your wildest tech dreams into reality! ✨
               </p>
               
 

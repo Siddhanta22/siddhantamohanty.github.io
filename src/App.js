@@ -6,7 +6,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Achievements from './components/Achievements';
-import FunFacts from './components/FunFacts';
+import Quote from './components/Quote';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
@@ -184,7 +184,7 @@ function App() {
         <About />
         <Projects />
         <Achievements />
-        <FunFacts />
+        <Quote />
         <Experience />
         <Skills />
         <Contact />
