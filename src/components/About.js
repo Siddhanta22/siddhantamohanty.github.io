@@ -16,10 +16,11 @@ const About = () => {
     dates: "August 2022 - May 2026",
     location: "State College, PA, USA",
     relevantCourses: [
-      "CMPSC465: Data Structures and Algorithms",
-      "CMPSC461: Programming Language Concepts", 
-      "CMPEN331: Computer Organization & Design",
-      "CMPSC442: Artificial Intelligence"
+      "CMPSC 465: Data Structures and Algorithms",
+      "CMPSC 464: Introduction to the Theory of Computation", 
+      "CMPEN 331: Computer Organization And Design",
+      "CMPSC 442: Artificial Intelligence",
+      "CMPSC 473: Operating Systems Design & Construction"
     ]
   };
 
@@ -55,37 +56,36 @@ const About = () => {
             className="space-y-6"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Building Tomorrow's Technology Today
+              About Me
             </h3>
             
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                As a senior at Penn State majoring in Computer Science with a Mathematics minor, 
-                I'm passionate about creating intelligent systems that solve real-world problems. 
-                My journey began with curiosity about how machines can learn and adapt, leading me 
-                to specialize in AI/ML and backend development.
+                Results-driven Computer Science senior specializing in AI/ML, backend development, and scalable software systems. 
+                Delivered production-ready LLM/RAG pipelines, computer vision algorithms, and backend architectures that cut 
+                resolution time by 50% and reduced debugging effort by 40%. Skilled in Python, C++, Flask, LangChain, and PostgreSQL, 
+                with a proven ability to turn complex problems into high-impact, maintainable solutions.
               </p>
               
               <p>
-                I've built production-ready systems that have made a measurable impact: a 
-                <span className="font-semibold text-primary-600 dark:text-primary-400"> self-healing backend</span> 
-                that reduced debugging time by 40%, an AI-powered camera assistant that helps photographers 
-                capture perfect shots, and <span className="font-semibold text-accent-600 dark:text-accent-400">Swipeflix</span>—a 
+                My journey spans from building <span className="font-semibold text-primary-600 dark:text-primary-400">self-healing backend systems</span> 
+                that automatically resolve errors to developing <span className="font-semibold text-accent-600 dark:text-accent-400">AI-powered camera assistants</span> 
+                that help photographers capture perfect shots. I've also created <span className="font-semibold text-accent-600 dark:text-accent-400">Swipeflix</span>—a 
                 movie discovery platform that makes finding your next watch as engaging as social media.
               </p>
               
               <p>
-                What drives me is the intersection of technical excellence and user experience. 
-                I believe the best technology feels magical while solving genuine problems. 
+                What drives me is the intersection of technical excellence and measurable impact. 
+                I believe the best technology solves genuine problems while delivering quantifiable results. 
                 Whether I'm optimizing perception algorithms for autonomous vehicles or building 
-                intuitive interfaces, I'm always thinking about how to make complex systems 
-                accessible and delightful for users.
+                intelligent error-handling systems, I'm always focused on creating solutions that 
+                make a real difference in how people work and interact with technology.
               </p>
               
               <p>
                 When I'm not coding, you'll find me exploring the latest AI research, contributing 
-                to open-source projects, or thinking about how we can build a more intelligent 
-                and connected future. I'm always excited to collaborate on projects that push 
+                to open-source projects, or thinking about how we can build more intelligent 
+                and efficient systems. I'm always excited to collaborate on projects that push 
                 the boundaries of what's possible with technology.
               </p>
               

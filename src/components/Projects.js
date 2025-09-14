@@ -15,9 +15,9 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Self-Healing Backend System",
-      description: "An intelligent error-handling pipeline that transforms raw system errors into human-readable insights using GPT-4o and vector search—reducing debugging time by 40%.",
-      longDescription: "Production-grade system that automatically intercepts, analyzes, and resolves system errors in real-time. Features include: intelligent error classification, automated fix suggestions, chatbot integration for troubleshooting, persistent issue tracking, and seamless integration with existing backend systems. Designed for enterprise-scale deployment with robust error handling and monitoring.",
+      title: "Self-Heal System",
+      description: "Reduced manual debugging effort by 40% via an AI-driven error-handling pipeline that intercepts and logs system errors, converts them into FAISS embeddings, and retrieves fixes with GPT-4o.",
+      longDescription: "Production-grade system that automatically intercepts, analyzes, and resolves system errors in real-time. Features include: intelligent error classification, automated fix suggestions, chatbot integration for troubleshooting, persistent issue tracking, and seamless integration with existing backend systems. Built an interactive troubleshooting chatbot allowing users to query past errors and track recurring issues.",
       technologies: ["GPT-4o", "FAISS", "Vector Search", "LangChain", "Python", "RAG", "Chatbot", "Production"],
       icon: Brain,
       color: "from-blue-500 to-purple-600",
@@ -27,12 +27,12 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["AI-Powered Debugging", "40% Time Reduction", "Enterprise Ready", "Real-time Processing"]
+      highlights: ["AI-Powered Debugging", "40% Time Reduction", "Interactive Chatbot", "Real-time Processing"]
     },
     {
       id: 2,
       title: "Photobot",
-      description: "An AI-powered camera assistant that reads camera manuals and provides intelligent setting recommendations for any photography scenario.",
+      description: "Created an AI-powered photography assistant using RAG + LangChain to provide DSLR/mirrorless settings tailored to context (e.g., astrophotography, sports). Cut configuration decision time by 60% through semantic retrieval from PDF manuals.",
       longDescription: "Production-ready AI assistant that processes PDF camera manuals and provides contextual recommendations. Features include: semantic search across multiple camera models, environment-specific suggestions (astrophotography, sports, concerts), detailed configuration tips, and an intuitive chat interface. Built with scalability in mind to support hundreds of camera models and thousands of users.",
       technologies: ["LangChain", "FAISS", "GPT-4", "React", "Python", "PDF Processing", "RAG", "Production"],
       icon: Camera,
@@ -43,14 +43,14 @@ const Projects = () => {
       live: null,
       featured: true,
       production: true,
-      highlights: ["Multi-Camera Support", "Context-Aware AI", "PDF Processing", "Scalable Architecture"]
+      highlights: ["60% Time Reduction", "Context-Aware AI", "PDF Processing", "Multi-Camera Support"]
     },
     {
       id: 3,
       title: "Swipeflix",
-      description: "A production-ready movie discovery app with a swipe-based interface that makes finding your next watch as fun as dating apps make finding love. Features cinematic UI, personalized recommendations, and seamless user experience.",
+      description: "Built a personalized movie/TV recommender using quiz-based profiling + real-time swipe feedback, improving recommendation accuracy over time with TensorFlow.js. Developed a responsive React frontend with smart filters for language, age rating, and genre.",
       longDescription: "Built with a focus on user experience and production quality. Features include: cinematic movie cards with hover effects, swipe gestures for movie selection, personalized recommendation algorithm, mood-based filtering, watchlist management, and responsive design that works flawlessly on all devices. The app uses modern React patterns, optimized performance, and intuitive UX that keeps users engaged.",
-      technologies: ["React", "Tailwind CSS", "JavaScript", "Local Storage", "Movie API", "UI/UX", "Production Ready"],
+      technologies: ["React", "Tailwind CSS", "JavaScript", "TensorFlow.js", "Movie API", "UI/UX", "Production Ready"],
       icon: Film,
       color: "from-red-500 to-pink-600",
       bgColor: "bg-red-50 dark:bg-red-900/20",
@@ -59,12 +59,12 @@ const Projects = () => {
       live: "https://swipeflix-alpha.vercel.app",
       featured: true,
       production: true,
-      highlights: ["Cinematic UI Design", "Swipe Gestures", "Personalized Recommendations", "Production Deployed"]
+      highlights: ["TensorFlow.js ML", "Quiz-Based Profiling", "Smart Filters", "Production Deployed"]
     },
     {
       id: 4,
       title: "Prompt Tracer",
-      description: "Browser extension for analyzing and optimizing AI prompts across ChatGPT, Claude, Grok, and Gemini with real-time scoring and privacy-first design.",
+      description: "Designed a browser extension to optimize AI prompts across ChatGPT, Claude, Grok, and Gemini with real-time scoring and recommendations. Implemented privacy-first architecture with local processing and cross-platform integration.",
       longDescription: "A sophisticated Chrome extension that transforms AI interactions through intelligent prompt analysis and optimization. Features real-time scoring, privacy-first local processing, cross-platform support, and an interactive analytics dashboard for progress tracking.",
       technologies: ["JavaScript", "Chrome Extension", "Prompt Engineering", "Privacy", "Analytics", "AI", "Cross-Platform"],
       icon: Zap,
@@ -79,8 +79,8 @@ const Projects = () => {
     },
     {
       id: 5,
-      title: "CourseScheduler",
-      description: "A smart academic planning tool that helps students navigate complex degree requirements and optimize their course schedules using NLP.",
+      title: "HackPSU(Oct 2024) CourseScheduler",
+      description: "Developed an NLP-powered academic planner with Node.js + MongoDB backend and React/Tailwind CSS frontend for conflict-free graduation scheduling.",
       longDescription: "Production application that simplifies academic planning for students with multiple majors/minors. Features include: intelligent course conflict detection, personalized graduation planning, degree requirement tracking, and an intuitive drag-and-drop interface. Built with modern web technologies and designed for university-scale deployment.",
       technologies: ["Node.js", "MongoDB", "React", "Tailwind CSS", "NLP", "Python", "Production"],
       icon: Calendar,

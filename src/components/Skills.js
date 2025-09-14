@@ -12,16 +12,16 @@ const Skills = () => {
   const skillCategories = [
     {
       id: 1,
-      title: "Programming Languages",
+      title: "Languages & Web",
       icon: Code,
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
       skills: [
         { name: "Python", level: 90 },
         { name: "C++", level: 85 },
-        { name: "JavaScript", level: 80 },
         { name: "HTML/CSS", level: 85 },
-        { name: "SQL", level: 75 }
+        { name: "Tailwind CSS", level: 90 },
+        { name: "JavaScript", level: 80 }
       ]
     },
     {
@@ -31,34 +31,30 @@ const Skills = () => {
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
       skills: [
-        { name: "LangChain", level: 85 },
         { name: "RAG", level: 80 },
-        { name: "Vector Databases", level: 75 },
-        { name: "GPT-4o", level: 90 },
-        { name: "FAISS", level: 80 },
-        { name: "scikit-learn", level: 75 },
-        { name: "OpenCV", level: 70 },
-        { name: "Neural Networks", level: 70 }
+        { name: "Agentic RAG", level: 75 },
+        { name: "Vector Databases (Pinecone, FAISS)", level: 75 },
+        { name: "LLMs (GPT-4, OpenAI API)", level: 90 },
+        { name: "MCP (Model Context Protocol)", level: 80 },
+        { name: "TensorFlow", level: 75 },
+        { name: "NumPy", level: 85 }
       ]
     },
     {
       id: 3,
-      title: "Web Development",
+      title: "Backend & Frameworks",
       icon: Globe,
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50 dark:bg-green-900/20",
       skills: [
-        { name: "React", level: 85 },
-        { name: "Tailwind CSS", level: 90 },
-        { name: "Node.js", level: 75 },
+        { name: "Flask", level: 80 },
         { name: "REST APIs", level: 80 },
-        { name: "MongoDB", level: 70 },
-        { name: "PostgreSQL", level: 70 }
+        { name: "Node.js", level: 75 }
       ]
     },
     {
       id: 4,
-      title: "Tools & Technologies",
+      title: "Development Tools",
       icon: Settings,
       color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
@@ -68,23 +64,21 @@ const Skills = () => {
         { name: "VS Code", level: 90 },
         { name: "Postman", level: 80 },
         { name: "Streamlit", level: 70 },
-        { name: "ROS", level: 65 },
-        { name: "PCL", level: 60 }
+        { name: "GitHub", level: 85 },
+        { name: "Google Cloud Platform", level: 70 },
+        { name: "GDB", level: 65 },
+        { name: "Cursor IDE", level: 80 }
       ]
     },
     {
       id: 5,
-      title: "Databases & Data",
+      title: "Databases",
       icon: Database,
       color: "from-red-500 to-red-600",
       bgColor: "bg-red-50 dark:bg-red-900/20",
       skills: [
         { name: "MySQL", level: 75 },
-        { name: "PostgreSQL", level: 70 },
-        { name: "MongoDB", level: 70 },
-        { name: "Pandas", level: 80 },
-        { name: "NumPy", level: 85 },
-        { name: "MATLAB", level: 65 }
+        { name: "PostgreSQL", level: 70 }
       ]
     }
   ];

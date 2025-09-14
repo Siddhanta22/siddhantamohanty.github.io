@@ -31,14 +31,13 @@ const Experience = () => {
       id: 2,
       company: "HCL Technologies",
       role: "GenAI Intern",
-      location: "Remote",
-      dates: "May 2025 - July 2025",
+      location: "Redmond, WA, USA",
+      dates: "May 2025 - August 2025",
       description: "Built production-ready AI systems that transform how businesses handle complex problems—from error debugging to camera assistance.",
       achievements: [
-        "Designed and deployed a Model Context Protocol (MCP) system enabling LLMs to autonomously execute dynamic, multi-step workflows across APIs, file systems, and databases using structured context prompts and LangChain agents.",
-        "Engineered an agentic RAG (Retrieval Augmented Generation) pipeline utilizing dual vector databases (one for historical error embeddings, one for internal documentation like Confluence) to support contextual reasoning.",
-        "Integrated a chatbot assistant with database access for interactive troubleshooting, incident exploration, and persistent issue escalation without manual error definitions.",
-        "Created 'Photobot,' an AI-powered camera assistant chatbot using RAG and LangChain, capable of recommending DSLR settings based on user queries and parsed camera manuals."
+        "Reduced support resolution time by 50% by engineering an agentic RAG pipeline with dual vector databases for historical error embeddings and internal documentation.",
+        "Automated complex, multi-step workflows across APIs, file systems, and databases via a Model Context Protocol (MCP) system using LangChain agents.",
+        "Designed a Confluence ingestion pipeline integrated with MCP and LangChain, enabling RAG-based contextual search across organizational documentation to improve developer efficiency."
       ],
       technologies: ["LLMs", "LangChain", "RAG", "Vector Databases", "MCP", "Python", "APIs"],
       logo: "HCL",
@@ -47,15 +46,14 @@ const Experience = () => {
     {
       id: 3,
       company: "Penn State Advanced Vehicle Team",
-      role: "Member - Perception Team",
+      role: "Member",
       location: "State College, PA, USA",
       dates: "February 2025 - Present",
       description: "Working on the future of transportation by developing perception systems that help cars see and understand the world around them.",
       achievements: [
-        "Developed and optimized algorithms for object detection, road marking recognition, and localization using Python, C++, and OpenCV to enhance autonomous vehicle perception.",
-        "Integrated data from cameras, radar, LiDAR, and GNSS with ROS (Robot Operating System) and PCL (Point Cloud Library) to improve perception accuracy.",
-        "Processed real-time sensor data using NumPy, Pandas, and MATLAB for improved autonomous vehicle decision-making.",
-        "Collaborated with a multidisciplinary team to refine perception pipelines and enhance system performance using Git and Docker for efficient development."
+        "Worked as part of the Perception Team to build ROS2-based algorithms detecting and tracking traffic lights, signs, road markings, parking spaces, and static/dynamic obstacles with >90% accuracy.",
+        "Developed multi-sensor fusion and localization systems combining LiDAR, radar, camera, and IMU to ensure accurate navigation under degraded GPS conditions.",
+        "Contributed to competition-ready frameworks including CAN message integration and perception pipelines aligned with SAE Year 4/5 challenge requirements."
       ],
       technologies: ["Python", "C++", "OpenCV", "ROS", "PCL", "LiDAR", "Computer Vision", "Docker"],
       logo: "PSU",
@@ -64,15 +62,12 @@ const Experience = () => {
     {
       id: 4,
       company: "Elevatoz Loyalty",
-      role: "Data Analytics Intern",
+      role: "Intern",
       location: "Bengaluru, KA, India",
       dates: "June 2024 - August 2024",
       description: "Applied data science and machine learning techniques to drive customer retention strategies and business insights.",
       achievements: [
-        "Extracted and manipulated large datasets using SQL (basic functions) to generate actionable insights for business intelligence.",
-        "Learned about company strategies for building models to help clients retain customers.",
-        "Built and deployed machine learning models using Python libraries (e.g., scikit-learn, pandas, NumPy) for predictive analytics on customer behavior data from Kaggle datasets.",
-        "Utilized Kaggle for hands-on machine learning projects and gained practical experience in data science workflows."
+        "Applied SQL and Python (pandas, NumPy) to extract, manipulate, and analyze large datasets for business intelligence and customer insights."
       ],
       technologies: ["SQL", "Python", "scikit-learn", "Pandas", "NumPy", "Machine Learning", "Kaggle"],
       logo: "EL",
