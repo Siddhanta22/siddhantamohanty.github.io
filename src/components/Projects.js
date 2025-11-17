@@ -33,21 +33,6 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: "Model Context Protocol Automation",
-      role: "GenAI Intern - HCL Technologies",
-      timeline: "May 2025 - August 2025",
-      problem: "Organizations struggle with complex, multi-step workflows that require coordination across APIs, file systems, and databases. Manual execution is error-prone and time-consuming.",
-      solution: "As part of the Generative AI internship, built MCP-powered workflows for LLM automation. Designed agentic RAG pipelines, vector database retrieval flows, and structured context-routing mechanisms that enabled internal teams to debug faster and build LLM-integrated tools more reliably.",
-      technologies: ["Python", "LangChain", "Vector DBs", "MCP"],
-      impact: "Automated complex workflows, reducing manual intervention and improving developer efficiency through intelligent context-aware execution.",
-      github: null,
-      live: null,
-      icon: Brain,
-      color: "from-blue-500 to-indigo-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20"
-    },
-    {
-      id: 3,
       title: "Photobot — RAG-Based DSLR Assistant",
       role: "GenAI Intern",
       timeline: "May 2025 - Present",
@@ -62,7 +47,7 @@ const Projects = () => {
       bgColor: "bg-green-50 dark:bg-green-900/20"
     },
     {
-      id: 4,
+      id: 3,
       title: "PromptTracer — Prompt Observability Tool",
       role: "Personal Project",
       timeline: "July 2025 - Present",
@@ -78,7 +63,7 @@ const Projects = () => {
       screenshots: ["/prompt-tracer-1.jpg"]
     },
     {
-      id: 5,
+      id: 4,
       title: "Autonomous Vehicle Team — Perception Algorithms",
       role: "Perception Team Member - Penn State AVT",
       timeline: "February 2025 - Present",
@@ -93,7 +78,7 @@ const Projects = () => {
       bgColor: "bg-red-50 dark:bg-red-900/20"
     },
     {
-      id: 6,
+      id: 5,
       title: "CourseScheduler — NLP Academic Planner",
       role: "HackPSU Project",
       timeline: "October 2024",
@@ -108,7 +93,7 @@ const Projects = () => {
       bgColor: "bg-orange-50 dark:bg-orange-900/20"
     },
     {
-      id: 7,
+      id: 6,
       title: "Swipeflix - Movie Discovery Platform",
       role: "Personal Project",
       timeline: "January 2025 - Present",
