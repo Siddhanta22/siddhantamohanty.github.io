@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Linkedin, Code, MapPin, Send } from 'lucide-react';
+import { Mail, Linkedin, MapPin, Send } from 'lucide-react';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -21,12 +21,6 @@ const Contact = () => {
       icon: Linkedin,
       url: "https://linkedin.com/in/siddhanta-mohanty-13aa92222",
       label: "linkedin.com/in/siddhanta-mohanty-13aa92222"
-    },
-    {
-      name: "GitLab",
-      icon: Code,
-      url: "#",
-      label: "GitLab (coming soon)"
     }
   ];
 
@@ -68,12 +62,12 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid md:grid-cols-3 gap-6 mb-12"
+            className="grid md:grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto"
           >
             {contactLinks.map((contact, index) => (
               <motion.a
                 key={index}
-                href={contact.url !== '#' ? contact.url : undefined}
+                href={contact.url}
                 target={contact.url.startsWith('http') ? '_blank' : undefined}
                 rel={contact.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                 initial={{ opacity: 0, y: 20 }}
@@ -81,9 +75,7 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex flex-col items-center p-6 bg-white dark:bg-dark-800 rounded-xl shadow-lg border border-gray-200 dark:border-dark-700 hover:shadow-xl transition-all duration-300 ${
-                  contact.url === '#' ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'
-                }`}
+                className="flex flex-col items-center p-6 bg-white dark:bg-dark-800 rounded-xl shadow-lg border border-gray-200 dark:border-dark-700 hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center mb-4">
                   <contact.icon className="w-6 h-6 text-white" />
@@ -104,15 +96,18 @@ const Contact = () => {
             <span>State College, PA, USA</span>
           </motion.div>
 
-          <motion.div
+          <motion.a
+            href="mailto:siddhantamohanty22@gmail.com"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 1 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
           >
             <Send className="w-5 h-5" />
             <span>Let's build something impactful together</span>
-          </motion.div>
+          </motion.a>
         </motion.div>
       </div>
     </section>
