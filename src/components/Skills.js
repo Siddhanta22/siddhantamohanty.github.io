@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, Brain, Server, Cpu } from 'lucide-react';
+import { Code, Brain, Server, Cpu, Settings } from 'lucide-react';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -16,31 +16,39 @@ const Skills = () => {
       icon: Code,
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      skills: ["Python", "C++", "JavaScript"]
+      skills: ["Python", "C++", "JavaScript", "SQL"]
     },
     {
       id: 2,
-      title: "AI / ML",
+      title: "AI & ML",
       icon: Brain,
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
-      skills: ["LangChain", "FAISS", "YOLO", "OpenCV", "RAG", "Agentic RAG", "LLMs", "MCP", "TensorFlow"]
+      skills: ["LangChain", "RAG", "FAISS", "YOLO", "OpenCV", "PyTorch (beginner)"]
     },
     {
       id: 3,
-      title: "Backend / Systems",
+      title: "Backend & Systems",
       icon: Server,
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50 dark:bg-green-900/20",
-      skills: ["PostgreSQL", "Docker", "REST APIs", "Flask", "Node.js"]
+      skills: ["Flask", "Node.js", "REST APIs", "Docker", "PostgreSQL", "MySQL"]
     },
     {
       id: 4,
-      title: "Robotics",
+      title: "Robotics & Perception",
       icon: Cpu,
       color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      skills: ["ROS2", "LiDAR-Camera Fusion", "PCL", "Computer Vision"]
+      skills: ["ROS2", "LiDAR-Camera Fusion", "Sensor Calibration", "CV Pipelines"]
+    },
+    {
+      id: 5,
+      title: "Tools",
+      icon: Settings,
+      color: "from-indigo-500 to-indigo-600",
+      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
+      skills: ["Git", "GitHub/GitLab", "VS Code", "Linux", "Docker", "MCP"]
     }
   ];
 
