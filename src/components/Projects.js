@@ -38,7 +38,8 @@ const Projects = () => {
       live: null,
       icon: Brain,
       color: "from-purple-500 to-pink-600",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20"
+      bgColor: "bg-purple-50 dark:bg-purple-900/20",
+      screenshots: ["/self-healing-1.jpg", "/self-healing-2.jpg", "/self-healing-3.jpg"]
     },
     {
       id: 3,
@@ -68,7 +69,8 @@ const Projects = () => {
       live: null,
       icon: Zap,
       color: "from-yellow-500 to-amber-600",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
+      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+      screenshots: ["/prompt-tracer-1.jpg"]
     },
     {
       id: 5,
@@ -113,7 +115,8 @@ const Projects = () => {
       live: "https://swipeflix-alpha.vercel.app",
       icon: Film,
       color: "from-indigo-500 to-purple-600",
-      bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
+      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
+      screenshots: ["/swipeflix-1.jpg", "/swipeflix-2.jpg", "/swipeflix-3.jpg"]
     }
   ];
 
@@ -216,6 +219,34 @@ const Projects = () => {
                   )}
                 </div>
               </div>
+
+              {/* Screenshots */}
+              {project.screenshots && project.screenshots.length > 0 && (
+                <div className="mb-8">
+                  <div className={`grid gap-4 ${
+                    project.screenshots.length === 1 
+                      ? 'grid-cols-1 max-w-2xl mx-auto' 
+                      : 'grid-cols-1 md:grid-cols-3'
+                  }`}>
+                    {project.screenshots.map((screenshot, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={inView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        whileHover={{ scale: 1.02 }}
+                        className="rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600 shadow-md hover:shadow-xl transition-all duration-300"
+                      >
+                        <img
+                          src={screenshot}
+                          alt={`${project.title} screenshot ${index + 1}`}
+                          className="w-full h-auto object-cover"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Problem Statement */}
               <div className="mb-6">
