@@ -65,19 +65,7 @@ const About = () => {
           >
             <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                I'm a Computer Science senior at Penn State, specializing in <span className="font-semibold text-gray-900 dark:text-white">AI/ML, robotics, autonomous systems, and full-stack development</span>. My journey began in India, where I first discovered my passion for technology and problem-solving.
-              </p>
-              
-              <p>
-                Moving to the United States to pursue my degree was a leap of faith—one that taught me the value of taking risks and embracing a growth mindset. This experience shaped my approach to building systems that are not just technically sound, but also resilient and adaptable.
-              </p>
-              
-              <p>
-                Today, I focus on creating <span className="font-semibold text-gray-900 dark:text-white">production-ready RAG pipelines, GenAI systems, and autonomous vehicle perception algorithms</span>. Whether I'm engineering agentic RAG systems that reduce debugging time by 50% or developing multi-sensor fusion systems for autonomous vehicles, I'm driven by the challenge of making complex technology work reliably in real-world scenarios.
-              </p>
-              
-              <p>
-                My work spans from backend architecture to AI research, always with a focus on <span className="font-semibold text-gray-900 dark:text-white">measurable impact and technical excellence</span>. I believe the best solutions are those that solve genuine problems while maintaining clarity and maintainability.
+                I am a senior Computer Science major at Penn State University focused on AI, robotics, and full-stack development. My journey began in India, and moving to the U.S. for my education taught me that real growth happens when you step outside your comfort zone. I thrive on building tools and systems that solve real-world problems. Whether it's developing perception algorithms for autonomous vehicles or architecting agentic RAG pipelines in enterprise workflows, I enjoy bridging intelligence, data, and engineering. Outside of code, I explore new technologies, tinker with projects, and stay curious about how things work under the hood.
               </p>
             </div>
           </motion.div>

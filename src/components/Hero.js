@@ -39,10 +39,10 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight"
           >
-            Siddhanta Mohanty
+            Hi, I'm Siddhanta Mohanty
             <br />
             <span className="text-4xl md:text-5xl lg:text-6xl text-gray-600 dark:text-gray-300 font-normal">
-              Software Engineer | AI & Robotics | Full-Stack Developer
+              Software Engineer • AI & Robotics • Full-Stack Developer
             </span>
           </motion.h1>
 
@@ -53,7 +53,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            Building intelligent systems that solve real-world problems—from autonomous vehicle perception to production-ready AI pipelines.
+            I build intelligent systems that blend generative AI, autonomous perception, and full-stack web development. I'm a senior Computer Science student at Penn State University and seeking full-time engineering roles.
           </motion.p>
 
           {/* CTA Buttons */}
