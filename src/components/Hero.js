@@ -95,37 +95,12 @@ const Hero = () => {
           >
             I build intelligent systems that blend <span className="font-semibold text-gray-900 dark:text-white">generative AI</span>, <span className="font-semibold text-gray-900 dark:text-white">autonomous perception</span>, and <span className="font-semibold text-gray-900 dark:text-white">full-stack development</span>. Senior Computer Science student at Penn State University, seeking full-time engineering roles starting 2025.
           </motion.p>
-          
-          {/* Quick Stats for Recruiters */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-6 md:gap-8 pt-8"
-          >
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">3+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">7+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Projects</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">4</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Internships</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">2x</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Dean's List</div>
-            </div>
-          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
           >
             <motion.button
