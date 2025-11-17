@@ -47,7 +47,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Passionate engineer building the future of intelligent systems
+            I build AI systems that solve real problems and learn something new with every project.
           </p>
         </motion.div>
 
@@ -60,17 +60,20 @@ const About = () => {
             className="space-y-6"
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-              <p className="text-xl font-medium text-gray-900 dark:text-white">
-                From India to Pennsylvania, building the future of intelligent systems.
+              <p>
+                Over the past year, I've gone from theory to practice. During my 3-month internship at HCL, I built production AI systems from the ground up: a self-healing backend that cut support resolution time by 50%, agentic workflows using Model Context Protocol, and RAG pipelines for enterprise documentation. I learned how to ship AI that works in real environments with real users, not just in controlled demos.
               </p>
               <p>
-                I'm a senior Computer Science major at Penn State University, passionate about AI, robotics, and full-stack development. My journey from India to the U.S. taught me that real growth happens when you step outside your comfort zone—a principle I apply to every project I build.
+                Beyond HCL, I've continued pushing my boundaries. I went from computer vision coursework to debugging real-time perception pipelines for autonomous vehicles. From experimenting with LLMs to researching how reinforcement learning can improve code generation. Each project teaches me something new about taking AI concepts and making them reliable at scale.
               </p>
               <p>
-                I specialize in creating systems that solve real-world problems. Whether it's developing perception algorithms for autonomous vehicles, architecting agentic RAG pipelines for enterprise workflows, or building production-ready web applications, I bridge the gap between intelligence, data, and engineering.
+                AI moves fast, and I move with it. I'm most energized when I'm tackling problems I haven't fully figured out yet, whether that's optimizing vector retrieval, architecting agentic workflows, or making models work reliably outside controlled environments. I focus on the practical side: taking emerging AI techniques and turning them into systems that actually ship.
               </p>
               <p>
-                When I'm not coding, I'm exploring new technologies, tinkering with side projects, and staying curious about how things work under the hood. I believe in building with purpose, learning continuously, and pushing the boundaries of what's possible.
+                My technical foundation spans RAG architectures, LLMs, autonomous perception, and full-stack development. But what I'm really good at is figuring things out quickly and building solutions that work, even when the docs are sparse and the Stack Overflow threads are empty.
+              </p>
+              <p>
+                Graduating May 2026. Looking for teams where shipping AI products means constantly learning new approaches. If that sounds like your team, let's connect.
               </p>
             </div>
           </motion.div>
