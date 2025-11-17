@@ -1,27 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Download, Github, Linkedin, Mail, Sparkles, Code, Cpu } from 'lucide-react';
-import TypingAnimation from './TypingAnimation';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Download, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
-  const [currentRole, setCurrentRole] = useState(0);
-  
-  const roles = [
-    "AI Engineer",
-    "Full-Stack Developer", 
-    "Problem Solver",
-    "Tech Innovator"
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [roles.length]);
-
-  const scrollToAbout = () => {
-    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+  const scrollToProjects = () => {
+    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
   };
 
   const downloadResume = () => {
@@ -35,196 +18,70 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 gradient-bg"></div>
-      
-      {/* Animated Background Shapes */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
-      <div className="absolute top-40 right-10 w-72 h-72 bg-accent-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{ animationDelay: '2s' }}></div>
-      
-      {/* Floating Tech Icons */}
-      <motion.div
-        animate={{ 
-          y: [0, -20, 0],
-          rotate: [0, 5, 0]
-        }}
-        transition={{ 
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute top-32 right-32 text-primary-400/30"
-      >
-        <Code className="w-8 h-8" />
-      </motion.div>
-      
-      <motion.div
-        animate={{ 
-          y: [0, 15, 0],
-          rotate: [0, -5, 0]
-        }}
-        transition={{ 
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-        className="absolute top-48 left-32 text-accent-400/30"
-      >
-        <Cpu className="w-6 h-6" />
-      </motion.div>
-      
-      <motion.div
-        animate={{ 
-          y: [0, -10, 0],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{ 
-          duration: 2.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-        className="absolute bottom-32 right-48 text-primary-500/30"
-      >
-        <Sparkles className="w-7 h-7" />
-      </motion.div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
+      {/* Subtle Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-200/20 dark:bg-primary-800/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-200/20 dark:bg-accent-800/20 rounded-full blur-3xl"></div>
+      </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
-          {/* Greeting */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium"
-          >
-            <span className="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
-            Open to new adventures
-          </motion.div>
-
-          {/* Main Heading */}
+          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight"
           >
-            Hi, I'm{' '}
-            <span className="gradient-text">Siddhanta</span>
+            Siddhanta Mohanty
+            <br />
+            <span className="text-4xl md:text-5xl lg:text-6xl text-gray-600 dark:text-gray-300 font-normal">
+              Software Engineer | AI & Robotics | Full-Stack Developer
+            </span>
           </motion.h1>
 
-          {/* Dynamic Role Display with Typing Animation */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="h-16 flex items-center justify-center"
-          >
-            <div className="text-2xl md:text-3xl font-semibold text-primary-600 dark:text-primary-400">
-              <TypingAnimation 
-                texts={roles}
-                speed={100}
-                deleteSpeed={50}
-                pauseTime={2000}
-              />
-            </div>
-          </motion.div>
-
-          {/* Subtitle */}
+          {/* Value Proposition */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            I build{' '}
-            <span className="font-semibold text-primary-600 dark:text-primary-400">
-              intelligent systems
-            </span>{' '}
-            that think, adapt, and solve real problems—from AI-powered debugging to movie discovery apps that make you smile.
-          </motion.p>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
-          >
-            Computer Science major at Penn State, exploring the sweet spot where serious tech meets delightful user experiences.
+            Building intelligent systems that solve real-world problems—from autonomous vehicle perception to production-ready AI pipelines.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
           >
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToAbout}
-              className="px-8 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 shimmer-effect"
+              whileTap={{ scale: 0.98 }}
+              onClick={scrollToProjects}
+              className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group"
             >
-              <span>Explore My Work</span>
-              <ChevronDown className="w-5 h-5" />
+              <span>View Projects</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.98 }}
               onClick={downloadResume}
-              className="px-8 py-3 border-2 border-primary-600 text-primary-600 dark:text-primary-400 rounded-lg font-semibold hover:bg-primary-600 hover:text-white transition-all duration-300 flex items-center space-x-2 glass-effect"
+              className="px-8 py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-lg font-semibold text-lg hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 flex items-center space-x-2"
             >
               <Download className="w-5 h-5" />
-              <span>Download Resume</span>
+              <span>Download Résumé</span>
             </motion.button>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="flex justify-center space-x-6 pt-8"
-          >
-            <motion.a
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://github.com/Siddhanta22"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-gray-100 dark:bg-dark-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300"
-            >
-              <Github className="w-6 h-6" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://linkedin.com/in/siddhanta-mohanty-13aa92222"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-gray-100 dark:bg-dark-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300"
-            >
-              <Linkedin className="w-6 h-6" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              href="mailto:siddhantamohanty22@gmail.com"
-              className="p-3 bg-gray-100 dark:bg-dark-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300"
-            >
-              <Mail className="w-6 h-6" />
-            </motion.a>
           </motion.div>
         </motion.div>
       </div>
@@ -233,7 +90,7 @@ const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 1, delay: 1 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <motion.div
@@ -252,4 +109,4 @@ const Hero = () => {
   );
 };
 
-export default Hero; 
+export default Hero;

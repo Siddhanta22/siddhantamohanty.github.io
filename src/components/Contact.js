@@ -14,7 +14,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
 
@@ -27,7 +26,6 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
-    // Clear error when user starts typing
     if (error) setError('');
   };
 
@@ -40,7 +38,7 @@ const Contact = () => {
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
-        subject: formData.subject,
+        subject: 'Portfolio Contact Form',
         message: formData.message,
         to_email: emailjsConfig.toEmail
       };
@@ -54,9 +52,8 @@ const Contact = () => {
       
       setIsSubmitting(false);
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
@@ -67,32 +64,29 @@ const Contact = () => {
     }
   };
 
-  const contactInfo = [
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "State College, PA, USA",
-      link: null
-    }
-  ];
-
   const socialLinks = [
     {
-      name: "GitHub",
-      icon: Github,
-      url: "https://github.com/Siddhanta22",
-      color: "hover:text-gray-900 dark:hover:text-white"
+      name: "Email",
+      icon: Mail,
+      url: "mailto:siddhantamohanty22@gmail.com",
+      label: "Email Me"
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
       url: "https://linkedin.com/in/siddhanta-mohanty-13aa92222",
-      color: "hover:text-blue-600 dark:hover:text-blue-400"
+      label: "LinkedIn"
+    },
+    {
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/Siddhanta22",
+      label: "GitHub"
     }
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-dark-800">
+    <section id="contact" className="py-24 bg-white dark:bg-dark-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -104,108 +98,47 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Let's <span className="gradient-text">Connect</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Let's chat about tech, collaborate on something cool, or just grab coffee and talk about the future
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+            Let's build something impactful together.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          {/* Contact CTAs */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            className="space-y-6"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Get in Touch
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                Whether you're a recruiter with an exciting opportunity, a fellow developer wanting to collaborate, 
-                or just someone who loves talking about the intersection of AI and creativity—I'd love to connect! 
-                I'm always excited to discuss new ideas and explore what we could build together.
-              </p>
-            </div>
-
-            {/* Contact Details */}
-            <div className="space-y-6">
-              {/* Email Icon */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex items-center space-x-4"
-              >
+            <div className="space-y-4">
+              {socialLinks.map((social, index) => (
                 <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  href="mailto:siddhantamohanty22@gmail.com"
-                  className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200"
-                >
-                  <Mail className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </motion.a>
-                <div>
-                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    Email
-                  </p>
-                  <p className="text-gray-900 dark:text-white">
-                    Click to send me an email
-                  </p>
-                </div>
-              </motion.div>
-
-              {contactInfo.map((info, index) => (
-                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  className="flex items-center space-x-4"
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  whileTap={{ scale: 0.98 }}
+                  href={social.url}
+                  target={social.url.startsWith('http') ? '_blank' : undefined}
+                  rel={social.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 hover:border-primary-400 dark:hover:border-primary-500 transition-all duration-300 group"
                 >
-                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
-                    <info.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors">
+                    <social.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                      {info.label}
-                    </p>
-                    {info.link ? (
-                      <a
-                        href={info.link}
-                        className="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
-                      >
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="text-gray-900 dark:text-white">
-                        {info.value}
-                      </p>
-                    )}
-                  </div>
-                </motion.div>
+                  <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                    {social.label}
+                  </span>
+                </motion.a>
               ))}
             </div>
 
-            {/* Social Links */}
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Follow My Work
-              </h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-3 bg-white dark:bg-dark-700 rounded-lg text-gray-600 dark:text-gray-300 transition-all duration-300 border border-gray-200 dark:border-dark-600 ${social.color}`}
-                  >
-                    <social.icon className="w-6 h-6" />
-                  </motion.a>
-                ))}
+            <div className="pt-6 border-t border-gray-200 dark:border-dark-700">
+              <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-400">
+                <MapPin className="w-5 h-5" />
+                <span>State College, PA, USA</span>
               </div>
             </div>
           </motion.div>
@@ -215,7 +148,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-white dark:bg-dark-700 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-dark-600"
+            className="bg-gray-50 dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-8"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Send a Message
@@ -248,7 +181,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-800 text-gray-900 dark:text-white transition-colors duration-200"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-700 text-gray-900 dark:text-white transition-colors"
                     placeholder="Your name"
                   />
                 </div>
@@ -264,24 +197,8 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-800 text-gray-900 dark:text-white transition-colors duration-200"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-700 text-gray-900 dark:text-white transition-colors"
                     placeholder="your.email@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-800 text-gray-900 dark:text-white transition-colors duration-200"
-                    placeholder="What's this about?"
                   />
                 </div>
 
@@ -296,7 +213,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-800 text-gray-900 dark:text-white transition-colors duration-200 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-700 text-gray-900 dark:text-white transition-colors resize-none"
                     placeholder="Tell me about your project, opportunity, or just say hello!"
                   ></textarea>
                 </div>
@@ -305,9 +222,9 @@ const Contact = () => {
                   <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center text-red-500"
+                    className="flex items-center space-x-2 text-red-500 text-sm"
                   >
-                    <AlertCircle className="w-6 h-6 mb-2" />
+                    <AlertCircle className="w-5 h-5" />
                     <p>{error}</p>
                   </motion.div>
                 )}
@@ -317,11 +234,11 @@ const Contact = () => {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-accent-700 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                       <span>Sending...</span>
                     </>
                   ) : (
@@ -340,4 +257,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

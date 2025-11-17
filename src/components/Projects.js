@@ -1,115 +1,120 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Zap, Brain, Camera, Film, Calendar, Star } from 'lucide-react';
+import { ExternalLink, Github, Brain, Camera, Film, Zap, Calendar, Code } from 'lucide-react';
 
 const Projects = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
-  const [hoveredProject, setHoveredProject] = useState(null);
-  const [showPreview, setShowPreview] = useState(null);
 
   const projects = [
     {
       id: 1,
-      title: "Self-Heal System",
-      description: "Reduced manual debugging effort by 40% via an AI-driven error-handling pipeline that intercepts and logs system errors, converts them into FAISS embeddings, and retrieves fixes with GPT-4o.",
-      longDescription: "Production-grade system that automatically intercepts, analyzes, and resolves system errors in real-time. Features include: intelligent error classification, automated fix suggestions, chatbot integration for troubleshooting, persistent issue tracking, and seamless integration with existing backend systems. Built an interactive troubleshooting chatbot allowing users to query past errors and track recurring issues.",
-      technologies: ["GPT-4o", "FAISS", "Vector Search", "LangChain", "Python", "RAG", "Chatbot", "Production"],
-      icon: Brain,
-      color: "from-blue-500 to-purple-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      date: "June 2025 - Present",
-      github: "https://github.com/Siddhanta22/Self-Healing-System",
+      title: "Model Context Protocol (MCP) System",
+      role: "GenAI Intern",
+      timeline: "May 2025 - August 2025",
+      problem: "Organizations struggle with complex, multi-step workflows that require coordination across APIs, file systems, and databases. Manual execution is error-prone and time-consuming.",
+      solution: "Designed and deployed a Model Context Protocol (MCP) system enabling LLMs to autonomously execute dynamic, multi-step workflows using structured context prompts and LangChain agents. Integrated Confluence ingestion pipeline for RAG-based contextual search across organizational documentation.",
+      technologies: ["LangChain", "MCP", "Python", "RAG", "Vector Databases", "APIs"],
+      impact: "Automated complex workflows, reducing manual intervention and improving developer efficiency through intelligent context-aware execution.",
+      github: null,
       live: null,
-      featured: true,
-      production: true,
-      highlights: ["AI-Powered Debugging", "40% Time Reduction", "Interactive Chatbot", "Real-time Processing"]
+      icon: Brain,
+      color: "from-blue-500 to-indigo-600",
+      bgColor: "bg-blue-50 dark:bg-blue-900/20"
     },
     {
       id: 2,
-      title: "Photobot",
-      description: "Created an AI-powered photography assistant using RAG + LangChain to provide DSLR/mirrorless settings tailored to context (e.g., astrophotography, sports). Cut configuration decision time by 60% through semantic retrieval from PDF manuals.",
-      longDescription: "Production-ready AI assistant that processes PDF camera manuals and provides contextual recommendations. Features include: semantic search across multiple camera models, environment-specific suggestions (astrophotography, sports, concerts), detailed configuration tips, and an intuitive chat interface. Built with scalability in mind to support hundreds of camera models and thousands of users.",
-      technologies: ["LangChain", "FAISS", "GPT-4", "React", "Python", "PDF Processing", "RAG", "Production"],
-      icon: Camera,
-      color: "from-green-500 to-teal-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
-      date: "May 2025 - Present",
-      github: null,
+      title: "Self-Healing Error Intelligence System",
+      role: "Personal Project",
+      timeline: "June 2025 - Present",
+      problem: "System errors require extensive manual debugging, consuming developer time and delaying issue resolution. Raw error logs lack context and actionable insights.",
+      solution: "Built an AI-driven error-handling pipeline that intercepts system errors, converts them into FAISS embeddings, and retrieves fixes using GPT-4o. Engineered an agentic RAG pipeline with dual vector databases—one for historical error embeddings and one for internal documentation (Confluence). Integrated an interactive troubleshooting chatbot for querying past errors and tracking recurring issues.",
+      technologies: ["GPT-4o", "FAISS", "Vector Search", "LangChain", "Python", "RAG", "Agentic RAG"],
+      impact: "Reduced manual debugging effort by 40% and support resolution time by 50% through intelligent error classification and automated fix suggestions.",
+      github: "https://github.com/Siddhanta22/Self-Healing-System",
       live: null,
-      featured: true,
-      production: true,
-      highlights: ["60% Time Reduction", "Context-Aware AI", "PDF Processing", "Multi-Camera Support"]
+      icon: Brain,
+      color: "from-purple-500 to-pink-600",
+      bgColor: "bg-purple-50 dark:bg-purple-900/20"
     },
     {
       id: 3,
-      title: "Swipeflix",
-      description: "Built a personalized movie/TV recommender using quiz-based profiling + real-time swipe feedback, improving recommendation accuracy over time with TensorFlow.js. Developed a responsive React frontend with smart filters for language, age rating, and genre.",
-      longDescription: "Built with a focus on user experience and production quality. Features include: cinematic movie cards with hover effects, swipe gestures for movie selection, personalized recommendation algorithm, mood-based filtering, watchlist management, and responsive design that works flawlessly on all devices. The app uses modern React patterns, optimized performance, and intuitive UX that keeps users engaged.",
-      technologies: ["React", "Tailwind CSS", "JavaScript", "TensorFlow.js", "Movie API", "UI/UX", "Production Ready"],
-      icon: Film,
-      color: "from-red-500 to-pink-600",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
-      date: "January 2025 - Present",
-      github: "https://github.com/Siddhanta22/swipeflix",
-      live: "https://swipeflix-alpha.vercel.app",
-      featured: true,
-      production: true,
-      highlights: ["TensorFlow.js ML", "Quiz-Based Profiling", "Smart Filters", "Production Deployed"]
+      title: "Photobot - RAG DSLR Assistant",
+      role: "GenAI Intern",
+      timeline: "May 2025 - Present",
+      problem: "Photographers struggle to find optimal camera settings for different scenarios. Manual PDF reference is time-consuming and context-specific knowledge is hard to retrieve.",
+      solution: "Created an AI-powered camera assistant using RAG + LangChain to process PDF camera manuals and provide DSLR/mirrorless settings tailored to context (astrophotography, sports, concerts). Implemented semantic search across multiple camera models with environment-specific recommendations.",
+      technologies: ["LangChain", "FAISS", "GPT-4", "React", "Python", "PDF Processing", "RAG"],
+      impact: "Cut configuration decision time by 60% through semantic retrieval from PDF manuals, enabling photographers to capture perfect shots faster.",
+      github: null,
+      live: null,
+      icon: Camera,
+      color: "from-green-500 to-teal-600",
+      bgColor: "bg-green-50 dark:bg-green-900/20"
     },
     {
       id: 4,
-      title: "Prompt Tracer",
-      description: "Designed a browser extension to optimize AI prompts across ChatGPT, Claude, Grok, and Gemini with real-time scoring and recommendations. Implemented privacy-first architecture with local processing and cross-platform integration.",
-      longDescription: "A sophisticated Chrome extension that transforms AI interactions through intelligent prompt analysis and optimization. Features real-time scoring, privacy-first local processing, cross-platform support, and an interactive analytics dashboard for progress tracking.",
-      technologies: ["JavaScript", "Chrome Extension", "Prompt Engineering", "Privacy", "Analytics", "AI", "Cross-Platform"],
-      icon: Zap,
-      color: "from-yellow-500 to-amber-600",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
-      date: "July 2025 - Present",
+      title: "PromptTracer Browser Extension",
+      role: "Personal Project",
+      timeline: "July 2025 - Present",
+      problem: "Users struggle to optimize AI prompts across different platforms (ChatGPT, Claude, Grok, Gemini). There's no unified tool for analyzing prompt effectiveness and improving interactions.",
+      solution: "Designed a browser extension to optimize AI prompts with real-time scoring and recommendations. Implemented privacy-first architecture with local processing and cross-platform integration. Built an interactive analytics dashboard for progress tracking across multiple AI platforms.",
+      technologies: ["JavaScript", "Chrome Extension", "Prompt Engineering", "Privacy", "Analytics", "Cross-Platform"],
+      impact: "Helps users write better prompts with real-time feedback, improving AI interaction quality across platforms while maintaining privacy.",
       github: "https://github.com/Siddhanta22/prompt_tracer",
       live: null,
-      featured: true,
-      production: true,
-      highlights: ["Real-time Prompt Analysis", "Privacy-First", "Cross-Platform", "Interactive Analytics"]
+      icon: Zap,
+      color: "from-yellow-500 to-amber-600",
+      bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
     },
     {
       id: 5,
-      title: "HackPSU(Oct 2024) CourseScheduler",
-      description: "Developed an NLP-powered academic planner with Node.js + MongoDB backend and React/Tailwind CSS frontend for conflict-free graduation scheduling.",
-      longDescription: "Production application that simplifies academic planning for students with multiple majors/minors. Features include: intelligent course conflict detection, personalized graduation planning, degree requirement tracking, and an intuitive drag-and-drop interface. Built with modern web technologies and designed for university-scale deployment.",
-      technologies: ["Node.js", "MongoDB", "React", "Tailwind CSS", "NLP", "Python", "Production"],
-      icon: Calendar,
-      color: "from-orange-500 to-yellow-600",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      date: "October 2024",
-      github: "https://github.com/Siddhanta22/course-scheduler",
+      title: "AVT Autonomous Perception Pipeline",
+      role: "Perception Team Member",
+      timeline: "February 2025 - Present",
+      problem: "Autonomous vehicles require accurate perception of traffic lights, signs, road markings, and obstacles. Multi-sensor fusion is critical for reliable navigation, especially under degraded GPS conditions.",
+      solution: "Developed ROS2-based algorithms detecting and tracking traffic lights, signs, road markings, parking spaces, and static/dynamic obstacles with >90% accuracy. Built multi-sensor fusion and localization systems combining LiDAR, radar, camera, and IMU. Contributed to competition-ready frameworks including CAN message integration and perception pipelines aligned with SAE Year 4/5 challenge requirements.",
+      technologies: ["Python", "C++", "OpenCV", "ROS2", "PCL", "LiDAR", "Computer Vision", "Multi-Sensor Fusion"],
+      impact: "Achieved >90% accuracy in object detection and tracking, enabling reliable autonomous navigation under various environmental conditions.",
+      github: null,
       live: null,
-      featured: true,
-      production: true,
-      highlights: ["NLP-Powered Planning", "Conflict Detection", "Multi-Major Support", "University Ready"]
+      icon: Code,
+      color: "from-red-500 to-pink-600",
+      bgColor: "bg-red-50 dark:bg-red-900/20"
     },
     {
       id: 6,
-      title: "yourAIbrief",
-      description: "A comprehensive AI newsletter platform delivering curated, up-to-date artificial intelligence news with superior coverage and personalization.",
-      longDescription: "Built to help users stay ahead in the fast-moving world of AI. Features include: personalized content curation, automated news aggregation, intelligent content filtering, responsive design, and seamless user experience. The platform provides daily insights into the latest AI developments, research breakthroughs, and industry trends.",
-      technologies: ["TypeScript", "React", "Node.js", "AI News", "Newsletter", "Content Curation", "Production"],
-      icon: Brain,
-      color: "from-indigo-500 to-purple-600",
-      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-      date: "December 2024 - Present",
-      github: "https://github.com/Siddhanta22/yourAIbrief",
+      title: "CourseScheduler - NLP Academic Planner",
+      role: "HackPSU Project",
+      timeline: "October 2024",
+      problem: "Students with multiple majors/minors struggle to plan course schedules that avoid conflicts while meeting degree requirements. Manual planning is error-prone and time-consuming.",
+      solution: "Developed an NLP-powered academic planner with Node.js + MongoDB backend and React/Tailwind CSS frontend. Implemented intelligent course conflict detection, personalized graduation planning, and degree requirement tracking with an intuitive drag-and-drop interface.",
+      technologies: ["Node.js", "MongoDB", "React", "Tailwind CSS", "NLP", "Python"],
+      impact: "Simplified academic planning for students, reducing scheduling errors and helping optimize graduation timelines.",
+      github: "https://github.com/Siddhanta22/course-scheduler",
       live: null,
-      featured: true,
-      production: true,
-      highlights: ["AI News Curation", "Personalized Content", "Daily Updates", "Industry Insights"]
+      icon: Calendar,
+      color: "from-orange-500 to-yellow-600",
+      bgColor: "bg-orange-50 dark:bg-orange-900/20"
+    },
+    {
+      id: 7,
+      title: "Swipeflix - Movie Discovery Platform",
+      role: "Personal Project",
+      timeline: "January 2025 - Present",
+      problem: "Finding the next movie to watch is overwhelming with thousands of options. Traditional recommendation systems lack engagement and personalization.",
+      solution: "Built a personalized movie/TV recommender using quiz-based profiling and real-time swipe feedback, improving recommendation accuracy over time with TensorFlow.js. Developed a responsive React frontend with smart filters for language, age rating, and genre. Implemented cinematic UI with swipe gestures for intuitive movie selection.",
+      technologies: ["React", "Tailwind CSS", "JavaScript", "TensorFlow.js", "Movie API", "UI/UX"],
+      impact: "Created an engaging movie discovery experience that makes finding your next watch as fun as social media, with personalized recommendations that improve over time.",
+      github: "https://github.com/Siddhanta22/swipeflix",
+      live: "https://swipeflix-alpha.vercel.app",
+      icon: Film,
+      color: "from-indigo-500 to-purple-600",
+      bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
     }
-
   ];
 
   const containerVariants = {
@@ -117,7 +122,7 @@ const Projects = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.15
       }
     }
   };
@@ -134,7 +139,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-white dark:bg-dark-900">
+    <section id="projects" className="py-24 bg-white dark:bg-dark-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -144,10 +149,10 @@ const Projects = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Cool <span className="gradient-text">Projects</span>
+            Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Production-ready applications that showcase creativity, technical depth, and real-world impact
+            Production-ready systems showcasing technical depth, architecture, and real-world impact
           </p>
         </motion.div>
 
@@ -155,36 +160,32 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-8"
+          className="space-y-12"
         >
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <motion.div
               key={project.id}
               variants={cardVariants}
-              className={`project-card ${project.featured ? 'md:col-span-2' : ''}`}
-              onHoverStart={() => {
-                setHoveredProject(project.id);
-                setShowPreview(project.id);
-              }}
-              onHoverEnd={() => {
-                setHoveredProject(null);
-                setShowPreview(null);
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                transition: { duration: 0.2 }
-              }}
+              whileHover={{ y: -5 }}
+              className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-8 hover:shadow-2xl transition-all duration-300"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${project.bgColor}`}>
-                    <project.icon className={`w-6 h-6 bg-gradient-to-r ${project.color} bg-clip-text text-transparent`} />
+              {/* Header */}
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start space-x-4 flex-1">
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${project.bgColor}`}>
+                    <project.icon className={`w-7 h-7 bg-gradient-to-r ${project.color} bg-clip-text text-transparent`} />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
-                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {project.date}
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                      <span className="font-medium">{project.role}</span>
+                      <span>•</span>
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {project.timeline}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -196,7 +197,7 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-gray-100 dark:bg-dark-700 rounded-lg text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+                      className="p-2 bg-gray-100 dark:bg-dark-700 rounded-lg text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
                       <Github className="w-5 h-5" />
                     </motion.a>
@@ -208,8 +209,7 @@ const Projects = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors duration-200"
-                      title="Live Demo"
+                      className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
                     >
                       <ExternalLink className="w-5 h-5" />
                     </motion.a>
@@ -217,83 +217,51 @@ const Projects = () => {
                 </div>
               </div>
 
-              <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                {project.description}
-              </p>
-
-              {project.featured && (
-                <div className="mb-4 p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {project.longDescription}
-                  </p>
-                </div>
-              )}
-
-              {/* Project Highlights */}
-              {project.highlights && (
-                <div className="mb-4">
-                  <h5 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Key Features:</h5>
-                  <div className="flex flex-wrap gap-2">
-                    {project.highlights.map((highlight, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 bg-gradient-to-r from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 text-primary-800 dark:text-primary-300 text-xs font-medium rounded-md border border-primary-200 dark:border-primary-800"
-                      >
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech, techIndex) => (
-                  <motion.span
-                    key={techIndex}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: techIndex * 0.1 }}
-                    className={`skill-tag ${tech === 'Production Ready' || tech === 'Production' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 border-green-300 dark:border-green-700' : ''}`}
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
+              {/* Problem Statement */}
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+                  Problem
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {project.problem}
+                </p>
               </div>
 
-              {/* Fun Preview Effect */}
-              {showPreview === project.id && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="mt-4 p-4 bg-gradient-to-r from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-lg border border-primary-200 dark:border-primary-800"
-                >
-                  <div className="flex items-center space-x-2 text-sm text-primary-700 dark:text-primary-300">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              {/* Solution / Architecture */}
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+                  What I Built
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {project.solution}
+                </p>
+              </div>
+
+              {/* Technologies */}
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                  Technologies
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium border border-gray-200 dark:border-dark-600"
                     >
-                      <Zap className="w-4 h-4" />
-                    </motion.div>
-                    <span className="font-medium">✨ This project showcases cutting-edge AI and modern web technologies!</span>
-                  </div>
-                </motion.div>
-              )}
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-
-              <div className="mt-4 flex items-center justify-between">
-                {project.featured && (
-                  <div className="flex items-center text-sm text-primary-600 dark:text-primary-400">
-                    <Star className="w-4 h-4 mr-2" />
-                    Featured Project
-                  </div>
-                )}
-                {project.production && (
-                  <div className="flex items-center text-sm text-green-600 dark:text-green-400">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                    Production Ready
-                  </div>
-                )}
+              {/* Impact */}
+              <div className="pt-6 border-t border-gray-200 dark:border-dark-600">
+                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+                  Impact
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                  {project.impact}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -303,7 +271,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-12"
+          className="text-center mt-16"
         >
           <motion.a
             whileHover={{ scale: 1.05 }}
@@ -322,4 +290,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;
