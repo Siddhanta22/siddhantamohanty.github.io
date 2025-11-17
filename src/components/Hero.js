@@ -93,7 +93,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            I build intelligent systems that blend <span className="font-semibold text-gray-900 dark:text-white">generative AI</span>, <span className="font-semibold text-gray-900 dark:text-white">autonomous perception</span>, and <span className="font-semibold text-gray-900 dark:text-white">full-stack development</span>. Senior Computer Science student at Penn State University, seeking full-time engineering roles starting 2025.
+            I'm a curious engineer learning to build across <span className="font-semibold text-gray-900 dark:text-white">systems</span>, <span className="font-semibold text-gray-900 dark:text-white">intelligence</span>, and <span className="font-semibold text-gray-900 dark:text-white">software</span> — exploring whatever sparks my imagination and pushing myself to grow through every project.
           </motion.p>
 
           {/* CTA Buttons */}
