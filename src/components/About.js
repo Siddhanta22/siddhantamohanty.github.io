@@ -82,7 +82,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Headshot Frame Placeholder */}
+          {/* Headshot Photo */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -90,13 +90,12 @@ const About = () => {
             className="relative"
           >
             <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl">
-              <div className="w-full h-full bg-gray-200 dark:bg-dark-700 rounded-2xl flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-primary-400 to-accent-400 rounded-full flex items-center justify-center">
-                    <span className="text-4xl font-bold text-white">SM</span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 italic">Headshot Placeholder</p>
-                </div>
+              <div className="w-full h-full rounded-2xl overflow-hidden">
+                <img 
+                  src="/headshot.jpg" 
+                  alt="Siddhanta Mohanty" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </motion.div>
