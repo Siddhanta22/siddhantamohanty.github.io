@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/siddhantamohanty.github.io/static/css/main.9500b154.css",
+    "main.js": "/siddhantamohanty.github.io/static/js/main.05612588.js",
+    "index.html": "/siddhantamohanty.github.io/index.html",
+    "main.9500b154.css.map": "/siddhantamohanty.github.io/static/css/main.9500b154.css.map",
+    "main.05612588.js.map": "/siddhantamohanty.github.io/static/js/main.05612588.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9500b154.css",
+    "static/js/main.05612588.js"
+  ]
+}
