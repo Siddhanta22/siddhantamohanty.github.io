@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, Brain, Server, Cpu, Settings } from 'lucide-react';
+import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -16,7 +16,7 @@ const Skills = () => {
       icon: Code,
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      skills: ["Python", "C++", "JavaScript", "SQL"]
+      skills: ["Python", "C++", "JavaScript"]
     },
     {
       id: 2,
@@ -24,31 +24,39 @@ const Skills = () => {
       icon: Brain,
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
-      skills: ["LangChain", "RAG", "FAISS", "YOLO", "OpenCV", "PyTorch (beginner)"]
+      skills: ["RAG", "LangChain", "FAISS", "OpenCV", "YOLOv8"]
     },
     {
       id: 3,
-      title: "Backend & Systems",
+      title: "Software Engineering",
       icon: Server,
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50 dark:bg-green-900/20",
-      skills: ["Flask", "Node.js", "REST APIs", "Docker", "PostgreSQL", "MySQL"]
+      skills: ["REST APIs", "Flask", "Node.js", "Docker", "Git", "GitLab"]
     },
     {
       id: 4,
-      title: "Robotics & Perception",
+      title: "Autonomous Systems",
       icon: Cpu,
       color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      skills: ["ROS2", "LiDAR-Camera Fusion", "Sensor Calibration", "CV Pipelines"]
+      skills: ["ROS2", "LiDAR-camera fusion", "calibration", "perception pipelines"]
     },
     {
       id: 5,
-      title: "Tools",
+      title: "Databases",
+      icon: Database,
+      color: "from-red-500 to-red-600",
+      bgColor: "bg-red-50 dark:bg-red-900/20",
+      skills: ["PostgreSQL", "MySQL"]
+    },
+    {
+      id: 6,
+      title: "Other",
       icon: Settings,
       color: "from-indigo-500 to-indigo-600",
       bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-      skills: ["Git", "GitHub/GitLab", "VS Code", "Linux", "Docker", "MCP"]
+      skills: ["Model Context Protocol (MCP)", "Linux", "VS Code"]
     }
   ];
 
@@ -95,7 +103,7 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {skillCategories.map((category) => (
             <motion.div

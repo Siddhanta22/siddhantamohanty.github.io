@@ -29,14 +29,14 @@ const Experience = () => {
     {
       id: 2,
       company: "HCL Technologies",
-      role: "GenAI Intern",
+      role: "Generative AI Engineer Intern",
       location: "Redmond, WA, USA",
       dates: "May 2025 - August 2025",
       achievements: [
-        "Reduced support resolution time by 50% by engineering agentic RAG pipeline with dual vector databases for historical error embeddings and internal documentation",
-        "Automated complex, multi-step workflows across APIs, file systems, and databases via Model Context Protocol (MCP) system using LangChain agents",
-        "Designed Confluence ingestion pipeline integrated with MCP and LangChain, enabling RAG-based contextual search across organizational documentation",
-        "Created Photobot, an AI-powered camera assistant using RAG + LangChain, cutting configuration decision time by 60% through semantic retrieval from PDF manuals"
+        "Worked on end-to-end LLM engineering initiatives including designing agentic RAG pipelines using dual vector databases",
+        "Built Model Context Protocol (MCP) workflows for automated LLM operations",
+        "Created the Self-Healing Error Intelligence platform for real-time debugging",
+        "Supported teams by integrating these solutions into internal AI tooling"
       ],
       technologies: ["LLMs", "LangChain", "RAG", "Vector Databases", "MCP", "Python", "APIs"],
       logo: "HCL",
@@ -45,16 +45,17 @@ const Experience = () => {
     {
       id: 3,
       company: "Penn State Advanced Vehicle Team",
-      role: "Member - Perception Team",
+      role: "Autonomous Vehicle Perception Engineer",
       location: "State College, PA, USA",
       dates: "February 2025 - Present",
       achievements: [
-        "Developed ROS2-based algorithms detecting and tracking traffic lights, signs, road markings, parking spaces, and static/dynamic obstacles with >90% accuracy",
-        "Built multi-sensor fusion and localization systems combining LiDAR, radar, camera, and IMU to ensure accurate navigation under degraded GPS conditions",
-        "Contributed to competition-ready frameworks including CAN message integration and perception pipelines aligned with SAE Year 4/5 challenge requirements",
-        "Optimized perception algorithms using Python, C++, and OpenCV to enhance autonomous vehicle decision-making in real-time scenarios"
+        "Contribute to the Perceptions Team's sensor fusion and detection pipeline",
+        "Implementing LiDAR-camera fusion modules",
+        "YOLOv8 object detection tuning and filtering",
+        "Camera calibration and depth-fusion improvements",
+        "Working within CarROS (ROS2) ecosystem using Python and C++"
       ],
-      technologies: ["Python", "C++", "OpenCV", "ROS2", "PCL", "LiDAR", "Computer Vision", "Docker"],
+      technologies: ["Python", "C++", "ROS2", "OpenCV", "YOLOv8", "LiDAR", "Computer Vision"],
       logo: "AVT",
       color: "from-green-600 to-emerald-800"
     },
