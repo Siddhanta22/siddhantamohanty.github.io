@@ -156,11 +156,14 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Featured <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
             Production-ready systems showcasing technical depth, architecture, and real-world impact
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            From AI-powered debugging tools to autonomous perception systems
           </p>
         </motion.div>
 
@@ -189,9 +192,21 @@ const Projects = () => {
                     <project.icon className={`w-7 h-7 bg-gradient-to-r ${project.color} bg-clip-text text-transparent`} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                      {project.title}
-                    </h3>
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {project.title}
+                      </h3>
+                      {project.id === 1 && (
+                        <span className="px-2 py-1 bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs font-bold rounded-full">
+                          FEATURED
+                        </span>
+                      )}
+                      {project.live && (
+                        <span className="px-2 py-1 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs font-bold rounded-full">
+                          LIVE
+                        </span>
+                      )}
+                    </div>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                       <span className="font-medium">{project.role}</span>
                       <span>•</span>
@@ -262,9 +277,10 @@ const Projects = () => {
               )}
 
               {/* Problem Statement */}
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                  Problem
+              <div className="mb-6 bg-red-50/50 dark:bg-red-900/10 border-l-4 border-red-400 dark:border-red-600 pl-4 py-3 rounded-r-lg">
+                <h4 className="text-sm font-semibold text-red-600 dark:text-red-400 uppercase tracking-wide mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                  Problem Statement
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   {project.problem}
@@ -273,37 +289,41 @@ const Projects = () => {
 
               {/* Solution / Architecture */}
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                  What I Built
+                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                  Architecture & Implementation
                 </h4>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
                   {project.solution}
                 </p>
               </div>
 
               {/* Technologies */}
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
-                  Technologies
+              <div className="mb-6 bg-blue-50/50 dark:bg-blue-900/10 border-l-4 border-blue-400 dark:border-blue-600 pl-4 py-3 rounded-r-lg">
+                <h4 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                  Tech Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
-                    <span
+                    <motion.span
                       key={index}
-                      className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium border border-gray-200 dark:border-dark-600"
+                      whileHover={{ scale: 1.05 }}
+                      className="px-3 py-1.5 bg-white dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md transition-all"
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
 
-              {/* Impact */}
-              <div className="pt-6 border-t border-gray-200 dark:border-dark-600">
-                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                  Impact
+              {/* Impact - More Prominent */}
+              <div className="pt-6 border-t-2 border-gray-300 dark:border-dark-600 bg-gradient-to-r from-primary-50/50 to-accent-50/50 dark:from-primary-900/10 dark:to-accent-900/10 -mx-8 px-8 py-6 rounded-b-2xl">
+                <h4 className="text-sm font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-primary-500 rounded-full"></span>
+                  Impact & Results
                 </h4>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+                <p className="text-gray-800 dark:text-gray-200 leading-relaxed font-semibold text-lg">
                   {project.impact}
                 </p>
               </div>

@@ -50,9 +50,12 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             About <span className="gradient-text">Me</span>
           </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Passionate engineer building the future of intelligent systems
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
