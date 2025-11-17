@@ -8,15 +8,6 @@ const Footer = () => {
     <footer className="bg-white dark:bg-dark-900 border-t border-gray-200 dark:border-dark-700 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center space-y-6">
-          <motion.h3
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl font-bold text-gray-900 dark:text-white"
-          >
-            Footer
-          </motion.h3>
-          
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
