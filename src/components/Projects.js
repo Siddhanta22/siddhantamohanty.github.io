@@ -192,21 +192,9 @@ const Projects = () => {
                     <project.icon className={`w-7 h-7 bg-gradient-to-r ${project.color} bg-clip-text text-transparent`} />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {project.title}
-                      </h3>
-                      {project.id === 1 && (
-                        <span className="px-2 py-1 bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs font-bold rounded-full">
-                          FEATURED
-                        </span>
-                      )}
-                      {project.live && (
-                        <span className="px-2 py-1 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs font-bold rounded-full">
-                          LIVE
-                        </span>
-                      )}
-                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      {project.title}
+                    </h3>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                       <span className="font-medium">{project.role}</span>
                       <span>•</span>
