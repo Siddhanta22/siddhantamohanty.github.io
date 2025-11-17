@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/siddhantamohanty.github.io/static/css/main.9186b131.css",
-    "main.js": "/siddhantamohanty.github.io/static/js/main.9868faf2.js",
+    "main.css": "/siddhantamohanty.github.io/static/css/main.aae791ed.css",
+    "main.js": "/siddhantamohanty.github.io/static/js/main.54d846b6.js",
     "index.html": "/siddhantamohanty.github.io/index.html",
-    "main.9186b131.css.map": "/siddhantamohanty.github.io/static/css/main.9186b131.css.map",
-    "main.9868faf2.js.map": "/siddhantamohanty.github.io/static/js/main.9868faf2.js.map"
+    "main.aae791ed.css.map": "/siddhantamohanty.github.io/static/css/main.aae791ed.css.map",
+    "main.54d846b6.js.map": "/siddhantamohanty.github.io/static/js/main.54d846b6.js.map"
   },
   "entrypoints": [
-    "static/css/main.9186b131.css",
-    "static/js/main.9868faf2.js"
+    "static/css/main.aae791ed.css",
+    "static/js/main.54d846b6.js"
   ]
 }
