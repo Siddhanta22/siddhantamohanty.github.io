@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, Award, Briefcase, Calendar } from 'lucide-react';
+import { GraduationCap, Award, Briefcase } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -30,13 +30,6 @@ const About = () => {
       value: "Perception Systems",
       color: "from-green-500 to-emerald-600",
       bgColor: "bg-green-50 dark:bg-green-900/20"
-    },
-    {
-      icon: Calendar,
-      label: "Years Experience",
-      value: "3+ Years",
-      color: "from-purple-500 to-pink-600",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20"
     }
   ];
 
@@ -114,7 +107,7 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
           {stats.map((stat, index) => (
             <motion.div
