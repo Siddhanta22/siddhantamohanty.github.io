@@ -174,9 +174,14 @@ const Projects = () => {
             <motion.div
               key={project.id}
               variants={cardVariants}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-8 hover:shadow-2xl transition-all duration-300"
+              whileHover={{ y: -8, scale: 1.01 }}
+              className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-8 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
             >
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-accent-500/0 group-hover:from-primary-500/5 group-hover:to-accent-500/5 transition-all duration-500 pointer-events-none"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
               {/* Header */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-start space-x-4 flex-1">
@@ -301,6 +306,7 @@ const Projects = () => {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
                   {project.impact}
                 </p>
+              </div>
               </div>
             </motion.div>
           ))}

@@ -1,8 +1,24 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Download, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Download, ArrowRight, Sparkles } from 'lucide-react';
 
 const Hero = () => {
+  const [currentTagline, setCurrentTagline] = useState(0);
+  
+  const taglines = [
+    "Building intelligent systems",
+    "Crafting AI solutions",
+    "Engineering autonomous systems",
+    "Creating production-ready software"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTagline((prev) => (prev + 1) % taglines.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [taglines.length]);
+
   const scrollToProjects = () => {
     document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
   };
@@ -33,18 +49,42 @@ const Hero = () => {
           className="space-y-8"
         >
           {/* Main Headline */}
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight"
+            className="space-y-4"
           >
-            Hi, I'm Siddhanta Mohanty
-            <br />
-            <span className="text-4xl md:text-5xl lg:text-6xl text-gray-600 dark:text-gray-300 font-normal">
-              Software Engineer • AI & Robotics • Full-Stack Developer
-            </span>
-          </motion.h1>
+            <motion.h1
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight"
+            >
+              Hi, I'm <span className="gradient-text">Siddhanta Mohanty</span>
+            </motion.h1>
+            
+            {/* Rotating Tagline */}
+            <div className="h-16 md:h-20 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentTagline}
+                  initial={{ opacity: 0, y: 20, rotateX: -90 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  exit={{ opacity: 0, y: -20, rotateX: 90 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-700 dark:text-gray-300"
+                >
+                  {taglines[currentTagline]}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            
+            <div className="flex items-center justify-center gap-3 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+              <span>Software Engineer</span>
+              <Sparkles className="w-4 h-4 text-primary-500" />
+              <span>AI & Robotics</span>
+              <Sparkles className="w-4 h-4 text-accent-500" />
+              <span>Full-Stack Developer</span>
+            </div>
+          </motion.div>
 
           {/* Value Proposition */}
           <motion.p
@@ -53,7 +93,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            I build intelligent systems that blend generative AI, autonomous perception, and full-stack web development. I'm a senior Computer Science student at Penn State University and seeking full-time engineering roles.
+            I build intelligent systems that blend generative AI, autonomous perception, and full-stack web development. Currently a senior Computer Science student at Penn State University, seeking full-time engineering roles.
           </motion.p>
 
           {/* CTA Buttons */}

@@ -63,9 +63,18 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+            <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+              <p className="text-xl font-medium text-gray-900 dark:text-white">
+                From India to Pennsylvania, building the future of intelligent systems.
+              </p>
               <p>
-                I am a senior Computer Science major at Penn State University focused on AI, robotics, and full-stack development. My journey began in India, and moving to the U.S. for my education taught me that real growth happens when you step outside your comfort zone. I thrive on building tools and systems that solve real-world problems. Whether it's developing perception algorithms for autonomous vehicles or architecting agentic RAG pipelines in enterprise workflows, I enjoy bridging intelligence, data, and engineering. Outside of code, I explore new technologies, tinker with projects, and stay curious about how things work under the hood.
+                I'm a senior Computer Science major at Penn State University, passionate about AI, robotics, and full-stack development. My journey from India to the U.S. taught me that real growth happens when you step outside your comfort zone—a principle I apply to every project I build.
+              </p>
+              <p>
+                I specialize in creating systems that solve real-world problems. Whether it's developing perception algorithms for autonomous vehicles, architecting agentic RAG pipelines for enterprise workflows, or building production-ready web applications, I bridge the gap between intelligence, data, and engineering.
+              </p>
+              <p>
+                When I'm not coding, I'm exploring new technologies, tinkering with side projects, and staying curious about how things work under the hood. I believe in building with purpose, learning continuously, and pushing the boundaries of what's possible.
               </p>
             </div>
           </motion.div>
@@ -77,18 +86,23 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative"
           >
-            <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl">
-              <div className="w-full h-full rounded-2xl overflow-hidden">
+            <motion.div
+              whileHover={{ scale: 1.02, rotate: 1 }}
+              transition={{ duration: 0.3 }}
+              className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl"
+            >
+              <div className="w-full h-full rounded-2xl overflow-hidden relative group">
                 <img 
                   src={`${process.env.PUBLIC_URL}/headshot.jpg`}
                   alt="Siddhanta Mohanty" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
                     e.target.style.display = 'none';
                   }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 

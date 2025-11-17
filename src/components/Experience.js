@@ -125,19 +125,25 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="space-y-8"
-        >
-          {experiences.map((experience) => (
-            <motion.div
-              key={experience.id}
-              variants={cardVariants}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-dark-700 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-600 p-8 hover:shadow-2xl transition-all duration-300"
-            >
+        <div className="relative">
+          {/* Timeline Line */}
+          <div className="hidden lg:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-accent-200 to-primary-200 dark:from-primary-800 dark:via-accent-800 dark:to-primary-800"></div>
+          
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            className="space-y-8 relative"
+          >
+            {experiences.map((experience, index) => (
+              <motion.div
+                key={experience.id}
+                variants={cardVariants}
+                whileHover={{ y: -5, x: 5 }}
+                className="relative bg-white dark:bg-dark-700 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-600 p-8 hover:shadow-2xl transition-all duration-300 lg:ml-16"
+              >
+                {/* Timeline Dot */}
+                <div className="hidden lg:block absolute -left-20 top-8 w-4 h-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full border-4 border-white dark:border-dark-800 shadow-lg"></div>
               {/* Header */}
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
                 <div className="flex items-start space-x-4 mb-4 lg:mb-0">
@@ -196,8 +202,9 @@ const Experience = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
         {/* Resume CTA */}
         <motion.div
