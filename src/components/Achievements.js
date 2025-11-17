@@ -20,33 +20,33 @@ const Achievements = () => {
     },
     {
       icon: Target,
-      title: "50% Reduction",
-      description: "Support Resolution Time",
+      title: "Research Assistant",
+      description: "Multi-stage LLM Optimization",
+      period: "Penn State University",
+      color: "from-blue-400 to-cyan-500",
+      bgColor: "bg-blue-50 dark:bg-blue-900/20"
+    },
+    {
+      icon: TrendingUp,
+      title: "GenAI Intern",
+      description: "Enterprise AI Solutions",
       period: "HCL Technologies",
       color: "from-green-400 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20"
     },
     {
-      icon: TrendingUp,
-      title: "40% Decrease",
-      description: "Debugging Effort",
-      period: "Self-Healing System",
-      color: "from-blue-400 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20"
-    },
-    {
       icon: Zap,
-      title: "60% Faster",
-      description: "Configuration Decisions",
-      period: "Photobot AI Assistant",
+      title: "AV Team Member",
+      description: "Autonomous Perception Systems",
+      period: "Penn State AVT",
       color: "from-indigo-400 to-purple-500",
       bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
     },
     {
       icon: Star,
-      title: "Dean's List",
-      description: "Academic Excellence",
-      period: "Fall 2023 & Spring 2024",
+      title: "Production Systems",
+      description: "Self-Healing Error Intelligence",
+      period: "Personal Projects",
       color: "from-rose-400 to-pink-500",
       bgColor: "bg-rose-50 dark:bg-rose-900/20"
     }
@@ -87,7 +87,7 @@ const Achievements = () => {
             Impact & <span className="gradient-text">Achievements</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Measurable results that demonstrate the real-world impact of my work
+            Key milestones and contributions across research, industry, and personal projects
           </p>
         </motion.div>
 
