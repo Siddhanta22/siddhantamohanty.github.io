@@ -250,32 +250,23 @@ const Projects = () => {
               )}
 
               {/* Problem Statement */}
-              <div className="mb-6 bg-gradient-to-r from-red-50/50 to-orange-50/30 dark:from-red-900/10 dark:to-orange-900/5 border-l-4 border-red-400 dark:border-red-500 pl-6 py-4 rounded-r-lg">
-                <h4 className="text-base font-bold text-red-600 dark:text-red-400 mb-3 flex items-center gap-2">
-                  <span className="text-xl">💡</span>
-                  <span>The Challenge</span>
-                </h4>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+              <div className="mb-6">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                   {project.problem}
                 </p>
               </div>
 
               {/* Solution / Architecture */}
-              <div className="mb-6 bg-gradient-to-r from-blue-50/50 to-indigo-50/30 dark:from-blue-900/10 dark:to-indigo-900/5 border-l-4 border-blue-400 dark:border-blue-500 pl-6 py-4 rounded-r-lg">
-                <h4 className="text-base font-bold text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
-                  <span className="text-xl">⚙️</span>
-                  <span>How I Built It</span>
-                </h4>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
+              <div className="mb-6">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                   {project.solution}
                 </p>
               </div>
 
               {/* Technologies */}
-              <div className="mb-6 bg-gradient-to-r from-purple-50/50 to-pink-50/30 dark:from-purple-900/10 dark:to-pink-900/5 border-l-4 border-purple-400 dark:border-purple-500 pl-6 py-4 rounded-r-lg">
-                <h4 className="text-base font-bold text-purple-600 dark:text-purple-400 mb-3 flex items-center gap-2">
-                  <span className="text-xl">🛠️</span>
-                  <span>Tech Stack</span>
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                  Built With
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
@@ -291,12 +282,8 @@ const Projects = () => {
               </div>
 
               {/* Impact - More Prominent */}
-              <div className="pt-6 border-t-2 border-gray-300 dark:border-dark-600 bg-gradient-to-r from-green-50/50 to-emerald-50/30 dark:from-green-900/10 dark:to-emerald-900/5 -mx-8 px-8 py-6 rounded-b-2xl">
-                <h4 className="text-base font-bold text-green-600 dark:text-green-400 mb-3 flex items-center gap-2">
-                  <span className="text-xl">🚀</span>
-                  <span>Impact & Results</span>
-                </h4>
-                <p className="text-gray-800 dark:text-gray-200 leading-relaxed font-semibold text-lg">
+              <div className="pt-6 border-t border-gray-200 dark:border-dark-600">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg font-medium">
                   {project.impact}
                 </p>
               </div>
