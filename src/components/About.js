@@ -80,9 +80,12 @@ const About = () => {
             <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl">
               <div className="w-full h-full rounded-2xl overflow-hidden">
                 <img 
-                  src="/headshot.jpg" 
+                  src={`${process.env.PUBLIC_URL}/headshot.jpg`}
                   alt="Siddhanta Mohanty" 
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
                 />
               </div>
             </div>

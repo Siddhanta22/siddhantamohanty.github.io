@@ -9,6 +9,11 @@ const Projects = () => {
     threshold: 0.1,
   });
 
+  // Helper function to get image path
+  const getImagePath = (filename) => {
+    return `${process.env.PUBLIC_URL || ''}${filename}`;
+  };
+
   const projects = [
     {
       id: 1,
@@ -238,9 +243,12 @@ const Projects = () => {
                         className="rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600 shadow-md hover:shadow-xl transition-all duration-300"
                       >
                         <img
-                          src={screenshot}
+                          src={getImagePath(screenshot)}
                           alt={`${project.title} screenshot ${index + 1}`}
                           className="w-full h-auto object-cover"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
                         />
                       </motion.div>
                     ))}
