@@ -60,7 +60,7 @@ const Projects = () => {
       icon: Zap,
       color: "from-yellow-500 to-amber-600",
       bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
-      screenshots: ["/prompt-tracer-1.jpg"]
+      screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
     },
     {
       id: 4,
