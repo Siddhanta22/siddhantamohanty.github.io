@@ -33,6 +33,22 @@ const Projects = () => {
     },
     {
       id: 2,
+      title: "Real-Time Collision Detection Engine",
+      role: "Personal Project",
+      timeline: "2024 - Present",
+      problem: "Traditional collision detection algorithms use brute-force methods that check every object against every other object, resulting in O(n²) complexity. This becomes computationally expensive with large numbers of moving objects, making real-time physics simulations impractical.",
+      solution: "Engineered the broad-phase collision subsystem of a physics engine using spatial grid partitioning and AABB (Axis-Aligned Bounding Box) culling. Implemented a modular architecture with plug-and-play collision strategies, allowing easy benchmarking and comparison of different algorithms. Built an interactive visualization system with a glowing space-style theme, featuring HUD displays, starfield backgrounds, and real-time collision highlighting to demonstrate performance improvements.",
+      technologies: ["TypeScript", "Canvas API", "Spatial Hashing", "AABB Culling", "Physics Engine"],
+      impact: "Reduced collision checks by ~98% compared to brute force methods, achieving 50–60× throughput improvement on 1000 moving objects while preserving 100% correctness. The spatial grid approach enables real-time performance for large-scale physics simulations.",
+      github: "https://github.com/Siddhanta22/collision_detector",
+      live: null,
+      icon: Code,
+      color: "from-blue-500 to-cyan-600",
+      bgColor: "bg-blue-50 dark:bg-blue-900/20",
+      screenshots: []
+    },
+    {
+      id: 3,
       title: "Photobot — RAG-Based DSLR Assistant",
       role: "GenAI Intern",
       timeline: "May 2025 - Present",
@@ -47,7 +63,7 @@ const Projects = () => {
       bgColor: "bg-green-50 dark:bg-green-900/20"
     },
     {
-      id: 3,
+      id: 4,
       title: "PromptTracer — Prompt Observability Tool",
       role: "Personal Project",
       timeline: "July 2025 - Present",
@@ -63,7 +79,7 @@ const Projects = () => {
       screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
     },
     {
-      id: 4,
+      id: 5,
       title: "Autonomous Vehicle Team — Perception Algorithms",
       role: "Perception Team Member - Penn State AVT",
       timeline: "February 2025 - Present",
@@ -78,7 +94,7 @@ const Projects = () => {
       bgColor: "bg-red-50 dark:bg-red-900/20"
     },
     {
-      id: 5,
+      id: 6,
       title: "CourseScheduler — NLP Academic Planner",
       role: "HackPSU Project",
       timeline: "October 2024",
@@ -93,7 +109,7 @@ const Projects = () => {
       bgColor: "bg-orange-50 dark:bg-orange-900/20"
     },
     {
-      id: 6,
+      id: 7,
       title: "Swipeflix - Movie Discovery Platform",
       role: "Personal Project",
       timeline: "January 2025 - Present",
