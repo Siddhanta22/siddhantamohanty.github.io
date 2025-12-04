@@ -45,7 +45,7 @@ const Projects = () => {
       icon: Code,
       color: "from-blue-500 to-cyan-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      screenshots: []
+      screenshots: ["/collision-detector-1.png"]
     },
     {
       id: 3,
