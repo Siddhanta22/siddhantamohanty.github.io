@@ -19,7 +19,6 @@ const Projects = () => {
       id: 1,
       title: "Self-Healing Error Intelligence Platform",
       role: "Personal Project",
-      timeline: "June 2025 - Present",
       problem: "System and database errors require extensive manual debugging, consuming developer time and delaying issue resolution. Raw error logs lack context and actionable insights.",
       solution: "A production-inspired system that detects, logs, and interprets system and database errors using vector search and GPT-based reasoning. Built with a Flask + PostgreSQL backend, FAISS embeddings for error similarity, and Slack integration for real-time explanations. This project demonstrates the full pipeline: capturing raw errors, embedding them, retrieving similar cases, and generating human-readable root-cause analysis.",
       technologies: ["Python", "Flask", "PostgreSQL", "FAISS", "LangChain", "Slack API"],
@@ -35,7 +34,6 @@ const Projects = () => {
       id: 2,
       title: "Real-Time Collision Detection Engine",
       role: "Personal Project",
-      timeline: "2024 - Present",
       problem: "Traditional collision detection algorithms use brute-force methods that check every object against every other object, resulting in O(n²) complexity. This becomes computationally expensive with large numbers of moving objects, making real-time physics simulations impractical.",
       solution: "Engineered the broad-phase collision subsystem of a physics engine using spatial grid partitioning and AABB (Axis-Aligned Bounding Box) culling. Implemented a modular architecture with plug-and-play collision strategies, allowing easy benchmarking and comparison of different algorithms. Built an interactive visualization system with a glowing space-style theme, featuring HUD displays, starfield backgrounds, and real-time collision highlighting to demonstrate performance improvements.",
       technologies: ["TypeScript", "Canvas API", "Spatial Hashing", "AABB Culling", "Physics Engine"],
@@ -51,7 +49,6 @@ const Projects = () => {
       id: 3,
       title: "Photobot — RAG-Based DSLR Assistant",
       role: "GenAI Intern",
-      timeline: "May 2025 - Present",
       problem: "Photographers struggle to find optimal camera settings for different scenarios. Manual PDF reference is time-consuming and context-specific knowledge is hard to retrieve.",
       solution: "A retrieval-augmented assistant trained on DSLR manuals, allowing users to ask natural-language questions about aperture, shutter speed, ISO, and more. Photobot extracts relevant documentation and generates simple, actionable photography instructions.",
       technologies: ["Python", "LangChain", "FAISS", "RAG"],
@@ -66,7 +63,6 @@ const Projects = () => {
       id: 4,
       title: "PromptTracer — Prompt Observability Tool",
       role: "Personal Project",
-      timeline: "July 2025 - Present",
       problem: "Developers struggle to understand how prompt changes affect LLM outputs. There's no unified tool for tracking prompt versions, model responses, and evaluation metrics.",
       solution: "A browser extension and backend workflow that tracks prompt versions, model responses, and evaluation metrics. Helps developers understand how prompt changes affect LLM outputs.",
       technologies: ["JavaScript", "React", "Chrome Extension APIs"],
@@ -82,7 +78,6 @@ const Projects = () => {
       id: 5,
       title: "Autonomous Vehicle Team — Perception Algorithms",
       role: "Perception Team Member - Penn State AVT",
-      timeline: "February 2025 - Present",
       problem: "Autonomous vehicles require accurate perception of traffic lights, signs, road markings, and obstacles. Multi-sensor fusion is critical for reliable navigation, especially under degraded GPS conditions.",
       solution: "Working on the Perceptions Team, contributing to LiDAR-camera fusion, YOLOv8-based object detection, bounding box confidence filtering (≥0.7), and depth estimation using ROS2. Also work within the CarROS stack, tuning launch files, calibrating sensors, and improving detection consistency within a 20m range.",
       technologies: ["Python", "C++", "ROS2", "OpenCV", "YOLOv8"],
@@ -97,7 +92,6 @@ const Projects = () => {
       id: 6,
       title: "CourseScheduler — NLP Academic Planner",
       role: "HackPSU Project",
-      timeline: "October 2024",
       problem: "Students with multiple majors/minors struggle to plan course schedules that avoid conflicts while meeting degree requirements. Manual planning is error-prone and time-consuming.",
       solution: "An academic planning tool that uses NLP to analyze course descriptions and build conflict-free graduation paths. Contributed to the frontend and pitched the project during HackPSU.",
       technologies: ["React", "Node.js", "MongoDB", "Python"],
@@ -112,7 +106,6 @@ const Projects = () => {
       id: 7,
       title: "Swipeflix - Movie Discovery Platform",
       role: "Personal Project",
-      timeline: "January 2025 - Present",
       problem: "Finding the next movie to watch is overwhelming with thousands of options. Traditional recommendation systems lack engagement and personalization.",
       solution: "Built a personalized movie/TV recommender using quiz-based profiling and real-time swipe feedback, improving recommendation accuracy over time with TensorFlow.js. Developed a responsive React frontend with smart filters for language, age rating, and genre. Implemented cinematic UI with swipe gestures for intuitive movie selection.",
       technologies: ["React", "Tailwind CSS", "JavaScript", "TensorFlow.js", "Movie API", "UI/UX"],
@@ -198,11 +191,6 @@ const Projects = () => {
                     </h3>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                       <span className="font-medium">{project.role}</span>
-                      <span>•</span>
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {project.timeline}
-                      </div>
                     </div>
                   </div>
                 </div>
