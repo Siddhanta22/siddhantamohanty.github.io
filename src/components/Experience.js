@@ -15,7 +15,7 @@ const Experience = () => {
       company: "Penn State University",
       role: "Research Assistant",
       location: "University Park, PA, USA",
-      dates: "September 2025 - Present",
+      dates: "September 2025 - December 2025",
       achievements: [
         "Designed RL layer leveraging secondary LLM reports to generate improved prompts and feedback signals for primary LLM in multi-stage code verification system",
         "Built pipeline integrating compilers and static analysis tools (Compiler, Klee, CodeQL) to analyze LLM outputs before RL refinement",
@@ -47,7 +47,7 @@ const Experience = () => {
       company: "Penn State Advanced Vehicle Team",
       role: "Autonomous Vehicle Perception Engineer",
       location: "State College, PA, USA",
-      dates: "February 2025 - Present",
+      dates: "February 2025 - December 2025",
       achievements: [
         "Contribute to the Perceptions Team's sensor fusion and detection pipeline",
         "Implementing LiDAR-camera fusion modules",
