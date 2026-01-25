@@ -46,7 +46,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="space-y-8"
+          className="space-y-7"
         >
           {/* Main Headline */}
           <motion.div
@@ -85,9 +85,6 @@ const Hero = () => {
               <span>Full-Stack Developer</span>
             </div>
 
-            <div className="text-sm md:text-base text-gray-500 dark:text-gray-400">
-              Graduating May 2026 • Seeking New Grad Software / AI / Systems Roles
-            </div>
           </motion.div>
 
           {/* Value Proposition */}
@@ -105,7 +102,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
           >
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}

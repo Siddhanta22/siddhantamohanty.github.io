@@ -14,7 +14,7 @@ const Achievements = () => {
       icon: Trophy,
       title: "Dean's List",
       description: "Academic Excellence",
-      period: "Fall 2023 & Spring 2024",
+      period: "Fall 2023 & Spring 2024 • Fall 2025",
       color: "from-yellow-400 to-orange-500",
       bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
     },
