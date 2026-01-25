@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Trophy, Target, TrendingUp, Zap, Star } from 'lucide-react';
+import { Trophy, Target, TrendingUp, Zap } from 'lucide-react';
 
 const Achievements = () => {
   const [ref, inView] = useInView({
@@ -21,7 +21,7 @@ const Achievements = () => {
     {
       icon: Target,
       title: "Research Assistant",
-      description: "Multi-stage LLM Optimization",
+      description: "Reinforcement Learning for Multi-Stage LLM Optimization",
       period: "Penn State University",
       color: "from-blue-400 to-cyan-500",
       bgColor: "bg-blue-50 dark:bg-blue-900/20"
@@ -29,7 +29,7 @@ const Achievements = () => {
     {
       icon: TrendingUp,
       title: "GenAI Intern",
-      description: "Enterprise AI Solutions",
+      description: "Enterprise AI Systems & Self-Healing Infrastructure",
       period: "HCLTech",
       color: "from-green-400 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20"
@@ -37,18 +37,10 @@ const Achievements = () => {
     {
       icon: Zap,
       title: "AV Team Member",
-      description: "Autonomous Perception Systems",
+      description: "Autonomous Perception & Sensor Fusion",
       period: "Penn State AVT",
       color: "from-indigo-400 to-purple-500",
       bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
-    },
-    {
-      icon: Star,
-      title: "Production Systems",
-      description: "Self-Healing Error Intelligence",
-      period: "Personal Projects",
-      color: "from-rose-400 to-pink-500",
-      bgColor: "bg-rose-50 dark:bg-rose-900/20"
     }
   ];
 
@@ -95,7 +87,7 @@ const Achievements = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch"
         >
           {achievements.map((achievement, index) => (
             <motion.div
@@ -106,30 +98,30 @@ const Achievements = () => {
                 y: -5,
                 transition: { duration: 0.2 }
               }}
-              className="bg-white dark:bg-dark-800 rounded-xl shadow-lg border border-gray-200 dark:border-dark-700 p-6 transition-all duration-300 hover:shadow-2xl"
+              className="bg-white dark:bg-dark-800 rounded-xl shadow-lg border border-gray-200 dark:border-dark-700 p-6 transition-all duration-300 hover:shadow-2xl h-full min-h-[180px] flex flex-col"
             >
               <div className="flex items-center mb-4">
                 <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${achievement.bgColor} mr-4`}>
                   <achievement.icon className={`w-6 h-6 bg-gradient-to-r ${achievement.color} bg-clip-text text-transparent`} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">
                     {achievement.title}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-gray-500/70 dark:text-gray-400/70">
                     {achievement.period}
                   </p>
                 </div>
               </div>
               
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
+              <p className="text-gray-900/90 dark:text-white/90 text-base font-semibold mt-1">
                 {achievement.description}
               </p>
               
               <div className="mt-4 h-1 bg-gray-200 dark:bg-dark-600 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={inView ? { width: "100%" } : { width: 0 }}
+                  animate={inView ? { width: "60%" } : { width: 0 }}
                   transition={{ duration: 1, delay: index * 0.1 }}
                   className={`h-full bg-gradient-to-r ${achievement.color} rounded-full`}
                 />

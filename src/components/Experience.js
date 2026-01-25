@@ -15,14 +15,14 @@ const Experience = () => {
       company: "Penn State University",
       role: "Research Assistant",
       location: "University Park, PA, USA",
-      dates: "September 2025 - December 2025",
+      dates: "Sep 2025 – Dec 2025",
       achievements: [
-        "Designed RL layer leveraging secondary LLM reports to generate improved prompts and feedback signals for primary LLM in multi-stage code verification system",
-        "Built pipeline integrating compilers and static analysis tools (Compiler, Klee, CodeQL) to analyze LLM outputs before RL refinement",
-        "Contributed to competition-ready frameworks including CAN message integration and perception pipelines aligned with SAE Year 4/5 challenge requirements",
-        "Developed advanced RL algorithms for multi-stage LLM optimization, improving code verification accuracy and system reliability"
+        "Built an RL feedback layer that uses secondary LLM reports to improve prompts for a primary LLM in a multi-stage code verification pipeline",
+        "Integrated compilers and static analysis tools (Klee, CodeQL) to validate LLM outputs before RL refinement",
+        "Researched reinforcement learning approaches and studied academic papers to apply RL to LLM-based code verification systems",
+        "Contributed to perception and CAN integration frameworks for SAE autonomous challenge systems"
       ],
-      technologies: ["Reinforcement Learning", "LLMs", "Python", "Compiler", "Klee", "CodeQL"],
+      technologies: ["Reinforcement Learning", "LLMs", "Python", "Klee", "CodeQL", "Compilers"],
       logo: "PSU",
       color: "from-blue-600 to-blue-800"
     },
@@ -33,12 +33,12 @@ const Experience = () => {
       location: "Redmond, WA, USA",
       dates: "May 2025 - August 2025",
       achievements: [
-        "Shipped agentic retrieval pipelines backed by dual vector stores, optimizing recall/latency for enterprise documentation workflows",
+        "Built agentic retrieval pipelines over dual vector stores, improving recall and latency for enterprise documentation workflows",
         "Implemented Model Context Protocol (MCP) automation to standardize tool-calling, tracing, and operational control for LLM jobs",
-        "Built a self-healing error intelligence service: log ingestion → similarity search → root-cause summaries → Slack delivery",
-        "Productized internal tooling with guardrails, eval hooks, and integration support across multiple engineering teams"
+        "Designed a self-healing error intelligence service: log ingestion → embedding search → root-cause summaries → Slack delivery",
+        "Productized internal LLM tooling with guardrails, evaluation hooks, and integrations used across multiple engineering teams"
       ],
-      technologies: ["LLMs", "LangChain", "RAG", "Vector Databases", "MCP", "Python", "APIs"],
+      technologies: ["LLMs", "RAG", "Vector Databases", "MCP", "Python", "APIs", "LangChain"],
       logo: "HCL",
       color: "from-indigo-600 to-purple-800"
     },
@@ -49,11 +49,10 @@ const Experience = () => {
       location: "State College, PA, USA",
       dates: "February 2025 - December 2025",
       achievements: [
-        "Contribute to the Perceptions Team's sensor fusion and detection pipeline",
-        "Implementing LiDAR-camera fusion modules",
-        "YOLOv8 object detection tuning and filtering",
-        "Camera calibration and depth-fusion improvements",
-        "Working within CarROS (ROS2) ecosystem using Python and C++"
+        "Worked on the perception stack for a competition-grade autonomous vehicle, focusing on real-time sensor fusion and robust detection under latency constraints",
+        "Built LiDAR–camera fusion modules and improved depth estimation reliability through calibration and depth-fusion tuning",
+        "Tuned and filtered YOLOv8 detections to reduce false positives and stabilize object tracking in motion",
+        "Developed and tested perception modules inside the ROS2/CarROS ecosystem using Python and C++"
       ],
       technologies: ["Python", "C++", "ROS2", "OpenCV", "YOLOv8", "LiDAR", "Computer Vision"],
       logo: "AVT",
@@ -66,9 +65,9 @@ const Experience = () => {
       location: "Bengaluru, KA, India",
       dates: "June 2024 - August 2024",
       achievements: [
-        "Applied SQL and Python (pandas, NumPy) to extract, manipulate, and analyze large datasets for business intelligence and customer insights",
-        "Built and deployed machine learning models using scikit-learn for predictive analytics on customer behavior data",
-        "Gained practical experience in data science workflows and model deployment for customer retention strategies"
+        "Worked with SQL and Python (pandas, NumPy) to explore and analyze customer datasets",
+        "Assisted in building basic scikit-learn models for customer behavior insights",
+        "Gained exposure to data science workflows and model deployment practices"
       ],
       technologies: ["SQL", "Python", "scikit-learn", "Pandas", "NumPy", "Machine Learning"],
       logo: "EL",
@@ -154,31 +153,46 @@ const Experience = () => {
                     {experience.logo}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                      {experience.role}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400 mb-2">
-                      <div className="flex items-center">
-                        <Building className="w-4 h-4 mr-1" />
-                        {experience.company}
+                    {experience.id === 1 ? (
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                          Research Assistant — Penn State University
+                        </h3>
+                        <div className="text-sm text-gray-500/70 dark:text-gray-400/70 whitespace-nowrap mt-1">
+                          {experience.dates}
+                        </div>
                       </div>
-                      <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-1" />
-                        {experience.location}
-                      </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {experience.dates}
-                      </div>
-                    </div>
+                    ) : (
+                      <>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                          {experience.role}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400 mb-2">
+                          <div className="flex items-center">
+                            <Building className="w-4 h-4 mr-1" />
+                            {experience.company}
+                          </div>
+                          <div className="flex items-center">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            {experience.location}
+                          </div>
+                          <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {experience.dates}
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
 
               {/* Achievements */}
               <div className="space-y-4 mb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Key Achievements:</h4>
-                <ul className="space-y-3">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  {experience.id === 4 ? "Experience" : (experience.id === 1 || experience.id === 2 || experience.id === 3 ? "Impact" : "Key Achievements:")}
+                </h4>
+                <ul className={experience.id === 1 || experience.id === 2 || experience.id === 3 ? "space-y-4" : "space-y-3"}>
                   {experience.achievements.map((achievement, index) => (
                     <li key={index} className="flex items-start">
                       <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
@@ -192,7 +206,9 @@ const Experience = () => {
 
               {/* Technologies */}
               <div className="pt-6 border-t border-gray-200 dark:border-dark-600">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies:</h4>
+                {experience.id === 1 || experience.id === 2 || experience.id === 3 ? null : (
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies:</h4>
+                )}
                 <div className="flex flex-wrap gap-2">
                   {experience.technologies.map((tech, index) => (
                     <span

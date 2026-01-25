@@ -20,7 +20,7 @@ const Skills = () => {
     },
     {
       id: 2,
-      title: "AI & ML",
+      title: "Applied AI / ML",
       icon: Brain,
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
@@ -28,19 +28,19 @@ const Skills = () => {
     },
     {
       id: 3,
-      title: "Software Engineering",
+      title: "Backend & Systems",
       icon: Server,
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50 dark:bg-green-900/20",
-      skills: ["REST APIs", "Flask", "Node.js", "Docker", "Git", "GitLab"]
+      skills: ["REST APIs", "Flask", "Node.js", "Docker", "Git"]
     },
     {
       id: 4,
-      title: "Autonomous Systems",
+      title: "Perception & Robotics",
       icon: Cpu,
       color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      skills: ["ROS2", "LiDAR-camera fusion", "calibration", "perception pipelines"]
+      skills: ["ROS2", "LiDAR–Camera Fusion", "Calibration", "Perception Pipelines"]
     },
     {
       id: 5,
@@ -52,7 +52,7 @@ const Skills = () => {
     },
     {
       id: 6,
-      title: "Other",
+      title: "Tooling",
       icon: Settings,
       color: "from-indigo-500 to-indigo-600",
       bgColor: "bg-indigo-50 dark:bg-indigo-900/20",

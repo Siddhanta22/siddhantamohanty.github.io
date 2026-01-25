@@ -12,36 +12,36 @@ const About = () => {
   const stats = [
     {
       icon: Briefcase,
-      label: "HCLTech",
-      value: "Software Intern",
+      label: "HCL Technologies",
+      value: "GenAI Intern",
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20"
     },
     {
       icon: Microscope,
       label: "Penn State University",
-      value: "Research Assistant",
+      value: "LLM Research Assistant",
       color: "from-purple-500 to-fuchsia-600",
       bgColor: "bg-purple-50 dark:bg-purple-900/20"
     },
     {
       icon: Car,
       label: "Penn State AVT",
-      value: "Perception Team",
+      value: "Autonomous Perception",
       color: "from-green-500 to-emerald-600",
       bgColor: "bg-green-50 dark:bg-green-900/20"
     },
     {
       icon: Server,
-      label: "Production Systems",
-      value: "Backend + Tooling",
+      label: "Production Systems I Built",
+      value: "Backend & Tooling",
       color: "from-slate-600 to-gray-800",
       bgColor: "bg-slate-50 dark:bg-slate-900/20"
     },
     {
       icon: Award,
-      label: "Dean's List",
-      value: "2 Semesters",
+      label: "Fall 2023 • Spring 2024 . fall 2025",
+      value: "Dean’s List",
       color: "from-yellow-500 to-amber-600",
       bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
     }
@@ -75,16 +75,16 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                Built and shipped backend + LLM-enabled systems end to end: ingestion pipelines, retrieval/embedding layers, evaluation loops, and integrations that land in real workflows.
+                Built and shipped backend and LLM-enabled systems end to end — from ingestion pipelines and retrieval/embedding layers to evaluation loops and integrations that land in real workflows.
               </p>
               <p>
-                Comfortable owning the full stack—from data + APIs and persistence layers to real-time perception pipelines and production UI—while keeping reliability, latency, and observability front and center.
+                Comfortable owning the full stack — from data, APIs, and persistence layers to real-time perception pipelines and production UI — while keeping reliability, latency, and observability front and center.
               </p>
               <p>
                 I optimize for engineering signal: clear interfaces, measurable performance, and systems that degrade gracefully under real-world constraints.
               </p>
               <p>
-                Core strengths: backend architecture, retrieval systems, distributed integrations, and real-time computer vision—built with the same standards I’d apply on a production team.
+                Core strengths include backend architecture, retrieval systems, distributed integrations, and real-time computer vision — built with the same standards I’d apply on a production team.
               </p>
               <p>
                 Final-year CS student (May 2026) pursuing New Grad roles across Software, Systems, Backend, and applied ML.
