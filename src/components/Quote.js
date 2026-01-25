@@ -9,7 +9,7 @@ const Quote = () => {
     threshold: 0.1,
   });
 
-  const quotes = [
+  const quotes = useMemo(() => ([
     {
       text: "Code is like humor. When you have to explain it, it's bad.",
       author: "Cory House",
@@ -35,10 +35,10 @@ const Quote = () => {
       author: "Dennis Ritchie",
       type: "wisdom"
     }
-  ];
+  ]), []);
 
   // Select a random quote once per page load
-  const selectedQuote = useMemo(() => quotes[Math.floor(Math.random() * quotes.length)], []);
+  const selectedQuote = useMemo(() => quotes[Math.floor(Math.random() * quotes.length)], [quotes]);
 
   const getQuoteStyle = (type) => {
     switch (type) {
