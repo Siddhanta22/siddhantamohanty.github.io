@@ -66,9 +66,9 @@ const Hero = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentTagline}
-                  initial={{ opacity: 0, y: 20, rotateX: -90 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  exit={{ opacity: 0, y: -20, rotateX: 90 }}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
                   transition={{ duration: 0.5 }}
                   className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-700 dark:text-gray-300"
                 >

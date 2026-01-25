@@ -124,7 +124,7 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -133,15 +133,15 @@ const About = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className={`${stat.bgColor} rounded-xl p-6 text-center border border-gray-200 dark:border-dark-700 shadow-lg hover:shadow-xl transition-all duration-300`}
+              className={`${stat.bgColor} rounded-xl p-5 text-center border border-gray-200 dark:border-dark-700 shadow-lg hover:shadow-xl transition-all duration-300 h-full`}
             >
               <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-r ${stat.color} mx-auto mb-4`}>
                 <stat.icon className="w-6 h-6 text-white" />
               </div>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+              <div className="text-2xl lg:text-xl font-bold text-gray-900 dark:text-white mb-1">
                 {stat.value}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm lg:text-xs text-gray-600 dark:text-gray-400">
                 {stat.label}
               </div>
             </motion.div>

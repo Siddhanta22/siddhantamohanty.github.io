@@ -30,7 +30,8 @@ const Header = ({ scrollToSection }) => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center space-x-2 cursor-pointer"
           >
             <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">SM</span>

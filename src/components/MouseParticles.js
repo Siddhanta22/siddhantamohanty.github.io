@@ -6,6 +6,11 @@ const MouseParticles = () => {
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    const isCoarsePointer = window.matchMedia?.('(pointer: coarse)')?.matches;
+    const isSmallScreen = window.innerWidth < 768;
+    if (prefersReducedMotion || isCoarsePointer || isSmallScreen) return;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
@@ -31,7 +36,7 @@ const MouseParticles = () => {
 
     const initParticles = () => {
       particlesRef.current = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 14; i++) {
         particlesRef.current.push(createParticle());
       }
     };
@@ -83,7 +88,7 @@ const MouseParticles = () => {
       mouseRef.current.y = e.clientY;
       
       // Create new particles on mouse move
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.2) {
         particlesRef.current.push(createParticle(e.clientX, e.clientY));
       }
     };
@@ -106,7 +111,7 @@ const MouseParticles = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: 0.25 }}
     />
   );
 };

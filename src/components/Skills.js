@@ -98,7 +98,7 @@ const Skills = () => {
             Technologies and tools I use to build production-ready systems
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Proficient across AI/ML, full-stack development, and autonomous systems
+            Backend & systems, applied AI/ML, and perception & robotics
           </p>
         </motion.div>
 

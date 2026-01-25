@@ -253,19 +253,23 @@ const Projects = () => {
                 </div>
               )}
 
-              {/* Problem Statement */}
-              <div className="mb-6">
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-                  {project.problem}
-                </p>
-              </div>
+              {/* Summary */}
+              {typeof project.problem === 'string' && project.problem.trim().length > 0 && (
+                <div className="mb-6">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base md:text-lg">
+                    {project.problem}
+                  </p>
+                </div>
+              )}
 
               {/* Solution / Architecture */}
-              <div className="mb-6">
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-                  {project.solution}
-                </p>
-              </div>
+              {typeof project.solution === 'string' && project.solution.trim().length > 0 && (
+                <div className="mb-6">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base md:text-lg">
+                    {project.solution}
+                  </p>
+                </div>
+              )}
 
               {/* Technologies */}
               <div className="mb-6">
@@ -287,7 +291,7 @@ const Projects = () => {
 
               {/* Impact - More Prominent */}
               <div className="pt-6 border-t border-gray-200 dark:border-dark-600">
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg font-medium">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base md:text-lg font-medium">
                   {project.impact}
                 </p>
               </div>

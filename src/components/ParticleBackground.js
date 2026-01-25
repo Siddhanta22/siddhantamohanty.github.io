@@ -4,6 +4,11 @@ const ParticleBackground = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    const isCoarsePointer = window.matchMedia?.('(pointer: coarse)')?.matches;
+    const isSmallScreen = window.innerWidth < 768;
+    if (prefersReducedMotion || isCoarsePointer || isSmallScreen) return;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
@@ -28,7 +33,7 @@ const ParticleBackground = () => {
 
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
+      const particleCount = Math.floor((canvas.width * canvas.height) / 16000);
       for (let i = 0; i < particleCount; i++) {
         particles.push(createParticle());
       }
@@ -64,11 +69,11 @@ const ParticleBackground = () => {
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
+          if (distance < 80) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(14, 165, 233, ${0.1 * (1 - distance / 100)})`;
+            ctx.strokeStyle = `rgba(14, 165, 233, ${0.08 * (1 - distance / 80)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -103,7 +108,7 @@ const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.3 }}
+      style={{ opacity: 0.18 }}
     />
   );
 };

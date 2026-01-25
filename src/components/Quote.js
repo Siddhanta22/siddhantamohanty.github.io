@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Quote as QuoteIcon, Sparkles } from 'lucide-react';
+import { Quote as QuoteIcon } from 'lucide-react';
 
 const Quote = () => {
   const [ref, inView] = useInView({
@@ -37,8 +37,8 @@ const Quote = () => {
     }
   ];
 
-  // Select a random quote
-  const selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  // Select a random quote once per page load
+  const selectedQuote = useMemo(() => quotes[Math.floor(Math.random() * quotes.length)], []);
 
   const getQuoteStyle = (type) => {
     switch (type) {
@@ -89,37 +89,8 @@ const Quote = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`bg-gradient-to-br ${quoteStyle.bgGradient} rounded-3xl shadow-2xl border ${quoteStyle.borderColor} p-8 md:p-12 relative overflow-hidden`}
+            className={`bg-gradient-to-br ${quoteStyle.bgGradient} rounded-3xl shadow-lg border ${quoteStyle.borderColor} p-8 md:p-12 relative overflow-hidden`}
           >
-            {/* Floating sparkles */}
-            <motion.div
-              animate={{ 
-                rotate: 360,
-                scale: [1, 1.1, 1]
-              }}
-              transition={{ 
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-              }}
-              className="absolute top-4 right-4"
-            >
-              <Sparkles className={`w-6 h-6 ${quoteStyle.iconColor} opacity-60`} />
-            </motion.div>
-            
-            <motion.div
-              animate={{ 
-                rotate: -360,
-                scale: [1, 0.9, 1]
-              }}
-              transition={{ 
-                rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-              }}
-              className="absolute bottom-4 left-4"
-            >
-              <Sparkles className={`w-4 h-4 ${quoteStyle.iconColor} opacity-40`} />
-            </motion.div>
-
             <div className="relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -166,7 +137,7 @@ const Quote = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-8 text-lg text-gray-600 dark:text-gray-400"
           >
-            Because every great developer needs a little inspiration (and humor) along the way ✨
+            A quick reminder to keep standards high.
           </motion.p>
         </motion.div>
       </div>
