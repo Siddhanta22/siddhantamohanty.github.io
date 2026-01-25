@@ -28,7 +28,7 @@ const Experience = () => {
     },
     {
       id: 2,
-      company: "HCL Technologies",
+      company: "HCLTech",
       role: "Software Engineering Intern (LLM Systems)",
       location: "Redmond, WA, USA",
       dates: "May 2025 - August 2025",

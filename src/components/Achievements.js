@@ -30,7 +30,7 @@ const Achievements = () => {
       icon: TrendingUp,
       title: "GenAI Intern",
       description: "Enterprise AI Solutions",
-      period: "HCL Technologies",
+      period: "HCLTech",
       color: "from-green-400 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20"
     },

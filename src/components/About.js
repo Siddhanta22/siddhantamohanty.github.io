@@ -12,7 +12,7 @@ const About = () => {
   const stats = [
     {
       icon: Briefcase,
-      label: "HCL Technologies",
+      label: "HCLTech",
       value: "Software Intern",
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50 dark:bg-blue-900/20"
