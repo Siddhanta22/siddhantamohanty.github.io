@@ -29,14 +29,14 @@ const Experience = () => {
     {
       id: 2,
       company: "HCL Technologies",
-      role: "Generative AI Engineer Intern",
+      role: "Software Engineering Intern (LLM Systems)",
       location: "Redmond, WA, USA",
       dates: "May 2025 - August 2025",
       achievements: [
-        "Worked on end-to-end LLM engineering initiatives including designing agentic RAG pipelines using dual vector databases",
-        "Built Model Context Protocol (MCP) workflows for automated LLM operations",
-        "Created the Self-Healing Error Intelligence platform for real-time debugging",
-        "Supported teams by integrating these solutions into internal AI tooling"
+        "Shipped agentic retrieval pipelines backed by dual vector stores, optimizing recall/latency for enterprise documentation workflows",
+        "Implemented Model Context Protocol (MCP) automation to standardize tool-calling, tracing, and operational control for LLM jobs",
+        "Built a self-healing error intelligence service: log ingestion → similarity search → root-cause summaries → Slack delivery",
+        "Productized internal tooling with guardrails, eval hooks, and integration support across multiple engineering teams"
       ],
       technologies: ["LLMs", "LangChain", "RAG", "Vector Databases", "MCP", "Python", "APIs"],
       logo: "HCL",
@@ -121,10 +121,10 @@ const Experience = () => {
             Professional <span className="gradient-text">Experience</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
-            Building production systems and advancing AI research across diverse domains
+            Shipping production software across backend systems, tooling, and real-time pipelines
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            From research labs to enterprise AI teams, contributing to cutting-edge projects
+            Internships + research + competitive engineering teams, focused on reliability and measurable impact
           </p>
         </motion.div>
 

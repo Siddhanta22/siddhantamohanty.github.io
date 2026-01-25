@@ -6,10 +6,10 @@ const Hero = () => {
   const [currentTagline, setCurrentTagline] = useState(0);
   
   const taglines = [
-    "Building intelligent systems",
-    "Crafting AI solutions",
-    "Engineering autonomous systems",
-    "Creating production-ready software"
+    "Shipping backend-first systems",
+    "Building reliable, scalable software",
+    "Turning ML into production features",
+    "Designing high-signal engineering tools"
   ];
 
   useEffect(() => {
@@ -84,6 +84,10 @@ const Hero = () => {
               <Sparkles className="w-4 h-4 text-accent-500" />
               <span>Full-Stack Developer</span>
             </div>
+
+            <div className="text-sm md:text-base text-gray-500 dark:text-gray-400">
+              Graduating May 2026 • Seeking New Grad Software / AI / Systems Roles
+            </div>
           </motion.div>
 
           {/* Value Proposition */}
@@ -93,7 +97,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            I'm a curious engineer learning to build across <span className="font-semibold text-gray-900 dark:text-white">systems</span>, <span className="font-semibold text-gray-900 dark:text-white">intelligence</span>, and <span className="font-semibold text-gray-900 dark:text-white">software</span> — exploring whatever sparks my imagination and pushing myself to grow through every project.
+            I build <span className="font-semibold text-gray-900 dark:text-white">production-grade software</span> across <span className="font-semibold text-gray-900 dark:text-white">backend</span>, <span className="font-semibold text-gray-900 dark:text-white">systems</span>, and <span className="font-semibold text-gray-900 dark:text-white">applied ML</span>—shipping services, tooling, and real-time pipelines end to end.
           </motion.p>
 
           {/* CTA Buttons */}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, Award, Briefcase } from 'lucide-react';
+import { Award, Briefcase, Car, Microscope, Server } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -11,25 +11,39 @@ const About = () => {
 
   const stats = [
     {
+      icon: Briefcase,
+      label: "HCL Technologies",
+      value: "Software Intern",
+      color: "from-blue-500 to-indigo-600",
+      bgColor: "bg-blue-50 dark:bg-blue-900/20"
+    },
+    {
+      icon: Microscope,
+      label: "Penn State University",
+      value: "Research Assistant",
+      color: "from-purple-500 to-fuchsia-600",
+      bgColor: "bg-purple-50 dark:bg-purple-900/20"
+    },
+    {
+      icon: Car,
+      label: "Penn State AVT",
+      value: "Perception Team",
+      color: "from-green-500 to-emerald-600",
+      bgColor: "bg-green-50 dark:bg-green-900/20"
+    },
+    {
+      icon: Server,
+      label: "Production Systems",
+      value: "Backend + Tooling",
+      color: "from-slate-600 to-gray-800",
+      bgColor: "bg-slate-50 dark:bg-slate-900/20"
+    },
+    {
       icon: Award,
       label: "Dean's List",
       value: "2 Semesters",
       color: "from-yellow-500 to-amber-600",
       bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
-    },
-    {
-      icon: Briefcase,
-      label: "GenAI Intern",
-      value: "HCL Technologies",
-      color: "from-blue-500 to-indigo-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20"
-    },
-    {
-      icon: GraduationCap,
-      label: "AV Team Member",
-      value: "Perception Systems",
-      color: "from-green-500 to-emerald-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20"
     }
   ];
 
@@ -47,7 +61,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            I build AI systems that solve real problems and learn something new with every project.
+            Systems-minded engineer shipping production-grade software across backend, tooling, and applied ML.
           </p>
         </motion.div>
 
@@ -61,19 +75,19 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                Over the past year, I've gone from theory to practice. During my 3-month internship at HCL, I built production AI systems from the ground up: a self-healing backend that cut support resolution time by 50%, agentic workflows using Model Context Protocol, and RAG pipelines for enterprise documentation. I learned how to ship AI that works in real environments with real users, not just in controlled demos.
+                Built and shipped backend + LLM-enabled systems end to end: ingestion pipelines, retrieval/embedding layers, evaluation loops, and integrations that land in real workflows.
               </p>
               <p>
-                Beyond HCL, I've continued pushing my boundaries. I went from computer vision coursework to debugging real-time perception pipelines for autonomous vehicles. From experimenting with LLMs to researching how reinforcement learning can improve code generation. Each project teaches me something new about taking AI concepts and making them reliable at scale.
+                Comfortable owning the full stack—from data + APIs and persistence layers to real-time perception pipelines and production UI—while keeping reliability, latency, and observability front and center.
               </p>
               <p>
-                AI moves fast, and I move with it. I'm most energized when I'm tackling problems I haven't fully figured out yet, whether that's optimizing vector retrieval, architecting agentic workflows, or making models work reliably outside controlled environments. I focus on the practical side: taking emerging AI techniques and turning them into systems that actually ship.
+                I optimize for engineering signal: clear interfaces, measurable performance, and systems that degrade gracefully under real-world constraints.
               </p>
               <p>
-                My technical foundation spans RAG architectures, LLMs, autonomous perception, and full-stack development. But what I'm really good at is figuring things out quickly and building solutions that work, even when the docs are sparse and the Stack Overflow threads are empty.
+                Core strengths: backend architecture, retrieval systems, distributed integrations, and real-time computer vision—built with the same standards I’d apply on a production team.
               </p>
               <p>
-                Graduating May 2026. Looking for teams where shipping AI products means constantly learning new approaches. If that sounds like your team, let's connect.
+                Final-year CS student (May 2026) pursuing New Grad roles across Software, Systems, Backend, and applied ML.
               </p>
             </div>
           </motion.div>
