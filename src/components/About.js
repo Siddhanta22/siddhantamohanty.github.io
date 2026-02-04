@@ -40,7 +40,7 @@ const About = () => {
     },
     {
       icon: Award,
-      label: "Fall 2023 • Spring 2024 . fall 2025",
+      label: "Fall 2023, Spring 2024, Fall 2025",
       value: "Dean’s List",
       color: "from-yellow-500 to-amber-600",
       bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
@@ -61,7 +61,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Systems-minded engineer shipping production-grade software across backend, tooling, and applied ML.
+            I build production-grade software across backend, tooling, and applied ML.
           </p>
         </motion.div>
 
@@ -75,19 +75,19 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                Built and shipped backend and LLM-enabled systems end to end — from ingestion pipelines and retrieval/embedding layers to evaluation loops and integrations that land in real workflows.
+                I build and ship backend and LLM-enabled systems end to end, from ingestion pipelines and retrieval layers to evaluation loops and integrations that land in real workflows.
               </p>
               <p>
-                Comfortable owning the full stack — from data, APIs, and persistence layers to real-time perception pipelines and production UI — while keeping reliability, latency, and observability front and center.
+                I'm comfortable owning the full stack, from data and APIs to real-time perception and production UI, while keeping reliability, latency, and observability front and center.
               </p>
               <p>
-                I optimize for engineering signal: clear interfaces, measurable performance, and systems that degrade gracefully under real-world constraints.
+                I optimize for clear interfaces, measurable performance, and systems that degrade gracefully under real-world constraints.
               </p>
               <p>
-                Core strengths include backend architecture, retrieval systems, distributed integrations, and real-time computer vision — built with the same standards I’d apply on a production team.
+                My strengths include backend architecture, retrieval systems, distributed integrations, and real-time computer vision , with the same standards I’d apply on a production team.
               </p>
               <p>
-                Final-year CS student (May 2026) pursuing New Grad roles across Software, Systems, Backend, and applied ML.
+                I'm a final-year CS student (May 2026) and am looking for New Grad roles in software, systems, backend, and applied ML.
               </p>
             </div>
           </motion.div>

@@ -35,7 +35,7 @@ const Experience = () => {
       achievements: [
         "Built agentic retrieval pipelines over dual vector stores, improving recall and latency for enterprise documentation workflows",
         "Implemented Model Context Protocol (MCP) automation to standardize tool-calling, tracing, and operational control for LLM jobs",
-        "Designed a self-healing error intelligence service: log ingestion → embedding search → root-cause summaries → Slack delivery",
+        "Designed a self-healing error intelligence service: log ingestion, embedding search, root-cause summaries, and Slack delivery",
         "Productized internal LLM tooling with guardrails, evaluation hooks, and integrations used across multiple engineering teams"
       ],
       technologies: ["LLMs", "RAG", "Vector Databases", "MCP", "Python", "APIs", "LangChain"],
@@ -50,7 +50,7 @@ const Experience = () => {
       dates: "February 2025 - December 2025",
       achievements: [
         "Worked on the perception stack for a competition-grade autonomous vehicle, focusing on real-time sensor fusion and robust detection under latency constraints",
-        "Built LiDAR–camera fusion modules and improved depth estimation reliability through calibration and depth-fusion tuning",
+        "Built LiDAR and camera fusion modules and improved depth estimation reliability through calibration and depth-fusion tuning",
         "Tuned and filtered YOLOv8 detections to reduce false positives and stabilize object tracking in motion",
         "Developed and tested perception modules inside the ROS2/CarROS ecosystem using Python and C++"
       ],
@@ -120,10 +120,10 @@ const Experience = () => {
             Professional <span className="gradient-text">Experience</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
-            Shipping production software across backend systems, tooling, and real-time pipelines
+            I ship production software across backend systems, tooling, and real-time pipelines
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Internships + research + competitive engineering teams, focused on reliability and measurable impact
+            Internships, research, and competitive engineering teams, with a focus on reliability and measurable impact
           </p>
         </motion.div>
 
@@ -156,7 +156,7 @@ const Experience = () => {
                     {experience.id === 1 ? (
                       <div className="flex items-start justify-between gap-4">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                          Research Assistant — Penn State University
+                          Research Assistant, Penn State University
                         </h3>
                         <div className="text-sm text-gray-500/70 dark:text-gray-400/70 whitespace-nowrap mt-1">
                           {experience.dates}

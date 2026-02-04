@@ -79,7 +79,7 @@ const Achievements = () => {
             Impact & <span className="gradient-text">Achievements</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Key milestones and contributions across research, industry, and personal projects
+            Milestones and contributions from research, industry, and personal projects
           </p>
         </motion.div>
 

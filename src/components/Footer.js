@@ -23,7 +23,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-sm text-gray-600 dark:text-gray-400 italic"
           >
-            Crafted with curiosity, rigor, and clean engineering.
+            Built with curiosity, rigor, and clean engineering.
           </motion.p>
         </div>
       </div>

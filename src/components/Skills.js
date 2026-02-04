@@ -40,7 +40,7 @@ const Skills = () => {
       icon: Cpu,
       color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      skills: ["ROS2", "LiDAR–Camera Fusion", "Calibration", "Perception Pipelines"]
+      skills: ["ROS2", "LiDAR and Camera Fusion", "Calibration", "Perception Pipelines"]
     },
     {
       id: 5,

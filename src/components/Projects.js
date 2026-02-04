@@ -50,7 +50,7 @@ const Projects = () => {
       title: "Photobot",
       role: "Personal Project",
       problem: "An RAG-based photography assistant for DSLR configuration that answers camera settings questions with grounded, actionable responses.",
-      solution: "Built with LangChain, RAG, and OpenAI API — semantic search over documentation with summarized instructions for aperture, shutter, and ISO.",
+      solution: "Built with LangChain, RAG, and OpenAI API. Semantic search over documentation with summarized instructions for aperture, shutter, and ISO.",
       technologies: ["LangChain", "RAG", "Python", "OpenAI API"],
       impact: "Reduced decision time by 60% by converting long-form documentation into low-latency semantic search and summarized guidance.",
       github: null,
@@ -76,10 +76,10 @@ const Projects = () => {
     },
     {
       id: 5,
-      title: "Autonomous Vehicle Team — Perception Algorithms",
+      title: "Autonomous Vehicle Team: Perception Algorithms",
       role: "Perception Team Member - Penn State AVT",
       problem: "Shipped perception modules for an autonomous vehicle stack focused on robust detection and sensor fusion under real-time constraints.",
-      solution: "ROS2/CarROS integration, LiDAR–camera fusion, YOLOv8 tuning with confidence filtering, calibration and depth-fusion improvements, and repeatable testing workflows for consistent runs.",
+      solution: "ROS2/CarROS integration, LiDAR and camera fusion, YOLOv8 tuning with confidence filtering, calibration and depth-fusion improvements, and repeatable testing workflows for consistent runs.",
       technologies: ["Python", "C++", "ROS2", "OpenCV", "YOLOv8"],
       impact: "Improved detection stability and real-time performance within a 20m operational envelope for competition-grade autonomy.",
       github: null,
@@ -90,7 +90,7 @@ const Projects = () => {
     },
     {
       id: 6,
-      title: "CourseScheduler — NLP Academic Planner",
+      title: "CourseScheduler: NLP Academic Planner",
       role: "HackPSU Project",
       problem: "",
       solution: "An NLP-based academic planning tool that analyzes course descriptions to generate conflict-free graduation paths. Built the frontend and pitched the project during HackPSU.",
@@ -107,7 +107,7 @@ const Projects = () => {
       title: "Swipeflix",
       role: "Personal Project",
       problem: "A personalized movie recommender using swipe feedback and TensorFlow.js.",
-      solution: "Built with React, Node.js, and MongoDB — gesture-driven discovery with a TensorFlow.js model trained on swipe feedback.",
+      solution: "Built with React, Node.js, and MongoDB. Gesture-driven discovery with a TensorFlow.js model trained on swipe feedback.",
       technologies: ["TensorFlow.js", "React", "Node.js", "MongoDB"],
       impact: "Achieved 75% recommendation accuracy through swipe feedback and personalized learning.",
       github: "https://github.com/Siddhanta22/swipeflix",
@@ -154,7 +154,7 @@ const Projects = () => {
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
-            Production-ready systems showcasing technical depth, architecture, and real-world impact
+            Projects that show technical depth, architecture, and real-world impact
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             From AI-powered debugging tools to autonomous perception systems
