@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Camera, Film, Zap, Calendar, Code } from 'lucide-react';
+import { ExternalLink, Github, Brain, Camera, Film, Zap, Calendar, Code, Mail } from 'lucide-react';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -32,6 +32,20 @@ const Projects = () => {
     },
     {
       id: 2,
+      title: "yourAIbrief",
+      role: "Personal Project",
+      problem: "A full-stack AI newsletter platform that ingests AI news via APIs, curates articles with rule-based filtering, and delivers structured daily briefs.",
+      solution: "Built with Next.js API routes, Prisma and PostgreSQL, NextAuth (OAuth), SendGrid for delivery, GitHub Actions cron jobs, and Vercel deployment.",
+      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "SendGrid", "Vercel"],
+      impact: "Delivers structured daily AI briefs to subscribers via automated ingestion, curation, and email delivery.",
+      github: "https://github.com/Siddhanta22/yourAIbrief",
+      live: "https://www.loom.com/share/7ffa45fdc6cc481ba034bb13bed45b82",
+      icon: Mail,
+      color: "from-violet-500 to-purple-600",
+      bgColor: "bg-violet-50 dark:bg-violet-900/20"
+    },
+    {
+      id: 3,
       title: "Real-Time Collision Detection Engine",
       role: "Personal Project",
       problem: "A real-time collision detection engine with an interactive Canvas visualizer for large numbers of moving bodies.",
@@ -46,7 +60,7 @@ const Projects = () => {
       screenshots: ["/collision-detector-1.png"]
     },
     {
-      id: 3,
+      id: 4,
       title: "Photobot",
       role: "Personal Project",
       problem: "An RAG-based photography assistant for DSLR configuration that answers camera settings questions with grounded, actionable responses.",
@@ -60,7 +74,7 @@ const Projects = () => {
       bgColor: "bg-green-50 dark:bg-green-900/20"
     },
     {
-      id: 4,
+      id: 5,
       title: "Prompt Tracer",
       role: "Personal Project",
       problem: "A Chrome extension for real-time prompt optimization across multiple AI assistants.",
@@ -75,7 +89,7 @@ const Projects = () => {
       screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
     },
     {
-      id: 5,
+      id: 6,
       title: "Autonomous Vehicle Team: Perception Algorithms",
       role: "Perception Team Member - Penn State AVT",
       problem: "Shipped perception modules for an autonomous vehicle stack focused on robust detection and sensor fusion under real-time constraints.",
@@ -89,7 +103,7 @@ const Projects = () => {
       bgColor: "bg-red-50 dark:bg-red-900/20"
     },
     {
-      id: 6,
+      id: 7,
       title: "CourseScheduler: NLP Academic Planner",
       role: "HackPSU Project",
       problem: "",
@@ -103,7 +117,7 @@ const Projects = () => {
       bgColor: "bg-orange-50 dark:bg-orange-900/20"
     },
     {
-      id: 7,
+      id: 8,
       title: "Swipeflix",
       role: "Personal Project",
       problem: "A personalized movie recommender using swipe feedback and TensorFlow.js.",
