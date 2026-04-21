@@ -19,10 +19,10 @@ const Projects = () => {
       id: 1,
       title: "Self-Heal System",
       role: "Personal Project",
-      problem: "An AI self-healing pipeline that stores error context in PostgreSQL, generates embeddings with FAISS, and auto-generates fixes via LangChain + GPT.",
-      solution: "Implemented severity-based Slack alerts and end-to-end pipeline from log capture to LLM-generated fixes, reducing MTTR by 35%.",
+      problem: "An AI-driven reliability platform that turns raw production errors into actionable root-cause insights and fixes.",
+      solution: "Built an end-to-end Flask pipeline with PostgreSQL logging, FAISS retrieval, and LangChain + GPT fix generation, with severity-aware Slack triage.",
       technologies: ["Flask", "LangChain", "FAISS", "PostgreSQL", "GPT-3.5", "Slack"],
-      impact: "Reduced mean time to resolution by 35% via automated triage and high-signal Slack alerts for engineers.",
+      impact: "Cut MTTR by 35% by automating triage and delivering high-signal remediation guidance directly in Slack.",
       github: "https://github.com/Siddhanta22/Self-Healing-System",
       live: null,
       icon: Brain,
@@ -34,10 +34,10 @@ const Projects = () => {
       id: 2,
       title: "yourAIbrief",
       role: "Personal Project",
-      problem: "A full-stack AI newsletter platform that ingests AI news via APIs, curates articles with rule-based filtering, and delivers structured daily briefs.",
-      solution: "Built with Next.js API routes, Prisma and PostgreSQL, NextAuth (OAuth), SendGrid for delivery, GitHub Actions cron jobs, and Vercel deployment.",
+      problem: "A full-stack AI newsletter platform for curated, personalized daily intelligence.",
+      solution: "Engineered automated ingestion, rule-based curation, and scheduled delivery using Next.js API routes, Prisma + PostgreSQL, NextAuth, SendGrid, and GitHub Actions.",
       technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "SendGrid", "Vercel"],
-      impact: "Delivers structured daily AI briefs to subscribers via automated ingestion, curation, and email delivery.",
+      impact: "Automates the full content pipeline from source ingestion to inbox delivery, enabling consistent, structured daily briefs.",
       github: "https://github.com/Siddhanta22/yourAIbrief",
       live: "https://www.loom.com/share/7ffa45fdc6cc481ba034bb13bed45b82",
       icon: Mail,
@@ -48,10 +48,10 @@ const Projects = () => {
       id: 3,
       title: "AI Transcript",
       role: "Personal Project",
-      problem: "A production-ready AI pipeline that captures audio input and generates publish-ready transcripts.",
-      solution: "Speech-to-text with OpenAI Whisper, then LLM processing to remove filler, improve flow, and produce clean transcripts. Built with FastAPI and a simple HTML/CSS/JS frontend.",
+      problem: "A speech pipeline that converts raw recordings into polished, publish-ready transcripts.",
+      solution: "Built with FastAPI, Whisper transcription, and LLM-based rewriting to remove filler words, improve flow, and clean transcript structure.",
       technologies: ["FastAPI", "OpenAI Whisper", "LLMs", "HTML/CSS/JS"],
-      impact: "Transforms raw audio into polished, publication-ready transcripts through transcription and LLM-based refinement.",
+      impact: "Significantly reduces manual editing by automating transcription and post-processing into clean final copy.",
       github: "https://github.com/Siddhanta22/AI_transcript",
       live: "https://www.loom.com/share/da220be0a60640dbbbe3ffa6c4182a31",
       icon: Mic,
@@ -62,10 +62,10 @@ const Projects = () => {
       id: 4,
       title: "Real-Time Collision Detection Engine",
       role: "Personal Project",
-      problem: "A real-time collision detection engine with an interactive Canvas visualizer for large numbers of moving bodies.",
-      solution: "Implemented spatial hashing eliminating 98% unnecessary collision checks, achieving 50× faster broad-phase performance.",
+      problem: "A real-time collision engine for dense 2D simulations with large numbers of moving entities.",
+      solution: "Implemented spatial hashing and broad-phase partitioning to aggressively prune candidate pairs before narrow-phase checks.",
       technologies: ["JavaScript", "Canvas API", "Spatial Hashing"],
-      impact: "Eliminated 98% of unnecessary collision checks vs brute force and achieved 50× faster broad-phase performance.",
+      impact: "Eliminated 98% of unnecessary checks and achieved 50x faster broad-phase performance versus brute force.",
       github: "https://github.com/Siddhanta22/collision_detector",
       live: null,
       icon: Code,
@@ -77,10 +77,10 @@ const Projects = () => {
       id: 5,
       title: "Photobot",
       role: "Personal Project",
-      problem: "An RAG-based photography assistant for DSLR configuration that answers camera settings questions with grounded, actionable responses.",
-      solution: "Built with LangChain, RAG, and OpenAI API. Semantic search over documentation with summarized instructions for aperture, shutter, and ISO.",
+      problem: "A DSLR assistant that retrieves relevant camera guidance and returns practical setting recommendations.",
+      solution: "Built a RAG workflow with LangChain and OpenAI to semantically search documentation and generate concise aperture, shutter, and ISO guidance.",
       technologies: ["LangChain", "RAG", "Python", "OpenAI API"],
-      impact: "Reduced decision time by 60% by converting long-form documentation into low-latency semantic search and summarized guidance.",
+      impact: "Reduced camera-setting decision time by 60% through low-latency semantic retrieval and concise recommendations.",
       github: null,
       live: null,
       icon: Camera,
@@ -91,10 +91,10 @@ const Projects = () => {
       id: 6,
       title: "Prompt Tracer",
       role: "Personal Project",
-      problem: "A Chrome extension for real-time prompt optimization across multiple AI assistants.",
-      solution: "Developed for ChatGPT, Claude, Grok, and Gemini with an analytics dashboard for comparing prompts and model outputs.",
+      problem: "A prompt observability extension for tracking and improving prompts across major LLM tools.",
+      solution: "Built a Chrome extension and analytics layer for ChatGPT, Claude, Grok, and Gemini to compare prompt variants and output quality in one workflow.",
       technologies: ["JavaScript", "Chrome Extension API", "Manifest V3"],
-      impact: "Enables real-time prompt optimization and side-by-side analytics across ChatGPT, Claude, Grok, and Gemini.",
+      impact: "Makes prompt iteration measurable and repeatable with side-by-side analytics across multiple model platforms.",
       github: "https://github.com/Siddhanta22/prompt_tracer",
       live: null,
       icon: Zap,
@@ -103,13 +103,13 @@ const Projects = () => {
       screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
     },
     {
-      id: 6,
+      id: 7,
       title: "Autonomous Vehicle Team: Perception Algorithms",
       role: "Perception Team Member - Penn State AVT",
-      problem: "Shipped perception modules for an autonomous vehicle stack focused on robust detection and sensor fusion under real-time constraints.",
-      solution: "ROS2/CarROS integration, LiDAR and camera fusion, YOLOv8 tuning with confidence filtering, calibration and depth-fusion improvements, and repeatable testing workflows for consistent runs.",
+      problem: "Perception work for a competition-grade autonomous vehicle under real-time reliability constraints.",
+      solution: "Implemented ROS2/CarROS perception modules with LiDAR-camera fusion, YOLOv8 tuning, calibration refinement, and repeatable sensor validation workflows.",
       technologies: ["Python", "C++", "ROS2", "OpenCV", "YOLOv8"],
-      impact: "Improved detection stability and real-time performance within a 20m operational envelope for competition-grade autonomy.",
+      impact: "Improved detection stability and real-time responsiveness within a 20m operational envelope for autonomous driving scenarios.",
       github: null,
       live: null,
       icon: Code,
@@ -120,10 +120,10 @@ const Projects = () => {
       id: 8,
       title: "CourseScheduler: NLP Academic Planner",
       role: "HackPSU Project",
-      problem: "",
-      solution: "An NLP-based academic planning tool that analyzes course descriptions to generate conflict-free graduation paths. Built the frontend and pitched the project during HackPSU.",
+      problem: "An academic planner that helps students build conflict-free graduation paths from natural-language course data.",
+      solution: "Built an NLP-powered planner that analyzes course descriptions and constraints to generate practical semester-by-semester plans.",
       technologies: ["React", "Node.js", "MongoDB", "Python"],
-      impact: "Simplified academic planning by reducing scheduling errors and helping optimize graduation timelines through NLP-based course analysis.",
+      impact: "Reduced manual scheduling effort and planning errors by automating course-sequence recommendations.",
       github: "https://github.com/Siddhanta22/course-scheduler",
       live: null,
       icon: Calendar,
@@ -134,10 +134,10 @@ const Projects = () => {
       id: 9,
       title: "Swipeflix",
       role: "Personal Project",
-      problem: "A personalized movie recommender using swipe feedback and TensorFlow.js.",
-      solution: "Built with React, Node.js, and MongoDB. Gesture-driven discovery with a TensorFlow.js model trained on swipe feedback.",
+      problem: "A swipe-first movie discovery app with on-the-fly personalization.",
+      solution: "Built a React, Node.js, and MongoDB platform with a TensorFlow.js feedback loop that continuously learns from user swipe behavior.",
       technologies: ["TensorFlow.js", "React", "Node.js", "MongoDB"],
-      impact: "Achieved 75% recommendation accuracy through swipe feedback and personalized learning.",
+      impact: "Reached 75% recommendation accuracy by training on real-time swipe feedback.",
       github: "https://github.com/Siddhanta22/swipeflix",
       live: "https://swipeflix-alpha.vercel.app",
       icon: Film,
@@ -182,7 +182,7 @@ const Projects = () => {
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
-            Projects that show technical depth, architecture, and real-world impact
+            A few projects I loved building, from AI systems to real-time engines
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             From AI-powered debugging tools to autonomous perception systems
@@ -222,7 +222,7 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex flex-wrap gap-2">
                   {project.github && (
                     <motion.a
                       whileHover={{ scale: 1.1 }}
@@ -230,9 +230,12 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-gray-100 dark:bg-dark-700 rounded-lg text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      aria-label={`Open ${project.title} source code`}
+                      title="Source Code"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 dark:bg-dark-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
                       <Github className="w-5 h-5" />
+                      <span>Code</span>
                     </motion.a>
                   )}
                   {project.live && (
@@ -242,9 +245,12 @@ const Projects = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
+                      aria-label={`Open ${project.title} demo`}
+                      title="Live Demo"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-sm font-medium text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
                     >
                       <ExternalLink className="w-5 h-5" />
+                      <span>Demo</span>
                     </motion.a>
                   )}
                 </div>

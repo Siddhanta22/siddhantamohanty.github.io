@@ -120,10 +120,10 @@ const Experience = () => {
             Professional <span className="gradient-text">Experience</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
-            I ship production software across backend systems, tooling, and real-time pipelines
+            I build software that ships, scales, and solves real engineering problems
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Internships, research, and competitive engineering teams, with a focus on reliability and measurable impact
+            Internships, research, and team projects focused on reliability and measurable impact
           </p>
         </motion.div>
 

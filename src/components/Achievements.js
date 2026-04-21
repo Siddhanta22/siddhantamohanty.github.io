@@ -13,7 +13,7 @@ const Achievements = () => {
     {
       icon: Trophy,
       title: "Dean's List",
-      description: "Academic Excellence",
+      description: "Recognized for strong academic performance",
       period: "Fall 2023 & Spring 2024 • Fall 2025",
       color: "from-yellow-400 to-orange-500",
       bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
@@ -21,7 +21,7 @@ const Achievements = () => {
     {
       icon: Target,
       title: "Research Assistant",
-      description: "Reinforcement Learning for Multi-Stage LLM Optimization",
+      description: "Researched RL strategies for improving multi-stage LLM verification pipelines",
       period: "Penn State University",
       color: "from-blue-400 to-cyan-500",
       bgColor: "bg-blue-50 dark:bg-blue-900/20"
@@ -29,7 +29,7 @@ const Achievements = () => {
     {
       icon: TrendingUp,
       title: "GenAI Intern",
-      description: "Enterprise AI Systems & Self-Healing Infrastructure",
+      description: "Built enterprise AI systems and self-healing reliability workflows",
       period: "HCLTech",
       color: "from-green-400 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20"
@@ -37,7 +37,7 @@ const Achievements = () => {
     {
       icon: Zap,
       title: "AV Team Member",
-      description: "Autonomous Perception & Sensor Fusion",
+      description: "Worked on autonomous perception and real-time sensor fusion systems",
       period: "Penn State AVT",
       color: "from-indigo-400 to-purple-500",
       bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
@@ -79,7 +79,7 @@ const Achievements = () => {
             Impact & <span className="gradient-text">Achievements</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Milestones and contributions from research, industry, and personal projects
+            Highlights from school, internships, research, and hands-on engineering work
           </p>
         </motion.div>
 

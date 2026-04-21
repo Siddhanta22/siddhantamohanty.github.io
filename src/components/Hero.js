@@ -6,10 +6,10 @@ const Hero = () => {
   const [currentTagline, setCurrentTagline] = useState(0);
   
   const taglines = [
-    "Shipping backend-first systems",
-    "Building reliable, scalable software",
-    "Turning ML into production features",
-    "Designing high-signal engineering tools"
+    "Building backend-first products people use",
+    "Shipping reliable, scalable software",
+    "Turning ML ideas into production features",
+    "Creating practical tools for engineers"
   ];
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Hero = () => {
             <div className="flex items-center justify-center gap-3 text-lg md:text-xl text-gray-600 dark:text-gray-400">
               <span>Software Engineer</span>
               <Sparkles className="w-4 h-4 text-primary-500" />
-              <span>AI & Robotics</span>
+              <span>AI and Robotics</span>
               <Sparkles className="w-4 h-4 text-accent-500" />
               <span>Full-Stack Developer</span>
             </div>
@@ -94,7 +94,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            I build <span className="font-semibold text-gray-900 dark:text-white">production-grade software</span> across <span className="font-semibold text-gray-900 dark:text-white">backend</span>, <span className="font-semibold text-gray-900 dark:text-white">systems</span>, and <span className="font-semibold text-gray-900 dark:text-white">applied ML</span>, from services and tooling to real-time pipelines.
+            I build <span className="font-semibold text-gray-900 dark:text-white">production-ready software</span> across <span className="font-semibold text-gray-900 dark:text-white">backend</span>, <span className="font-semibold text-gray-900 dark:text-white">systems</span>, and <span className="font-semibold text-gray-900 dark:text-white">applied ML</span>, from services and internal tooling to real-time pipelines.
           </motion.p>
 
           {/* CTA Buttons */}

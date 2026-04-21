@@ -84,7 +84,7 @@ const About = () => {
                 I optimize for clear interfaces, measurable performance, and systems that degrade gracefully under real-world constraints.
               </p>
               <p>
-                My strengths include backend architecture, retrieval systems, distributed integrations, and real-time computer vision , with the same standards I’d apply on a production team.
+                My strengths include backend architecture, retrieval systems, distributed integrations, and real-time computer vision, with the same standards I'd apply on a production team.
               </p>
               <p>
                 I'm a final-year CS student (May 2026) and am looking for New Grad roles in software, systems, backend, and applied ML.
