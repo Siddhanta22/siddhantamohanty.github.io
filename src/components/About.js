@@ -61,7 +61,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            I build production-grade software across backend, tooling, and applied ML.
+            Backend engineering, AI systems, and applied research.
           </p>
         </motion.div>
 
@@ -75,19 +75,19 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                I build and ship backend and LLM-enabled systems end to end, from ingestion pipelines and retrieval layers to evaluation loops and integrations that land in real workflows.
+                I'm a Computer Science graduate from Penn State with interests in backend engineering, AI systems, and applied research.
               </p>
               <p>
-                I'm comfortable owning the full stack, from data and APIs to real-time perception and production UI, while keeping reliability, latency, and observability front and center.
+                I've worked on agentic AI applications, backend infrastructure, automation platforms, and reinforcement learning research, with a focus on building systems that are practical, reliable, and useful in real-world environments.
               </p>
               <p>
-                I optimize for clear interfaces, measurable performance, and systems that degrade gracefully under real-world constraints.
+                I like taking ideas from concept to implementation, whether that means designing APIs, building scalable services, developing AI-powered tools, or trying new approaches through research. What keeps me engaged is understanding how systems work, why they fail, and how they can be improved.
               </p>
               <p>
-                My strengths include backend architecture, retrieval systems, distributed integrations, and real-time computer vision, with the same standards I'd apply on a production team.
+                Beyond day-to-day software work, I'm drawn to intelligent systems and how they interact with the physical world. That curiosity has led me to autonomous vehicle perception, reinforcement learning research, and AI applications that go beyond chat interfaces.
               </p>
               <p>
-                I'm a final-year CS student (May 2026) and am looking for New Grad roles in software, systems, backend, and applied ML.
+                When I'm not building something, you'll usually find me exploring new technologies, tinkering with side projects, reading about emerging AI systems, or planning my next adventure.
               </p>
             </div>
           </motion.div>
