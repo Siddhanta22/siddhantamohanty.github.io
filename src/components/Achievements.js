@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Trophy, Target, TrendingUp, Zap } from 'lucide-react';
+import { Trophy, Microscope, Brain, Car } from 'lucide-react';
 
 const Achievements = () => {
   const [ref, inView] = useInView({
@@ -13,35 +13,43 @@ const Achievements = () => {
     {
       icon: Trophy,
       title: "Dean's List",
-      description: "Recognized for strong academic performance",
-      period: "Fall 2023 & Spring 2024 • Fall 2025",
-      color: "from-yellow-400 to-orange-500",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
+      tag: "Academic",
+      description: "Recognized for strong academic performance across multiple semesters.",
+      period: "Fall 2023 · Spring 2024 · Fall 2025",
+      accent: "from-amber-500 to-orange-500",
+      iconBg: "bg-gradient-to-br from-amber-500 to-orange-600",
+      borderHover: "hover:border-amber-400/50 dark:hover:border-amber-500/40",
     },
     {
-      icon: Target,
+      icon: Microscope,
       title: "Research Assistant",
-      description: "Researched RL strategies for improving multi-stage LLM verification pipelines",
+      tag: "Research",
+      description: "Explored reinforcement learning strategies to improve multi-stage LLM code verification pipelines.",
       period: "Penn State University",
-      color: "from-blue-400 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20"
+      accent: "from-sky-500 to-cyan-500",
+      iconBg: "bg-gradient-to-br from-sky-500 to-cyan-600",
+      borderHover: "hover:border-sky-400/50 dark:hover:border-sky-500/40",
     },
     {
-      icon: TrendingUp,
+      icon: Brain,
       title: "GenAI Intern",
-      description: "Built enterprise AI systems and self-healing reliability workflows",
-      period: "HCLTech",
-      color: "from-green-400 to-emerald-500",
-      bgColor: "bg-green-50 dark:bg-green-900/20"
+      tag: "Industry",
+      description: "Built enterprise AI systems and self-healing reliability workflows used by engineering teams.",
+      period: "HCLTech · Redmond, WA",
+      accent: "from-emerald-500 to-teal-500",
+      iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
+      borderHover: "hover:border-emerald-400/50 dark:hover:border-emerald-500/40",
     },
     {
-      icon: Zap,
+      icon: Car,
       title: "AV Team Member",
-      description: "Worked on autonomous perception and real-time sensor fusion systems",
-      period: "Penn State AVT",
-      color: "from-indigo-400 to-purple-500",
-      bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
-    }
+      tag: "Engineering",
+      description: "Contributed to autonomous perception and real-time LiDAR and camera sensor fusion systems.",
+      period: "Penn State Advanced Vehicle Team",
+      accent: "from-indigo-500 to-blue-600",
+      iconBg: "bg-gradient-to-br from-indigo-500 to-blue-600",
+      borderHover: "hover:border-indigo-400/50 dark:hover:border-indigo-500/40",
+    },
   ];
 
   const containerVariants = {
@@ -49,36 +57,44 @@ const Achievements = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.12,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-br from-gray-50 to-primary-50 dark:from-dark-800 dark:to-dark-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="achievements"
+      className="py-24 bg-gradient-to-br from-gray-50 to-primary-50 dark:from-dark-800 dark:to-dark-900 relative overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-primary-400/10 dark:bg-primary-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/5 w-72 h-72 bg-accent-400/10 dark:bg-accent-600/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Impact & <span className="gradient-text">Achievements</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Highlights from school, internships, research, and hands-on engineering work
           </p>
         </motion.div>
@@ -87,49 +103,47 @@ const Achievements = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto"
         >
           {achievements.map((achievement, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-              className="bg-white dark:bg-dark-800 rounded-xl shadow-lg border border-gray-200 dark:border-dark-700 p-6 transition-all duration-300 hover:shadow-2xl h-full min-h-[180px] flex flex-col"
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className={`group relative bg-white dark:bg-dark-800 rounded-2xl border border-gray-200 dark:border-dark-600 p-6 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden ${achievement.borderHover}`}
             >
-              <div className="flex items-center mb-4">
-                <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${achievement.bgColor} mr-4`}>
-                  <achievement.icon className={`w-6 h-6 bg-gradient-to-r ${achievement.color} bg-clip-text text-transparent`} />
+              <div
+                className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${achievement.accent} opacity-80`}
+              />
+
+              <div className="flex items-start gap-4 mb-4">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center ${achievement.iconBg} shadow-md shrink-0 group-hover:scale-105 transition-transform duration-300`}
+                >
+                  <achievement.icon className="w-6 h-6 text-white" strokeWidth={2} />
                 </div>
-                <div>
-                  <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-sm text-gray-500/70 dark:text-gray-400/70">
+
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                      {achievement.title}
+                    </h3>
+                    <span className="px-2 py-0.5 text-xs font-semibold rounded-md bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-dark-500">
+                      {achievement.tag}
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     {achievement.period}
                   </p>
                 </div>
               </div>
-              
-              <p className="text-gray-900/90 dark:text-white/90 text-base font-semibold mt-1">
+
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
                 {achievement.description}
               </p>
-              
-              <div className="mt-4 h-1 bg-gray-200 dark:bg-dark-600 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={inView ? { width: "60%" } : { width: 0 }}
-                  transition={{ duration: 1, delay: index * 0.1 }}
-                  className={`h-full bg-gradient-to-r ${achievement.color} rounded-full`}
-                />
-              </div>
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
