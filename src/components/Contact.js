@@ -103,10 +103,10 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 dark:bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-primary-700 dark:hover:bg-primary-400 transition-all duration-300 cursor-pointer"
           >
             <Send className="w-5 h-5" />
-            <span>Let's build something impactful together</span>
+            <span>Say hello</span>
           </motion.a>
         </motion.div>
       </div>

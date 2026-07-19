@@ -30,7 +30,7 @@ const MouseParticles = () => {
         opacity: Math.random() * 0.5 + 0.3,
         life: 1,
         decay: Math.random() * 0.02 + 0.01,
-        color: Math.random() > 0.5 ? '#0ea5e9' : '#d946ef'
+        color: '#06b6d4'
       };
     };
 

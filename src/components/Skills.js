@@ -14,50 +14,38 @@ const Skills = () => {
       id: 1,
       title: "Languages",
       icon: Code,
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      skills: ["Python", "C++", "JavaScript"]
+      skills: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "HTML/CSS"],
     },
     {
       id: 2,
       title: "Applied AI / ML",
       icon: Brain,
-      color: "from-purple-500 to-purple-600",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20",
-      skills: ["RAG", "LangChain", "FAISS", "OpenCV", "YOLOv8"]
+      skills: ["RAG", "LangChain", "FAISS", "Pinecone", "LLMs", "PyTorch", "Prompt Engineering", "NumPy", "pandas"],
     },
     {
       id: 3,
       title: "Backend & Systems",
       icon: Server,
-      color: "from-green-500 to-green-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
-      skills: ["REST APIs", "Flask", "Node.js", "Docker", "Git"]
+      skills: ["Flask", "FastAPI", "Django", "Node.js", "REST APIs", "Docker", "React"],
     },
     {
       id: 4,
       title: "Perception & Robotics",
       icon: Cpu,
-      color: "from-orange-500 to-orange-600",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      skills: ["ROS2", "LiDAR and Camera Fusion", "Calibration", "Perception Pipelines"]
+      skills: ["ROS2", "Roboflow", "Computer Vision"],
     },
     {
       id: 5,
       title: "Databases",
       icon: Database,
-      color: "from-red-500 to-red-600",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
-      skills: ["PostgreSQL", "MySQL"]
+      skills: ["PostgreSQL", "MySQL", "MongoDB"],
     },
     {
       id: 6,
       title: "Tooling",
       icon: Settings,
-      color: "from-indigo-500 to-indigo-600",
-      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-      skills: ["Model Context Protocol (MCP)", "Linux", "VS Code"]
-    }
+      skills: ["MCP", "Git", "GitHub", "AWS", "GCP", "Postman", "Linux"],
+    },
   ];
 
   const containerVariants = {
@@ -65,40 +53,42 @@ const Skills = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const categoryVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   return (
-    <section id="skills" className="py-24 bg-gray-50 dark:bg-dark-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-24 bg-white dark:bg-dark-900 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-primary-400/10 dark:bg-primary-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/5 w-72 h-72 bg-accent-400/10 dark:bg-accent-600/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Technical <span className="gradient-text">Skills</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
-            Technologies and tools I use to build production-ready systems
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Backend & systems, applied AI/ML, and perception & robotics
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Tools I use across backend systems, applied AI, and perception work
           </p>
         </motion.div>
 
@@ -106,32 +96,32 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {skillCategories.map((category) => (
             <motion.div
               key={category.id}
               variants={categoryVariants}
-              className="bg-white dark:bg-dark-700 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-600 p-8 hover:shadow-xl transition-all duration-300"
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="group relative bg-white dark:bg-dark-700 rounded-2xl border border-gray-200 dark:border-dark-600 p-6 shadow-md hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 overflow-hidden"
             >
-              <div className="flex items-center mb-6">
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${category.bgColor} mr-4`}>
-                  <category.icon className={`w-7 h-7 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`} />
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0 group-hover:scale-105 transition-transform duration-300">
+                  <category.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" strokeWidth={2} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                   {category.title}
                 </h3>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, index) => (
                   <motion.span
                     key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: index * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-4 py-2 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium border border-gray-200 dark:border-dark-500 hover:border-primary-400 dark:hover:border-primary-500 transition-all duration-200"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.05 * index }}
+                    className="px-3 py-1.5 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium border border-gray-200 dark:border-dark-500 group-hover:border-gray-300 dark:group-hover:border-dark-400 transition-colors duration-200"
                   >
                     {skill}
                   </motion.span>

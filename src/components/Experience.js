@@ -23,55 +23,48 @@ const Experience = () => {
         "Contributed to perception and CAN integration frameworks for SAE autonomous challenge systems"
       ],
       technologies: ["Reinforcement Learning", "LLMs", "Python", "Klee", "CodeQL", "Compilers"],
-      logo: "PSU",
-      color: "from-blue-600 to-blue-800"
+      logo: "PSU"
     },
     {
       id: 2,
       company: "HCLTech",
-      role: "Software Engineering Intern (LLM Systems)",
+      role: "GenAI Intern — LLM Systems",
       location: "Redmond, WA, USA",
       dates: "May 2025 - August 2025",
       achievements: [
-        "Built agentic retrieval pipelines over dual vector stores, improving recall and latency for enterprise documentation workflows",
-        "Implemented Model Context Protocol (MCP) automation to standardize tool-calling, tracing, and operational control for LLM jobs",
-        "Designed a self-healing error intelligence service: log ingestion, embedding search, root-cause summaries, and Slack delivery",
-        "Productized internal LLM tooling with guardrails, evaluation hooks, and integrations used across multiple engineering teams"
+        "Built a RAG-based support automation pipeline that turns production error logs into remediation recommendations and automated Slack alerts, cutting support resolution time 50%",
+        "Indexed internal documentation and historical incidents into FAISS with structured metadata, sharpening the relevance of retrieved recommendations",
+        "Orchestrated multi-agent workflows across APIs, file systems, databases, and Confluence using MCP and LangChain to automate knowledge retrieval and routine actions"
       ],
-      technologies: ["LLMs", "RAG", "Vector Databases", "MCP", "Python", "APIs", "LangChain"],
-      logo: "HCL",
-      color: "from-indigo-600 to-purple-800"
+      technologies: ["LLMs", "RAG", "Flask", "FAISS", "MCP", "Python", "LangChain"],
+      logo: "HCL"
     },
     {
       id: 3,
       company: "Penn State Advanced Vehicle Team",
-      role: "Autonomous Vehicle Perception Engineer",
+      role: "Perception Team Member",
       location: "State College, PA, USA",
       dates: "February 2025 - December 2025",
       achievements: [
-        "Worked on the perception stack for a competition-grade autonomous vehicle, focusing on real-time sensor fusion and robust detection under latency constraints",
-        "Built LiDAR and camera fusion modules and improved depth estimation reliability through calibration and depth-fusion tuning",
-        "Tuned and filtered YOLOv8 detections to reduce false positives and stabilize object tracking in motion",
-        "Developed and tested perception modules inside the ROS2/CarROS ecosystem using Python and C++"
+        "Curated and labeled perception datasets in Roboflow to support object-detection model training for vehicle and traffic scenarios",
+        "Ran ROS2 perception pipelines against recorded rosbag sessions to evaluate detection output and catch dataset issues before training",
+        "Worked alongside the perception team to turn raw sensor recordings into training-ready data for a competition-grade autonomous vehicle"
       ],
-      technologies: ["Python", "C++", "ROS2", "OpenCV", "YOLOv8", "LiDAR", "Computer Vision"],
-      logo: "AVT",
-      color: "from-green-600 to-emerald-800"
+      technologies: ["Python", "ROS2", "Roboflow", "Computer Vision"],
+      logo: "AVT"
     },
     {
       id: 4,
       company: "Elevatoz Loyalty",
-      role: "Intern",
+      role: "Data Analytics Intern",
       location: "Bengaluru, KA, India",
       dates: "June 2024 - August 2024",
       achievements: [
-        "Worked with SQL and Python (pandas, NumPy) to explore and analyze customer datasets",
-        "Assisted in building basic scikit-learn models for customer behavior insights",
-        "Gained exposure to data science workflows and model deployment practices"
+        "Analyzed customer datasets with SQL and Python (pandas, NumPy) to surface behavioral trends for the loyalty platform",
+        "Automated recurring ETL workflows, cutting data-processing time by 40%"
       ],
-      technologies: ["SQL", "Python", "scikit-learn", "Pandas", "NumPy", "Machine Learning"],
-      logo: "EL",
-      color: "from-orange-600 to-red-800"
+      technologies: ["SQL", "Python", "pandas", "NumPy"],
+      logo: "EL"
     }
   ];
 
@@ -149,7 +142,7 @@ const Experience = () => {
               {/* Header */}
               <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
                 <div className="flex items-start space-x-4 mb-4 lg:mb-0">
-                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center bg-gradient-to-r ${experience.color} text-white font-bold text-lg shadow-lg`}>
+                  <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-lg shadow-lg shrink-0">
                     {experience.logo}
                   </div>
                   <div>

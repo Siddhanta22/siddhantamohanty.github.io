@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Award, Briefcase, Car, Microscope, Server } from 'lucide-react';
+import { Trophy, Briefcase, GraduationCap, Layers } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -11,39 +11,24 @@ const About = () => {
 
   const stats = [
     {
+      icon: Layers,
+      label: "Projects Shipped",
+      value: "9+",
+    },
+    {
       icon: Briefcase,
-      label: "HCL Technologies",
-      value: "GenAI Intern",
-      color: "from-blue-500 to-indigo-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20"
+      label: "Internships & Research Roles",
+      value: "4",
     },
     {
-      icon: Microscope,
-      label: "Penn State University",
-      value: "LLM Research Assistant",
-      color: "from-purple-500 to-fuchsia-600",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20"
+      icon: Trophy,
+      label: "Dean's List",
+      value: "4x",
     },
     {
-      icon: Car,
-      label: "Penn State AVT",
-      value: "Autonomous Perception",
-      color: "from-green-500 to-emerald-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20"
-    },
-    {
-      icon: Server,
-      label: "Production Systems I Built",
-      value: "Backend & Tooling",
-      color: "from-slate-600 to-gray-800",
-      bgColor: "bg-slate-50 dark:bg-slate-900/20"
-    },
-    {
-      icon: Award,
-      label: "Fall 2023, Spring 2024, Fall 2025",
-      value: "Dean’s List",
-      color: "from-yellow-500 to-amber-600",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
+      icon: GraduationCap,
+      label: "B.S. Computer Science, Penn State",
+      value: "Class of 2026",
     }
   ];
 
@@ -75,19 +60,13 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                I'm a Computer Science graduate from Penn State with interests in backend engineering, AI systems, and applied research.
+                I'm a Computer Science graduate from Penn State, building backend systems, AI/ML tooling, and autonomous perception software. I like taking ideas from concept to implementation — designing APIs, shipping production services, or testing a research idea against real code and real sensors.
               </p>
               <p>
-                I've worked on agentic AI applications, backend infrastructure, automation platforms, and reinforcement learning research, with a focus on building systems that are practical, reliable, and useful in real-world environments.
+                What keeps me engaged is the failure mode, not the demo: why a system breaks under load, why a model's output can't be trusted blindly, why a detector drops a frame at the wrong moment. That's shown up in agentic AI tooling at HCLTech, reinforcement-learning research at Penn State, and perception work with the Advanced Vehicle Team.
               </p>
               <p>
-                I like taking ideas from concept to implementation, whether that means designing APIs, building scalable services, developing AI-powered tools, or trying new approaches through research. What keeps me engaged is understanding how systems work, why they fail, and how they can be improved.
-              </p>
-              <p>
-                Beyond day-to-day software work, I'm drawn to intelligent systems and how they interact with the physical world. That curiosity has led me to autonomous vehicle perception, reinforcement learning research, and AI applications that go beyond chat interfaces.
-              </p>
-              <p>
-                When I'm not building something, you'll usually find me exploring new technologies, tinkering with side projects, reading about emerging AI systems, or planning my next adventure.
+                Outside of that, I'm usually reading about new AI systems, tinkering with a side project, or planning the next trip.
               </p>
             </div>
           </motion.div>
@@ -124,7 +103,7 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -132,11 +111,11 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className={`${stat.bgColor} rounded-xl p-5 text-center border border-gray-200 dark:border-dark-700 shadow-lg hover:shadow-xl transition-all duration-300 h-full`}
+              whileHover={{ y: -4 }}
+              className="bg-white dark:bg-dark-800 rounded-xl p-5 text-center border border-gray-200 dark:border-dark-700 shadow-md hover:shadow-lg transition-all duration-300 h-full"
             >
-              <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-r ${stat.color} mx-auto mb-4`}>
-                <stat.icon className="w-6 h-6 text-white" />
+              <div className="w-11 h-11 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 mx-auto mb-4">
+                <stat.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" strokeWidth={2} />
               </div>
               <div className="text-2xl lg:text-xl font-bold text-gray-900 dark:text-white mb-1">
                 {stat.value}
