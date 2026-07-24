@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Camera, Film, Zap, Calendar, Code, Mail, Mic } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic } from 'lucide-react';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -60,17 +60,6 @@ const Projects = () => {
       live: null,
       icon: Code,
       screenshots: ["/collision-detector-1.png"]
-    },
-    {
-      id: 5,
-      title: "Photobot",
-      role: "Personal Project",
-      summary: "A DSLR assistant that retrieves relevant camera guidance and returns practical setting recommendations via a RAG workflow over documentation.",
-      technologies: ["LangChain", "RAG", "Python", "OpenAI API"],
-      impact: "Cut camera-setting decision time by 60% through low-latency semantic retrieval.",
-      github: null,
-      live: null,
-      icon: Camera,
     },
     {
       id: 6,
