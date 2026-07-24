@@ -35,7 +35,7 @@ const Projects = () => {
       technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Resend", "Vercel"],
       impact: "Tracks per-issue email open and click analytics to measure real engagement, not just delivery.",
       github: "https://github.com/Siddhanta22/yourAIbrief",
-      live: "https://www.loom.com/share/7ffa45fdc6cc481ba034bb13bed45b82",
+      live: "https://your-a-ibrief.vercel.app",
       icon: Mail,
     },
     {
