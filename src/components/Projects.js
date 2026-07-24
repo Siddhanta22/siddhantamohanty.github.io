@@ -152,14 +152,14 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-6 items-start"
+          className="md:columns-2 gap-6"
         >
           {projects.map((project) => (
             <motion.div
               key={project.id}
               variants={cardVariants}
               whileHover={{ y: -4 }}
-              className="project-card flex flex-col"
+              className="project-card flex flex-col break-inside-avoid mb-6"
             >
               <div className="flex items-start justify-between gap-3 mb-4">
                 <div className="flex items-start space-x-3 flex-1 min-w-0">
