@@ -60,8 +60,7 @@ const Experience = () => {
       location: "Bengaluru, KA, India",
       dates: "June 2024 - August 2024",
       achievements: [
-        "Analyzed customer datasets with SQL and Python (pandas, NumPy) to surface behavioral trends for the loyalty platform",
-        "Automated recurring ETL workflows, cutting data-processing time by 40%"
+        "Cleaned, transformed, and analyzed structured customer datasets using SQL and Python (pandas, NumPy)"
       ],
       technologies: ["SQL", "Python", "pandas", "NumPy"],
       logo: "EL"

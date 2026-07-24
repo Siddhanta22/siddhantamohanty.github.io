@@ -20,13 +20,13 @@ const Skills = () => {
       id: 2,
       title: "Applied AI / ML",
       icon: Brain,
-      skills: ["RAG", "LangChain", "FAISS", "Pinecone", "LLMs", "PyTorch", "Prompt Engineering", "NumPy", "pandas"],
+      skills: ["RAG", "LangChain", "FAISS", "Pinecone", "LLMs", "MCP", "PyTorch", "NumPy", "pandas"],
     },
     {
       id: 3,
       title: "Backend & Systems",
       icon: Server,
-      skills: ["Flask", "FastAPI", "Django", "Node.js", "REST APIs", "Docker", "React"],
+      skills: ["Flask", "FastAPI", "Django", "Next.js", "Node.js", "REST APIs", "Docker", "React"],
     },
     {
       id: 4,
@@ -44,7 +44,7 @@ const Skills = () => {
       id: 6,
       title: "Tooling",
       icon: Settings,
-      skills: ["MCP", "Git", "GitHub", "AWS", "GCP", "Postman", "Linux"],
+      skills: ["Git", "GitHub", "Prisma", "Postman", "AWS", "GCP", "VS Code"],
     },
   ];
 
