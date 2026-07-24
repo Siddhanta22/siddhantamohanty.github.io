@@ -1,36 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Trophy, Briefcase, GraduationCap, Layers } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const stats = [
-    {
-      icon: Layers,
-      label: "Projects Shipped",
-      value: "9+",
-    },
-    {
-      icon: Briefcase,
-      label: "Internships & Research Roles",
-      value: "4",
-    },
-    {
-      icon: Trophy,
-      label: "Dean's List",
-      value: "4x",
-    },
-    {
-      icon: GraduationCap,
-      label: "B.S. Computer Science, Penn State",
-      value: "Class of 2026",
-    }
-  ];
 
   return (
     <section id="about" className="py-24 bg-white dark:bg-dark-900">
@@ -50,7 +26,7 @@ const About = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Story Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -68,6 +44,14 @@ const About = () => {
               <p>
                 Outside of that, I'm usually reading about new AI systems, tinkering with a side project, or planning the next trip.
               </p>
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-400">
+              <span>B.S. Computer Science, Penn State</span>
+              <span className="text-gray-300 dark:text-dark-600">·</span>
+              <span>Class of 2026</span>
+              <span className="text-gray-300 dark:text-dark-600">·</span>
+              <span>Dean's List ×4</span>
             </div>
           </motion.div>
 
@@ -97,35 +81,6 @@ const About = () => {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Stats Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="bg-white dark:bg-dark-800 rounded-xl p-5 text-center border border-gray-200 dark:border-dark-700 shadow-md hover:shadow-lg transition-all duration-300 h-full"
-            >
-              <div className="w-11 h-11 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 mx-auto mb-4">
-                <stat.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" strokeWidth={2} />
-              </div>
-              <div className="text-2xl lg:text-xl font-bold text-gray-900 dark:text-white mb-1">
-                {stat.value}
-              </div>
-              <div className="text-sm lg:text-xs text-gray-600 dark:text-gray-400">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
