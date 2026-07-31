@@ -273,7 +273,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
-              I build <span className="font-semibold text-gray-900 dark:text-white">production-ready software</span> across <span className="font-semibold text-gray-900 dark:text-white">backend</span>, <span className="font-semibold text-gray-900 dark:text-white">systems</span>, and <span className="font-semibold text-gray-900 dark:text-white">applied ML</span>, from services and internal tooling to real-time pipelines.
+              I build <span className="font-semibold text-gray-900 dark:text-white">production-ready software</span> across <span className="font-semibold text-gray-900 dark:text-white">backend</span>, <span className="font-semibold text-gray-900 dark:text-white">applied ML</span>, and <span className="font-semibold text-gray-900 dark:text-white">autonomous perception</span> — from AI that fixes itself to vehicles that see the road.
             </motion.p>
 
             {/* CTA Buttons */}
