@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown } from 'lucide-react';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -9,7 +9,6 @@ const Projects = () => {
     threshold: 0.1,
   });
 
-  // Helper function to get image path
   const getImagePath = (filename) => {
     return `${process.env.PUBLIC_URL || ''}${filename}`;
   };
@@ -98,30 +97,21 @@ const Projects = () => {
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+  const [activeId, setActiveId] = useState(projects[0].id);
+
+  const rowVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
   };
 
   return (
     <section id="projects" className="py-24 bg-gray-50 dark:bg-dark-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -141,95 +131,137 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="md:columns-2 gap-6"
+          className="space-y-3"
         >
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={cardVariants}
-              whileHover={{ y: -4 }}
-              className="project-card flex flex-col break-inside-avoid mb-6"
-            >
-              <div className="flex items-start justify-between gap-3 mb-4">
-                <div className="flex items-start space-x-3 flex-1 min-w-0">
-                  <div className="w-11 h-11 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0">
+          {projects.map((project, index) => {
+            const isActive = activeId === project.id;
+            const toggle = () => setActiveId(isActive ? null : project.id);
+
+            return (
+              <motion.div
+                key={project.id}
+                variants={rowVariants}
+                className={`rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
+                  isActive
+                    ? 'border-primary-300 dark:border-primary-600 shadow-lg'
+                    : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
+                }`}
+              >
+                <div
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isActive}
+                  onClick={toggle}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggle();
+                    }
+                  }}
+                  className="w-full flex items-center gap-4 p-5 text-left cursor-pointer select-none"
+                >
+                  <span className="hidden sm:block font-mono text-sm text-gray-300 dark:text-dark-500 w-6 shrink-0">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0">
                     <project.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" strokeWidth={2} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                    <h3 className="font-bold text-gray-900 dark:text-white truncate">
                       {project.title}
                     </h3>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{project.role}</span>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                      {project.role} · {project.technologies.slice(0, 3).join(', ')}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        aria-label={`Open ${project.title} source code`}
+                        title="Source Code"
+                        className="p-2 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <Github className="w-4 h-4" />
+                      </a>
+                    )}
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        aria-label={`Open ${project.title} demo`}
+                        title="Live Demo"
+                        className="p-2 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                    <ChevronDown
+                      className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
+                    />
                   </div>
                 </div>
-                <div className="flex gap-2 shrink-0">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Open ${project.title} source code`}
-                      title="Source Code"
-                      className="p-2 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      className="overflow-hidden"
                     >
-                      <Github className="w-4 h-4" />
-                    </a>
+                      <div className="px-5 pb-6 pt-1 border-t border-gray-100 dark:border-dark-600 sm:pl-[4.75rem]">
+                        {project.screenshots && project.screenshots.length > 0 && (
+                          <div className={`grid gap-2 mt-4 mb-4 ${project.screenshots.length === 1 ? 'grid-cols-1' : 'grid-cols-3'}`}>
+                            {project.screenshots.map((screenshot, i) => (
+                              <div
+                                key={i}
+                                className="rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600"
+                              >
+                                <img
+                                  src={getImagePath(screenshot)}
+                                  alt={`${project.title} screenshot ${i + 1}`}
+                                  className="w-full h-auto object-cover"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                  }}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        <p className={`text-gray-700 dark:text-gray-300 leading-relaxed text-sm mb-4 ${!project.screenshots ? 'mt-4' : ''}`}>
+                          {project.summary}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {project.technologies.map((tech, i) => (
+                            <span
+                              key={i}
+                              className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        <p className="pt-4 border-t border-gray-100 dark:border-dark-600 text-sm font-medium text-gray-800 dark:text-gray-200">
+                          {project.impact}
+                        </p>
+                      </div>
+                    </motion.div>
                   )}
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Open ${project.title} demo`}
-                      title="Live Demo"
-                      className="p-2 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {project.screenshots && project.screenshots.length > 0 && (
-                <div className={`grid gap-2 mb-4 ${project.screenshots.length === 1 ? 'grid-cols-1' : 'grid-cols-3'}`}>
-                  {project.screenshots.map((screenshot, index) => (
-                    <div
-                      key={index}
-                      className="rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600"
-                    >
-                      <img
-                        src={getImagePath(screenshot)}
-                        alt={`${project.title} screenshot ${index + 1}`}
-                        className="w-full h-auto object-cover"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm mb-4">
-                {project.summary}
-              </p>
-
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {project.technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <p className="mt-auto pt-4 border-t border-gray-200 dark:border-dark-700 text-sm font-medium text-gray-800 dark:text-gray-200">
-                {project.impact}
-              </p>
-            </motion.div>
-          ))}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         <motion.div

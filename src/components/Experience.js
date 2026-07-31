@@ -146,11 +146,11 @@ const Experience = () => {
                   </div>
                   <div>
                     {experience.id === 1 ? (
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                           Research Assistant, Penn State University
                         </h3>
-                        <div className="text-sm text-gray-500/70 dark:text-gray-400/70 whitespace-nowrap mt-1">
+                        <div className="text-sm text-gray-500/70 dark:text-gray-400/70 sm:whitespace-nowrap sm:mt-1">
                           {experience.dates}
                         </div>
                       </div>
