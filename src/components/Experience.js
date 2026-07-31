@@ -111,104 +111,118 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="space-y-3"
-        >
-          {experiences.map((experience) => {
-            const isActive = activeId === experience.id;
-            const toggle = () => setActiveId(isActive ? null : experience.id);
+        <div className="relative">
+          {/* Branch line */}
+          <div className="hidden sm:block absolute left-4 top-0 bottom-0 w-px bg-gray-200 dark:bg-dark-600" />
 
-            return (
-              <motion.div
-                key={experience.id}
-                variants={rowVariants}
-                className={`rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
-                  isActive
-                    ? 'border-primary-300 dark:border-primary-600 shadow-lg'
-                    : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
-                }`}
-              >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={isActive}
-                  onClick={toggle}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      toggle();
-                    }
-                  }}
-                  className="w-full flex items-center gap-4 p-5 text-left cursor-pointer select-none"
-                >
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-xs shrink-0">
-                    {experience.logo}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-900 dark:text-white truncate">
-                      {experience.role}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                      {experience.teaser}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="hidden sm:block text-xs font-mono text-gray-400 dark:text-gray-500 whitespace-nowrap">
-                      {experience.dates}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            className="space-y-5"
+          >
+            {experiences.map((experience) => {
+              const isActive = activeId === experience.id;
+              const toggle = () => setActiveId(isActive ? null : experience.id);
+
+              return (
+                <motion.div key={experience.id} variants={rowVariants} className="relative">
+                  {/* Branch node */}
+                  <span className="hidden sm:flex absolute left-0 top-8 w-8 items-center justify-center z-10">
+                    <span
+                      className={`w-3 h-3 rounded-full ring-4 ring-gray-50 dark:ring-dark-800 transition-colors duration-300 ${
+                        isActive ? 'bg-primary-500' : 'bg-gray-300 dark:bg-dark-500'
+                      }`}
                     />
-                  </div>
-                </div>
+                  </span>
 
-                <AnimatePresence initial={false}>
-                  {isActive && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: 'easeInOut' }}
-                      className="overflow-hidden"
+                  <div
+                    className={`sm:ml-10 rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
+                      isActive
+                        ? 'border-primary-300 dark:border-primary-600 shadow-lg'
+                        : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
+                    }`}
+                  >
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={isActive}
+                      onClick={toggle}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          toggle();
+                        }
+                      }}
+                      className="w-full flex items-center gap-5 p-6 text-left cursor-pointer select-none"
                     >
-                      <div className="px-5 pb-6 pt-4 border-t border-gray-100 dark:border-dark-600 sm:pl-[3.75rem]">
-                        <span className="text-xs font-mono uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                          {experience.company} · {experience.location}
-                          <span className="sm:hidden"> · {experience.dates}</span>
-                        </span>
-
-                        <ul className="space-y-3 mt-4 mb-4">
-                          {experience.achievements.map((achievement, index) => (
-                            <li key={index} className="flex items-start">
-                              <div className="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 shrink-0"></div>
-                              <span className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-                                {achievement}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="flex flex-wrap gap-1.5">
-                          {experience.technologies.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-xs shrink-0">
+                        {experience.logo}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-white truncate">
+                          {experience.role}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                          {experience.teaser}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className="hidden sm:block text-xs font-mono text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                          {experience.dates}
+                        </span>
+                        <ChevronDown
+                          className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
+                        />
+                      </div>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: 'easeInOut' }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-7 pt-4 border-t border-gray-100 dark:border-dark-600">
+                            <span className="text-xs font-mono uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                              {experience.company} · {experience.location}
+                              <span className="sm:hidden"> · {experience.dates}</span>
+                            </span>
+
+                            <ul className="space-y-3 mt-4 mb-4">
+                              {experience.achievements.map((achievement, index) => (
+                                <li key={index} className="flex items-start">
+                                  <div className="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 shrink-0"></div>
+                                  <span className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                                    {achievement}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+
+                            <div className="flex flex-wrap gap-1.5">
+                              {experience.technologies.map((tech, index) => (
+                                <span
+                                  key={index}
+                                  className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
