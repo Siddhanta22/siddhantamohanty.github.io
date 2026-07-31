@@ -26,7 +26,7 @@ const Skills = () => {
       id: 3,
       title: "Backend & Systems",
       icon: Server,
-      skills: ["Flask", "FastAPI", "Django", "Next.js", "Node.js", "REST APIs", "Docker", "React"],
+      skills: ["Flask", "FastAPI", "Django", "Next.js", "Node.js", "REST APIs", "SQLAlchemy", "Docker", "React"],
     },
     {
       id: 4,
