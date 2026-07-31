@@ -235,9 +235,9 @@ const Hero = () => {
               className="space-y-4"
             >
               <motion.h1
-                className="text-5xl md:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white leading-tight"
+                className="text-5xl md:text-6xl xl:text-7xl font-bold leading-tight"
               >
-                Hi, I'm <span className="gradient-text">Siddhanta Mohanty</span>
+                <span className="gradient-text">Siddhanta Mohanty</span>
               </motion.h1>
 
               {/* Rotating Tagline */}
