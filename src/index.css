@@ -50,8 +50,8 @@
     @apply text-primary-600 dark:text-primary-400;
   }
 
-  .nav-link.active::after {
-    @apply w-full;
+  .nav-link.active:hover::after {
+    @apply w-0;
   }
 
   .skill-tag {

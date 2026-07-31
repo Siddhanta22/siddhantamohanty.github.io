@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Download, ChevronDown } from 'lucide-react';
+import SpotlightCard from './SpotlightCard';
 
 const Experience = () => {
   const [ref, inView] = useInView({
@@ -113,7 +114,13 @@ const Experience = () => {
 
         <div className="relative">
           {/* Branch line */}
-          <div className="hidden sm:block absolute left-4 top-0 bottom-0 w-px bg-gray-200 dark:bg-dark-600" />
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={inView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1.1, ease: 'easeInOut' }}
+            style={{ transformOrigin: 'top' }}
+            className="hidden sm:block absolute left-4 top-0 bottom-0 w-px bg-gray-200 dark:bg-dark-600"
+          />
 
           <motion.div
             variants={containerVariants}
@@ -129,15 +136,21 @@ const Experience = () => {
                 <motion.div key={experience.id} variants={rowVariants} className="relative">
                   {/* Branch node */}
                   <span className="hidden sm:flex absolute left-0 top-8 w-8 items-center justify-center z-10">
-                    <span
+                    <motion.span
+                      animate={
+                        isActive
+                          ? { boxShadow: ['0 0 0 0 rgba(6,182,212,0.45)', '0 0 0 8px rgba(6,182,212,0)', '0 0 0 0 rgba(6,182,212,0)'] }
+                          : {}
+                      }
+                      transition={isActive ? { duration: 2, repeat: Infinity, ease: 'easeInOut' } : {}}
                       className={`w-3 h-3 rounded-full ring-4 ring-gray-50 dark:ring-dark-800 transition-colors duration-300 ${
                         isActive ? 'bg-primary-500' : 'bg-gray-300 dark:bg-dark-500'
                       }`}
                     />
                   </span>
 
-                  <div
-                    className={`sm:ml-10 rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
+                  <SpotlightCard
+                    className={`relative sm:ml-10 rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
                       isActive
                         ? 'border-primary-300 dark:border-primary-600 shadow-lg'
                         : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
@@ -217,7 +230,7 @@ const Experience = () => {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </SpotlightCard>
                 </motion.div>
               );
             })}

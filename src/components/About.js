@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -7,6 +7,17 @@ const About = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handlePhotoMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: py * -12, y: px * 12 });
+  };
+
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
     <section id="about" className="py-24 bg-white dark:bg-dark-900">
@@ -61,10 +72,14 @@ const About = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative"
+            style={{ perspective: 1000 }}
           >
             <motion.div
-              whileHover={{ scale: 1.02, rotate: 1 }}
-              transition={{ duration: 0.3 }}
+              onMouseMove={handlePhotoMouseMove}
+              onMouseLeave={resetTilt}
+              animate={{ rotateX: tilt.x, rotateY: tilt.y, scale: tilt.x || tilt.y ? 1.03 : 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+              style={{ transformStyle: 'preserve-3d' }}
               className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl"
             >
               <div className="w-full h-full rounded-2xl overflow-hidden relative group">

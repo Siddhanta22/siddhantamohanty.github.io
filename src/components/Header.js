@@ -72,10 +72,17 @@ const Header = ({ scrollToSection, darkMode, toggleDarkMode }) => {
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                  className={`nav-link relative ${activeSection === item.id ? 'active' : ''}`}
                   aria-current={activeSection === item.id ? 'true' : undefined}
                 >
                   {item.label}
+                  {activeSection === item.id && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-x-2 -bottom-1 h-0.5 bg-primary-600 dark:bg-primary-400 rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
                 </button>
               ))}
             </nav>
