@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Building, MapPin, Calendar, Download } from 'lucide-react';
+import { Download, ChevronDown } from 'lucide-react';
 
 const Experience = () => {
   const [ref, inView] = useInView({
@@ -16,6 +16,7 @@ const Experience = () => {
       role: "Research Assistant",
       location: "University Park, PA, USA",
       dates: "Sep 2025 – Dec 2025",
+      teaser: "Applied reinforcement learning to make LLM-based code verification self-correcting.",
       achievements: [
         "Built an RL feedback layer that uses secondary LLM reports to improve prompts for a primary LLM in a multi-stage code verification pipeline",
         "Integrated compilers and static analysis tools (Klee, CodeQL) to validate LLM outputs before RL refinement",
@@ -30,7 +31,8 @@ const Experience = () => {
       company: "HCLTech",
       role: "GenAI Intern — LLM Systems",
       location: "Redmond, WA, USA",
-      dates: "May 2025 - August 2025",
+      dates: "May 2025 – Aug 2025",
+      teaser: "Built a RAG-based support system that cut resolution time in half.",
       achievements: [
         "Built a RAG-based support automation pipeline that turns production error logs into remediation recommendations and automated Slack alerts, cutting support resolution time 50%",
         "Indexed internal documentation and historical incidents into FAISS with structured metadata, sharpening the relevance of retrieved recommendations",
@@ -44,7 +46,8 @@ const Experience = () => {
       company: "Penn State Advanced Vehicle Team",
       role: "Perception Team Member",
       location: "State College, PA, USA",
-      dates: "February 2025 - December 2025",
+      dates: "Feb 2025 – Dec 2025",
+      teaser: "Curated and validated perception datasets for a competition-grade autonomous vehicle.",
       achievements: [
         "Curated and labeled perception datasets in Roboflow to support object-detection model training for vehicle and traffic scenarios",
         "Ran ROS2 perception pipelines against recorded rosbag sessions to evaluate detection output and catch dataset issues before training",
@@ -58,7 +61,8 @@ const Experience = () => {
       company: "Elevatoz Loyalty",
       role: "Data Analytics Intern",
       location: "Bengaluru, KA, India",
-      dates: "June 2024 - August 2024",
+      dates: "Jun 2024 – Aug 2024",
+      teaser: "Cleaned and analyzed structured customer datasets to surface behavioral trends.",
       achievements: [
         "Cleaned, transformed, and analyzed structured customer datasets using SQL and Python (pandas, NumPy)"
       ],
@@ -66,6 +70,8 @@ const Experience = () => {
       logo: "EL"
     }
   ];
+
+  const [activeId, setActiveId] = useState(experiences[0].id);
 
   const downloadResume = () => {
     const link = document.createElement('a');
@@ -77,30 +83,19 @@ const Experience = () => {
     document.body.removeChild(link);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+  const rowVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
   };
 
   return (
     <section id="experience" className="py-24 bg-gray-50 dark:bg-dark-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -111,113 +106,110 @@ const Experience = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Professional <span className="gradient-text">Experience</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             I build software that ships, scales, and solves real engineering problems
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Internships, research, and team projects focused on reliability and measurable impact
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="hidden lg:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-accent-200 to-primary-200 dark:from-primary-800 dark:via-accent-800 dark:to-primary-800"></div>
-          
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="space-y-8 relative"
-          >
-            {experiences.map((experience, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="space-y-3"
+        >
+          {experiences.map((experience) => {
+            const isActive = activeId === experience.id;
+            const toggle = () => setActiveId(isActive ? null : experience.id);
+
+            return (
               <motion.div
                 key={experience.id}
-                variants={cardVariants}
-                whileHover={{ y: -5, x: 5 }}
-                className="relative bg-white dark:bg-dark-700 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-600 p-8 hover:shadow-2xl transition-all duration-300 lg:ml-16"
+                variants={rowVariants}
+                className={`rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
+                  isActive
+                    ? 'border-primary-300 dark:border-primary-600 shadow-lg'
+                    : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
+                }`}
               >
-                {/* Timeline Dot */}
-                <div className="hidden lg:block absolute -left-20 top-8 w-4 h-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full border-4 border-white dark:border-dark-800 shadow-lg"></div>
-              {/* Header */}
-              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
-                <div className="flex items-start space-x-4 mb-4 lg:mb-0">
-                  <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-lg shadow-lg shrink-0">
+                <div
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isActive}
+                  onClick={toggle}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggle();
+                    }
+                  }}
+                  className="w-full flex items-center gap-4 p-5 text-left cursor-pointer select-none"
+                >
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-xs shrink-0">
                     {experience.logo}
                   </div>
-                  <div>
-                    {experience.id === 1 ? (
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                          Research Assistant, Penn State University
-                        </h3>
-                        <div className="text-sm text-gray-500/70 dark:text-gray-400/70 sm:whitespace-nowrap sm:mt-1">
-                          {experience.dates}
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                          {experience.role}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400 mb-2">
-                          <div className="flex items-center">
-                            <Building className="w-4 h-4 mr-1" />
-                            {experience.company}
-                          </div>
-                          <div className="flex items-center">
-                            <MapPin className="w-4 h-4 mr-1" />
-                            {experience.location}
-                          </div>
-                          <div className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {experience.dates}
-                          </div>
-                        </div>
-                      </>
-                    )}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-gray-900 dark:text-white truncate">
+                      {experience.role}
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                      {experience.teaser}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="hidden sm:block text-xs font-mono text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                      {experience.dates}
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
+                    />
                   </div>
                 </div>
-              </div>
 
-              {/* Achievements */}
-              <div className="space-y-4 mb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {experience.id === 4 ? "Experience" : (experience.id === 1 || experience.id === 2 || experience.id === 3 ? "Impact" : "Key Achievements:")}
-                </h4>
-                <ul className={experience.id === 1 || experience.id === 2 || experience.id === 3 ? "space-y-4" : "space-y-3"}>
-                  {experience.achievements.map((achievement, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {achievement}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Technologies */}
-              <div className="pt-6 border-t border-gray-200 dark:border-dark-600">
-                {experience.id === 1 || experience.id === 2 || experience.id === 3 ? null : (
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies:</h4>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  {experience.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium border border-gray-200 dark:border-dark-500"
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      className="overflow-hidden"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                      <div className="px-5 pb-6 pt-4 border-t border-gray-100 dark:border-dark-600 sm:pl-[3.75rem]">
+                        <span className="text-xs font-mono uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                          {experience.company} · {experience.location}
+                          <span className="sm:hidden"> · {experience.dates}</span>
+                        </span>
 
-        {/* Resume CTA */}
+                        <ul className="space-y-3 mt-4 mb-4">
+                          {experience.achievements.map((achievement, index) => (
+                            <li key={index} className="flex items-start">
+                              <div className="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 shrink-0"></div>
+                              <span className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                                {achievement}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <div className="flex flex-wrap gap-1.5">
+                          {experience.technologies.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

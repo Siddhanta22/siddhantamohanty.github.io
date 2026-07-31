@@ -18,6 +18,7 @@ const Projects = () => {
       id: 1,
       title: "Self-Heal System",
       role: "Personal Project",
+      teaser: "Turns production errors into automated root-cause explanations and fixes.",
       summary: "An AI-powered self-healing backend for production incidents. Captures database exceptions, embeds runtime error logs into FAISS, and retrieves similar historical incidents via semantic search to generate context-aware root-cause explanations and fixes.",
       technologies: ["Flask", "LangChain", "FAISS", "PostgreSQL", "OpenAI", "Slack"],
       impact: "Ships as a Slack-integrated incident response system with severity-based alerts, LLM-generated diagnostics, and a chatbot with read-only (SELECT-only) SQL access to recent error logs and database stats.",
@@ -30,6 +31,7 @@ const Projects = () => {
       id: 2,
       title: "yourAIbrief",
       role: "Personal Project",
+      teaser: "A personalized AI newsletter platform with magic-link auth and 50+ sources.",
       summary: "A full-stack AI newsletter platform with magic-link authentication and personalized topic preferences. Aggregates content from 50+ trusted sources and delivers structured briefs on a per-user schedule.",
       technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Resend", "Vercel"],
       impact: "Tracks per-issue email open and click analytics to measure real engagement, not just delivery.",
@@ -41,6 +43,7 @@ const Projects = () => {
       id: 3,
       title: "AI Transcript",
       role: "Personal Project",
+      teaser: "Turns raw recordings into polished, publish-ready transcripts.",
       summary: "A speech pipeline that converts raw recordings into polished, publish-ready transcripts using FastAPI, Whisper transcription, and LLM-based rewriting.",
       technologies: ["FastAPI", "OpenAI Whisper", "LLMs"],
       impact: "Cuts manual editing by automating transcription and clean-up into publish-ready copy.",
@@ -52,6 +55,7 @@ const Projects = () => {
       id: 4,
       title: "Real-Time Collision Detection Engine",
       role: "Personal Project",
+      teaser: "A 2D collision engine tuned for scale — 50x faster than brute force.",
       summary: "A real-time collision engine for dense 2D simulations with large numbers of moving entities. Implemented spatial hashing and broad-phase partitioning to aggressively prune candidate pairs before narrow-phase checks.",
       technologies: ["JavaScript", "Canvas API", "Spatial Hashing"],
       impact: "Eliminated 98% of unnecessary checks and achieved 50x faster broad-phase performance versus brute force.",
@@ -64,6 +68,7 @@ const Projects = () => {
       id: 6,
       title: "Prompt Tracer",
       role: "Personal Project",
+      teaser: "Tracks and compares prompt performance across every major LLM.",
       summary: "A prompt observability extension for tracking and improving prompts across major LLM tools. Built a Chrome extension with a real-time analytics dashboard for ChatGPT, Claude, Grok, and Gemini, comparing prompt variants and output quality to surface performance trends as they happen.",
       technologies: ["JavaScript", "Chrome Extension API", "Manifest V3"],
       impact: "Makes prompt iteration measurable and repeatable with side-by-side analytics across multiple model platforms.",
@@ -76,6 +81,7 @@ const Projects = () => {
       id: 8,
       title: "CourseScheduler",
       role: "HackPSU Project",
+      teaser: "Builds conflict-free graduation paths from natural-language course data.",
       summary: "An NLP academic planner that helps students build conflict-free graduation paths from natural-language course data.",
       technologies: ["React", "Node.js", "MongoDB", "Python"],
       impact: "Cut manual scheduling effort and planning errors via automated course-sequence recommendations.",
@@ -87,6 +93,7 @@ const Projects = () => {
       id: 9,
       title: "Swipeflix",
       role: "Personal Project",
+      teaser: "Swipe-based movie discovery with a custom weighted-scoring algorithm.",
       summary: "A swipe-based movie and TV discovery app. Recommendations are driven by a weighted scoring algorithm — genre match, popularity, recency, and format — tuned by a 5-question onboarding quiz and live TMDB API data.",
       technologies: ["React", "Vite", "Tailwind CSS", "TMDB API", "Vercel"],
       impact: "Built custom gesture-driven swipe interactions with hand-rolled CSS transforms (no animation libraries), plus session recaps that surface swipe stats and inferred viewing preferences.",
@@ -171,7 +178,7 @@ const Projects = () => {
                       {project.title}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                      {project.role} · {project.technologies.slice(0, 3).join(', ')}
+                      {project.teaser}
                     </p>
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
@@ -216,7 +223,10 @@ const Projects = () => {
                       transition={{ duration: 0.35, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="px-5 pb-6 pt-1 border-t border-gray-100 dark:border-dark-600 sm:pl-[4.75rem]">
+                      <div className="px-5 pb-6 pt-4 border-t border-gray-100 dark:border-dark-600 sm:pl-[4.75rem]">
+                        <span className="text-xs font-mono uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                          {project.role}
+                        </span>
                         {project.screenshots && project.screenshots.length > 0 && (
                           <div className={`grid gap-2 mt-4 mb-4 ${project.screenshots.length === 1 ? 'grid-cols-1' : 'grid-cols-3'}`}>
                             {project.screenshots.map((screenshot, i) => (
@@ -237,7 +247,7 @@ const Projects = () => {
                           </div>
                         )}
 
-                        <p className={`text-gray-700 dark:text-gray-300 leading-relaxed text-sm mb-4 ${!project.screenshots ? 'mt-4' : ''}`}>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm mt-3 mb-4">
                           {project.summary}
                         </p>
 
