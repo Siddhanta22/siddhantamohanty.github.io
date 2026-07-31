@@ -72,7 +72,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-24 bg-white dark:bg-dark-900 relative overflow-hidden">
+    <section id="skills" className="py-24 bg-white/90 dark:bg-dark-900/90 relative overflow-hidden">
       <FloatingOrbs variant="subtle" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -11,7 +11,7 @@ const Quote = () => {
   });
 
   return (
-    <section className="py-20 bg-white dark:bg-dark-900 relative overflow-hidden">
+    <section className="py-20 bg-white/90 dark:bg-dark-900/90 relative overflow-hidden">
       <FloatingOrbs variant="subtle" />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div

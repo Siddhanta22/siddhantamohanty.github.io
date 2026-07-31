@@ -8,8 +8,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ParticleBackground from './components/ParticleBackground';
-import MouseParticles from './components/MouseParticles';
+import NetworkBackground from './components/NetworkBackground';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
@@ -52,8 +51,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 relative">
       <ScrollProgress />
-      <ParticleBackground />
-      <MouseParticles />
+      <NetworkBackground />
 
       {/* Main Content */}
       <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
