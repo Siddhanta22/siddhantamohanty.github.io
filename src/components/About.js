@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import FloatingOrbs from './FloatingOrbs';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -20,8 +21,9 @@ const About = () => {
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <section id="about" className="py-24 bg-white dark:bg-dark-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 bg-white dark:bg-dark-900 relative overflow-hidden">
+      <FloatingOrbs variant="subtle" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Mail, Linkedin, MapPin, Send } from 'lucide-react';
+import FloatingOrbs from './FloatingOrbs';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -26,11 +27,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-200/10 dark:bg-primary-800/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent-200/10 dark:bg-accent-800/10 rounded-full blur-3xl"></div>
-      </div>
+      <FloatingOrbs variant="subtle" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div

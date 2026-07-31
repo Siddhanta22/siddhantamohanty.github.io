@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Download, ChevronDown } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
+import FloatingOrbs from './FloatingOrbs';
 
 const Experience = () => {
   const [ref, inView] = useInView({
@@ -95,8 +96,9 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-24 bg-gray-50 dark:bg-dark-800">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-24 bg-gray-50 dark:bg-dark-800 relative overflow-hidden">
+      <FloatingOrbs variant="subtle" />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}

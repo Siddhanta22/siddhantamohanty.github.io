@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, ArrowRight, Sparkles } from 'lucide-react';
+import FloatingOrbs from './FloatingOrbs';
 
 const STACK_GROUPS = [
   { label: 'backend/', items: 'Python, FastAPI, Flask, Node.js' },
@@ -213,11 +214,7 @@ const Hero = () => {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 pt-36 pb-28">
-      {/* Subtle Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-200/20 dark:bg-primary-800/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-200/20 dark:bg-accent-800/20 rounded-full blur-3xl"></div>
-      </div>
+      <FloatingOrbs />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">

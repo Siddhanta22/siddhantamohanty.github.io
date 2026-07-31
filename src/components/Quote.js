@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Quote as QuoteIcon } from 'lucide-react';
+import FloatingOrbs from './FloatingOrbs';
 
 const Quote = () => {
   const [ref, inView] = useInView({
@@ -10,8 +11,9 @@ const Quote = () => {
   });
 
   return (
-    <section className="py-20 bg-white dark:bg-dark-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white dark:bg-dark-900 relative overflow-hidden">
+      <FloatingOrbs variant="subtle" />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -41,7 +43,7 @@ const Quote = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="text-2xl md:text-3xl font-medium text-gray-800 dark:text-gray-200 leading-relaxed"
               >
-                Whether it's a Slack bot, an LLM pipeline, or a car reading a stop sign — the version I ship is the one that keeps working after I stop watching it.
+                Whether it's a system that heals itself, a pipeline serving real users, or software reading the road — the version I ship is the one that keeps working after I stop watching it.
               </motion.blockquote>
             </div>
           </motion.div>

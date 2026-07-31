@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
+import FloatingOrbs from './FloatingOrbs';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -72,10 +73,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-24 bg-white dark:bg-dark-900 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-primary-400/10 dark:bg-primary-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 left-1/5 w-72 h-72 bg-accent-400/10 dark:bg-accent-600/10 rounded-full blur-3xl" />
-      </div>
+      <FloatingOrbs variant="subtle" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
