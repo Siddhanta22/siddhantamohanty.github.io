@@ -22,8 +22,7 @@ const Experience = () => {
       achievements: [
         "Built an RL feedback layer that uses secondary LLM reports to improve prompts for a primary LLM in a multi-stage code verification pipeline",
         "Integrated compilers and static analysis tools (Klee, CodeQL) to validate LLM outputs before RL refinement",
-        "Researched reinforcement learning approaches and studied academic papers to apply RL to LLM-based code verification systems",
-        "Contributed to perception and CAN integration frameworks for SAE autonomous challenge systems"
+        "Researched reinforcement learning approaches and studied academic papers to apply RL to LLM-based code verification systems"
       ],
       technologies: ["Reinforcement Learning", "LLMs", "Python", "Klee", "CodeQL", "Compilers"],
       logo: "PSU"
