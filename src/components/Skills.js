@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
   Code, Brain, Server, Cpu, Settings, Database,
-  Sparkles, Boxes, Layers, Network,
+  Sparkles, Boxes, Layers, Network, Bot, Wrench, MessageSquare,
 } from 'lucide-react';
 import {
   SiPython, SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3,
-  SiPytorch, SiNumpy, SiPandas,
-  SiFlask, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiSqlalchemy, SiDocker, SiReact,
+  SiPytorch, SiNumpy, SiPandas, SiOpenai,
+  SiFlask, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiSqlalchemy, SiDocker, SiReact, SiPydantic,
   SiRos,
   SiPostgresql, SiMysql, SiMongodb,
-  SiGit, SiGithub, SiPrisma, SiPostman, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
+  SiGit, SiGithub, SiGithubactions, SiPlaywright, SiPrisma, SiPostman, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
 } from 'react-icons/si';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
@@ -48,7 +48,11 @@ const skillCategories = [
       { name: "FAISS", ...fallback(Layers) },
       { name: "Pinecone", ...fallback(Database) },
       { name: "LLMs", ...fallback(Sparkles) },
+      { name: "AI Agents", ...fallback(Bot) },
+      { name: "Tool Calling", ...fallback(Wrench) },
       { name: "MCP", ...fallback(Network) },
+      { name: "Claude API", ...fallback(MessageSquare) },
+      { name: "OpenAI API", ...logo(SiOpenai, "#412991") },
       { name: "PyTorch", ...logo(SiPytorch, "#EE4C2C") },
       { name: "NumPy", ...logo(SiNumpy, "#013243") },
       { name: "pandas", ...logo(SiPandas, "#150458") },
@@ -66,6 +70,7 @@ const skillCategories = [
       { name: "Node.js", ...logo(SiNodedotjs, "#339933") },
       { name: "REST APIs", ...fallback(Network) },
       { name: "SQLAlchemy", ...logo(SiSqlalchemy, "#371C1C") },
+      { name: "Pydantic", ...logo(SiPydantic, "#E92063") },
       { name: "Docker", ...logo(SiDocker, "#2496ED") },
       { name: "React", ...logo(SiReact, "#61DAFB") },
     ],
@@ -97,6 +102,8 @@ const skillCategories = [
     skills: [
       { name: "Git", ...logo(SiGit, "#F1502F") },
       { name: "GitHub", ...logo(SiGithub, "#181717") },
+      { name: "GitHub Actions", ...logo(SiGithubactions, "#2088FF") },
+      { name: "Playwright", ...logo(SiPlaywright, "#2EAD33") },
       { name: "Prisma", ...logo(SiPrisma, "#0C344B") },
       { name: "Postman", ...logo(SiPostman, "#FF6C37") },
       { name: "AWS", ...logo(SiAmazonaws, "#FF9900") },

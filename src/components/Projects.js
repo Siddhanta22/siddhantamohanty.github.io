@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown, Rewind } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
 
@@ -28,6 +28,18 @@ const Projects = () => {
       live: null,
       icon: Brain,
       screenshots: ["/self-healing-1.jpg", "/self-healing-2.jpg", "/self-healing-3.jpg"]
+    },
+    {
+      id: 10,
+      title: "Rewind",
+      role: "Personal Project",
+      teaser: "An LLM browser agent whose successful runs replay with zero LLM calls.",
+      summary: "An LLM-driven browser agent built on Claude tool-calling and Playwright that completes multi-step workflows on a demo banking app from accessibility-tree snapshots, then compiles successful runs into typed, versioned replay artifacts.",
+      technologies: ["Python", "Playwright", "Pydantic", "Claude API"],
+      impact: "A deterministic replay engine reruns recorded workflows with zero LLM calls, separating business outcomes (e.g., a denied loan) from failures with step-level diagnostics, plus action allowlisting, secret redaction, and human handoff.",
+      github: "https://github.com/Siddhanta22/Rewind",
+      live: null,
+      icon: Rewind,
     },
     {
       id: 2,
