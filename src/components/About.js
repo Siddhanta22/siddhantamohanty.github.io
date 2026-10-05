@@ -39,7 +39,7 @@ const About = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Story Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -49,21 +49,25 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                I'm a Computer Science graduate from Penn State who likes figuring out how things work and building them better. My experience spans backend development, applied AI, and research, from RAG and LLM systems to APIs and developer tools. I like working across the stack, solving complex problems, and taking ideas from rough prototypes to something people can rely on.
+                I'm a Computer Science graduate from Penn State who enjoys figuring out how things work, building things from scratch, and getting into problems I don't fully know how to solve yet.
               </p>
               <p>
-                What keeps me engaged is the failure mode, not the demo: why a system breaks under load, why a model's output can't be trusted blindly, why a detector drops a frame at the wrong moment. That's shown up in agentic AI tooling at HCLTech, reinforcement-learning research at Penn State, and perception work with the Advanced Vehicle Team.
+                Some of my best experiences have come from unfamiliar territory. At HCLTech, I had a week to learn RAG from scratch, and that learning eventually helped me come up with and build Self-Heal. At Penn State, I stepped into reinforcement learning with little prior experience and worked my way toward proposing an approach for improving LLM code verification.
               </p>
               <p>
-                Outside of that, I'm usually reading about new AI systems, tinkering with a side project, or planning the next trip.
+                Across internships, research, team projects, and things I've built on my own, I've learned that I enjoy taking ownership, learning quickly, and turning ideas into something meaningful with a real use case and impact.
+              </p>
+              <p>
+                Outside of tech, I enjoy traveling, exploring new places, and following sports.
               </p>
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-400">
+            {/* Stacked below xl, where the single row no longer fits without wrapping mid-item */}
+            <div className="pt-2 flex flex-col xl:flex-row xl:items-center gap-x-3 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-400">
               <span>B.S. Computer Science, Penn State</span>
-              <span className="text-gray-300 dark:text-dark-600">·</span>
+              <span className="hidden xl:inline text-gray-300 dark:text-dark-600">·</span>
               <span>Class of 2026</span>
-              <span className="text-gray-300 dark:text-dark-600">·</span>
+              <span className="hidden xl:inline text-gray-300 dark:text-dark-600">·</span>
               <span>Dean's List ×4</span>
             </div>
           </motion.div>
@@ -73,7 +77,7 @@ const About = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
+            className="relative order-first lg:order-last"
             style={{ perspective: 1000 }}
           >
             <motion.div
@@ -82,11 +86,11 @@ const About = () => {
               animate={{ rotateX: tilt.x, rotateY: tilt.y, scale: tilt.x || tilt.y ? 1.03 : 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl"
+              className="aspect-square max-w-[13rem] sm:max-w-xs lg:max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl"
             >
               <div className="w-full h-full rounded-2xl overflow-hidden relative group">
                 <img 
-                  src={`${process.env.PUBLIC_URL}/headshot.jpg`}
+                  src={`${process.env.PUBLIC_URL}/headshot-square.jpg`}
                   alt="Siddhanta Mohanty" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
