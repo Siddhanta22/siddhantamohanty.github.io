@@ -103,14 +103,11 @@ const Experience = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
             Professional <span className="gradient-text">Experience</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            I build software that ships, scales, and solves real engineering problems
-          </p>
         </motion.div>
 
         <div className="relative">
@@ -158,34 +155,36 @@ const Experience = () => {
                     }`}
                   >
                     <div
-                      role="button"
-                      tabIndex={0}
-                      aria-expanded={isActive}
                       onClick={toggle}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          toggle();
-                        }
-                      }}
                       className="w-full flex items-center gap-5 p-6 text-left cursor-pointer select-none"
                     >
-                      <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-xs shrink-0">
-                        {experience.logo}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white truncate">
-                          {experience.role}
-                        </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                          {experience.teaser}
-                        </p>
-                      </div>
+                      {/* The real toggle is a button (keyboard + screen readers); the row's own
+                          onClick keeps the whole row clickable for mouse users. */}
+                      <h3 className="flex-1 min-w-0">
+                        <button
+                          type="button"
+                          aria-expanded={isActive}
+                          className="flex w-full min-w-0 items-center gap-5 text-left rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 focus-visible:ring-offset-4 dark:focus-visible:ring-offset-dark-700"
+                        >
+                          <span className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-xs shrink-0">
+                            {experience.logo}
+                          </span>
+                          <span className="flex-1 min-w-0">
+                            <span className="block text-lg font-bold text-gray-900 dark:text-white truncate">
+                              {experience.role}
+                            </span>
+                            <span className="block text-sm font-normal text-gray-600 dark:text-gray-300 truncate">
+                              {experience.company} · {experience.location}
+                            </span>
+                          </span>
+                        </button>
+                      </h3>
                       <div className="flex items-center gap-3 shrink-0">
-                        <span className="hidden sm:block text-xs font-mono text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                        <span className="hidden sm:block text-xs font-mono text-gray-600 dark:text-gray-300 whitespace-nowrap">
                           {experience.dates}
                         </span>
                         <ChevronDown
+                          aria-hidden="true"
                           className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
                         />
                       </div>
@@ -201,10 +200,12 @@ const Experience = () => {
                           className="overflow-hidden"
                         >
                           <div className="px-6 pb-7 pt-4 border-t border-gray-100 dark:border-dark-600">
-                            <span className="text-xs font-mono uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                              {experience.company} · {experience.location}
-                              <span className="sm:hidden"> · {experience.dates}</span>
-                            </span>
+                            <p className="sm:hidden text-xs font-mono text-gray-600 dark:text-gray-300 mb-2">
+                              {experience.dates}
+                            </p>
+                            <p className="text-base font-medium text-gray-800 dark:text-gray-100 leading-relaxed">
+                              {experience.teaser}
+                            </p>
 
                             <ul className="space-y-3 mt-4 mb-4">
                               {experience.achievements.map((achievement, index) => (
