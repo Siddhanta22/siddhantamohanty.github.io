@@ -19,13 +19,13 @@ const Experience = () => {
       role: "Research Assistant",
       location: "University Park, PA, USA",
       dates: "Sep 2025 – Dec 2025",
-      teaser: "Applied reinforcement learning to make LLM-based code verification self-correcting.",
+      teaser: "Designed reinforcement-learning approaches for self-correcting LLM code verification.",
       achievements: [
-        "Built an RL feedback layer that uses secondary LLM reports to improve prompts for a primary LLM in a multi-stage code verification pipeline",
-        "Integrated compilers and static analysis tools (Klee, CodeQL) to validate LLM outputs before RL refinement",
-        "Researched reinforcement learning approaches and studied academic papers to apply RL to LLM-based code verification systems"
+        "Designed an RL feedback approach where reports from a secondary LLM improve the prompts of a primary LLM in a multi-stage code verification pipeline",
+        "Designed ways to combine RL with compilers and validation tools (Klee, CodeQL) to check LLM outputs before RL refinement",
+        "Researched RL approaches and studied academic papers, then proposed PPO as the final recommendation"
       ],
-      technologies: ["Reinforcement Learning", "LLMs", "Python", "Klee", "CodeQL", "Compilers"],
+      technologies: ["Reinforcement Learning", "PPO", "LLMs", "Python", "Klee", "CodeQL", "Compilers"],
       logo: "PSU"
     },
     {
