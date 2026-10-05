@@ -72,7 +72,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto"
           >
-            I enjoy collaborating with engineers, building real-world systems, and exploring new opportunities in AI, software engineering, and autonomous systems.
+            I enjoy collaborating with engineers, building real-world systems, and exploring new opportunities in AI and software engineering.
           </motion.p>
 
           <motion.div

@@ -8,24 +8,24 @@ const STACK_GROUPS = [
   { label: 'backend/', items: 'Python, FastAPI, Flask, Node.js' },
   { label: 'ai-ml/', items: 'LangChain, RAG, PyTorch' },
   { label: 'frontend/', items: 'React, TypeScript' },
-  { label: 'robotics/', items: 'ROS2, Computer Vision' },
+  { label: 'data/', items: 'PostgreSQL, MySQL, MongoDB' },
 ];
 
 const BOOT_LINES = [
   { prompt: 'whoami', output: 'Siddhanta Mohanty, software engineer' },
-  { prompt: 'cat focus.txt', output: 'Backend systems, applied AI/ML,\nautonomous perception' },
+  { prompt: 'cat focus.txt', output: 'Backend systems, applied AI/ML,\nand developer tools' },
   { prompt: 'ls stack/', groups: STACK_GROUPS },
   { prompt: 'status', output: 'Open to new opportunities' },
 ];
 
 const COMMANDS = {
   help: () => ({ output: "Commands: whoami, about, stack, projects, experience, skills, contact, resume, clear" }),
-  whoami: () => ({ output: 'Siddhanta Mohanty — software engineer building backend systems, applied AI/ML, and autonomous perception software.' }),
+  whoami: () => ({ output: 'Siddhanta Mohanty — software engineer building backend systems and applied AI/ML tools.' }),
   about: () => ({ output: "CS grad from Penn State ('26). I like taking ideas from concept to production — APIs, services, AI tooling, research." }),
   stack: () => ({ groups: STACK_GROUPS }),
   projects: () => ({ output: 'Self-Heal System, Rewind, Scout, and more. Scrolling you there.', scrollTo: 'projects' }),
   experience: () => ({ output: 'Penn State Research · HCLTech · Advanced Vehicle Team · Elevatoz Loyalty. Scrolling you there.', scrollTo: 'experience' }),
-  skills: () => ({ output: 'Python, TypeScript, React, FastAPI, LangChain, RAG, ROS2, and more. Scrolling you there.', scrollTo: 'skills' }),
+  skills: () => ({ output: 'Python, TypeScript, React, FastAPI, LangChain, RAG, PostgreSQL, and more. Scrolling you there.', scrollTo: 'skills' }),
   contact: () => ({ output: 'siddhantamohanty22@gmail.com · linkedin.com/in/siddhanta-mohanty-13aa92222. Scrolling you there.', scrollTo: 'contact' }),
   resume: () => {
     viewResume();
