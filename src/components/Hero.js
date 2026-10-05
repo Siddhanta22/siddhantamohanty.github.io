@@ -275,7 +275,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg md:text-xl xl:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
-              I build backend and applied-AI systems that hold up in production. At HCLTech that meant a <span className="font-semibold text-gray-900 dark:text-white">RAG support system that halved resolution time</span>; at Penn State, research on <span className="font-semibold text-gray-900 dark:text-white">self-correcting LLM code verification</span>; on my own, tools like <span className="whitespace-nowrap">Self-Heal</span> and Rewind — built <span className="font-semibold text-gray-900 dark:text-white">end to end</span>, from the API to the model to the interface.
+              I build backend and applied-AI systems that hold up in production. At HCLTech that meant a <span className="font-semibold text-gray-900 dark:text-white">RAG support system that halved resolution time</span>; at Penn State, research on <span className="font-semibold text-gray-900 dark:text-white">self-correcting LLM code verification</span>; and in personal projects like <span className="whitespace-nowrap">Self-Heal</span> and Rewind, I take the whole thing <span className="font-semibold text-gray-900 dark:text-white">end to end</span>, from the API to the model to the interface.
             </motion.p>
 
             {/* CTA Buttons */}
