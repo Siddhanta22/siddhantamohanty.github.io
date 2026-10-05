@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown, Rewind, Compass, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Code, Mail, Mic, ChevronDown, Rewind, Compass, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
 
@@ -207,17 +207,6 @@ const Projects = () => {
       github: "https://github.com/Siddhanta22/AI_transcript",
       live: "https://www.loom.com/share/da220be0a60640dbbbe3ffa6c4182a31",
       icon: Mic,
-    },
-    {
-      id: 8,
-      title: "CourseScheduler",
-      role: "HackPSU Project",
-      teaser: "Builds conflict-free graduation paths from natural-language course data.",
-      summary: "An NLP academic planner that helps students build conflict-free graduation paths from natural-language course data.",
-      technologies: ["React", "Node.js", "MongoDB", "Python"],
-      github: null,
-      live: null,
-      icon: Calendar,
     },
   ];
 
