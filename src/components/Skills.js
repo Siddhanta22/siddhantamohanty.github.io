@@ -153,12 +153,9 @@ const Skills = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
             Technical <span className="gradient-text">Skills</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Tools I use across backend systems, applied AI, and perception work
-          </p>
         </motion.div>
 
         <motion.div
@@ -173,7 +170,7 @@ const Skills = () => {
               variants={categoryVariants}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
-              <SpotlightCard className="group relative bg-white dark:bg-dark-700 rounded-2xl border border-gray-200 dark:border-dark-600 p-6 shadow-md hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 overflow-hidden">
+              <SpotlightCard className="group relative h-full bg-white dark:bg-dark-700 rounded-2xl border border-gray-200 dark:border-dark-600 p-6 shadow-md hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 overflow-hidden">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0 group-hover:scale-105 transition-transform duration-300">
                     <category.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" strokeWidth={2} />
@@ -200,7 +197,7 @@ const Skills = () => {
                           <skill.icon className="w-4 h-4 text-gray-400" strokeWidth={2} />
                         )}
                       </div>
-                      <span className="text-[11px] leading-tight font-medium text-gray-600 dark:text-gray-300">
+                      <span className="text-xs leading-tight font-medium text-gray-600 dark:text-gray-300">
                         {skill.name}
                       </span>
                     </motion.div>
