@@ -1,9 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown, Rewind, Compass } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown, Rewind, Compass, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
+
+const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.querySelector('button')?.focus();
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      else if (e.key === 'ArrowRight') onNav(1);
+      else if (e.key === 'ArrowLeft') onNav(-1);
+      else if (e.key === 'Tab') {
+        // Keep keyboard focus inside the dialog while it is open
+        const items = [...dialogRef.current.querySelectorAll('button')];
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [onClose, onNav]);
+
+  const many = shots.length > 1;
+  const navButton = 'absolute top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-primary-400 transition-colors';
+
+  return (
+    <motion.div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${title} screenshots`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 sm:p-10"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close screenshot viewer"
+        className="absolute top-4 right-4 p-3 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-primary-400 transition-colors"
+      >
+        <X className="w-5 h-5" />
+      </button>
+
+      <div onClick={(e) => e.stopPropagation()} className="relative flex flex-col items-center max-w-6xl w-full">
+        <img
+          src={getImagePath(shots[index])}
+          alt={`${title} screenshot ${index + 1} of ${shots.length}`}
+          className="max-h-[80vh] w-auto max-w-full rounded-lg shadow-2xl object-contain"
+        />
+        <p className="mt-4 text-sm text-gray-300 font-mono">
+          {title}{many ? ` · ${index + 1} / ${shots.length}` : ''}
+        </p>
+        {many && (
+          <>
+            <button type="button" onClick={() => onNav(-1)} aria-label="Previous screenshot" className={`${navButton} left-2 sm:-left-14`}>
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button type="button" onClick={() => onNav(1)} aria-label="Next screenshot" className={`${navButton} right-2 sm:-right-14`}>
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </>
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -15,19 +92,34 @@ const Projects = () => {
     return `${process.env.PUBLIC_URL || ''}${filename}`;
   };
 
+  const [lightbox, setLightbox] = useState(null);
+  const lastFocus = useRef(null);
+
+  const openLightbox = (project, index) => {
+    lastFocus.current = document.activeElement;
+    setLightbox({ title: project.title, shots: project.screenshots, index });
+  };
+  const closeLightbox = useCallback(() => {
+    setLightbox(null);
+    lastFocus.current?.focus?.();
+  }, []);
+  const navLightbox = useCallback((delta) => {
+    setLightbox((l) => (l ? { ...l, index: (l.index + delta + l.shots.length) % l.shots.length } : l));
+  }, []);
+
   const projects = [
     {
       id: 1,
       title: "Self-Heal System",
       role: "Personal Project",
-      teaser: "Finds similar past incidents for a new production error, then explains it and suggests a fix.",
+      teaser: "Matches errors to past incidents, then explains and recommends a fix.",
       summary: "An AI-powered self-healing backend for production incidents. Captures database exceptions, embeds runtime error logs into FAISS, and retrieves similar past incidents via semantic search, using a calibrated similarity threshold so irrelevant history isn't forced into the answer, to generate context-aware explanations and fixes.",
       technologies: ["Flask", "LangChain", "FAISS", "PostgreSQL", "OpenAI", "Slack"],
       impact: "Ships as a Slack-integrated incident response system with severity-based alerts, LLM-generated diagnostics, and a chatbot with read-only (SELECT-only) SQL access to recent error logs and database stats.",
       github: "https://github.com/Siddhanta22/Self-Healing-System",
       live: null,
       icon: Brain,
-      screenshots: ["/self-healing-1.jpg", "/self-healing-2.jpg", "/self-healing-3.jpg"]
+      screenshots: ["/self-healing-workflow.jpg", "/self-healing-dashboard.jpg", "/self-healing-errors.jpg"]
     },
     {
       id: 10,
@@ -64,7 +156,7 @@ const Projects = () => {
       github: "https://github.com/Siddhanta22/prompt_tracer",
       live: null,
       icon: Zap,
-      screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
+      screenshots: ["/prompt-tracer-1.jpg", "/prompt-tracer-2.jpg"]
     },
     {
       id: 2,
@@ -102,7 +194,7 @@ const Projects = () => {
       github: "https://github.com/Siddhanta22/collision_detector",
       live: null,
       icon: Code,
-      screenshots: ["/collision-detector-1.png"]
+      screenshots: ["/collision-detector-1.jpg"]
     },
     {
       id: 3,
@@ -224,12 +316,12 @@ const Projects = () => {
                         <h3 className="text-lg font-bold text-gray-900 dark:text-white truncate">
                           {project.title}
                         </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                        <p className="text-sm text-gray-500 dark:text-gray-300 truncate">
                           {project.teaser}
                         </p>
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
-                        {project.github && (
+                        {project.github ? (
                           <a
                             href={project.github}
                             target="_blank"
@@ -241,8 +333,10 @@ const Projects = () => {
                           >
                             <Github className="w-4 h-4" />
                           </a>
+                        ) : (
+                          <span className="hidden sm:block w-9 h-9" aria-hidden="true" />
                         )}
-                        {project.live && (
+                        {project.live ? (
                           <a
                             href={project.live}
                             target="_blank"
@@ -254,6 +348,8 @@ const Projects = () => {
                           >
                             <ExternalLink className="w-4 h-4" />
                           </a>
+                        ) : (
+                          <span className="hidden sm:block w-9 h-9" aria-hidden="true" />
                         )}
                         <ChevronDown
                           className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
@@ -271,25 +367,33 @@ const Projects = () => {
                           className="overflow-hidden"
                         >
                           <div className="px-6 pb-7 pt-4 border-t border-gray-100 dark:border-dark-600">
-                            <span className="text-xs font-mono uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                            <span className="text-xs font-mono uppercase tracking-wide text-gray-600 dark:text-gray-300">
                               {project.role}
                             </span>
                             {project.screenshots && project.screenshots.length > 0 && (
                               <div className={`grid gap-2 mt-4 mb-4 ${project.screenshots.length === 1 ? 'grid-cols-1' : 'grid-cols-3'}`}>
                                 {project.screenshots.map((screenshot, i) => (
-                                  <div
+                                  <button
                                     key={i}
-                                    className="rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600"
+                                    type="button"
+                                    onClick={() => openLightbox(project, i)}
+                                    aria-label={`Enlarge ${project.title} screenshot ${i + 1}`}
+                                    className="group relative aspect-[16/10] rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600 cursor-zoom-in focus-visible:ring-2 focus-visible:ring-primary-500"
                                   >
                                     <img
                                       src={getImagePath(screenshot)}
                                       alt={`${project.title} screenshot ${i + 1}`}
-                                      className="w-full h-auto object-cover"
+                                      loading="lazy"
+                                      decoding="async"
+                                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
                                       onError={(e) => {
                                         e.target.style.display = 'none';
                                       }}
                                     />
-                                  </div>
+                                    <span className="absolute bottom-2 right-2 p-1.5 rounded-md bg-black/55 text-white opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
+                                      <ZoomIn className="w-4 h-4" />
+                                    </span>
+                                  </button>
                                 ))}
                               </div>
                             )}
@@ -344,6 +448,19 @@ const Projects = () => {
           </motion.a>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {lightbox && (
+          <Lightbox
+            title={lightbox.title}
+            shots={lightbox.shots}
+            index={lightbox.index}
+            onClose={closeLightbox}
+            onNav={navLightbox}
+            getImagePath={getImagePath}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };
