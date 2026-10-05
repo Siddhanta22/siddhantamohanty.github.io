@@ -41,9 +41,9 @@ const Quote = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-2xl md:text-3xl font-medium text-gray-800 dark:text-gray-200 leading-relaxed"
+                className="text-3xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white leading-tight text-balance"
               >
-                Whether it's a system that heals itself, a pipeline serving real users, or software reading the road — the version I ship is the one that keeps working after I stop watching it.
+                I like <span className="gradient-text">problems I don’t know how to solve yet.</span>
               </motion.blockquote>
             </div>
           </motion.div>
@@ -52,9 +52,9 @@ const Quote = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-8 text-lg text-gray-600 dark:text-gray-400"
+            className="mt-8 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-balance"
           >
-            A rule I hold myself to on every project.
+            Because figuring them out is usually where the interesting work begins.
           </motion.p>
         </motion.div>
       </div>
