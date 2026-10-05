@@ -22,6 +22,20 @@ const concept = { icon: null, color: null };
 
 const skillCategories = [
   {
+    id: 1,
+    title: "Languages",
+    icon: Code,
+    skills: [
+      { name: "Python", ...logo(SiPython, "#3776AB") },
+      { name: "C++", ...logo(SiCplusplus, "#00599C") },
+      { name: "JavaScript", ...logo(SiJavascript, "#F7DF1E") },
+      { name: "TypeScript", ...logo(SiTypescript, "#3178C6") },
+      { name: "SQL", ...concept },
+      { name: "HTML5", ...logo(SiHtml5, "#E34C26") },
+      { name: "CSS3", ...logo(SiCss3, "#1572B6") },
+    ],
+  },
+  {
     id: 2,
     title: "Applied AI / ML",
     icon: Brain,
@@ -59,37 +73,6 @@ const skillCategories = [
     ],
   },
   {
-    id: 6,
-    title: "Tooling",
-    icon: Settings,
-    skills: [
-      { name: "Git", ...logo(SiGit, "#F1502F") },
-      { name: "GitHub", ...logo(SiGithub, "#181717") },
-      { name: "GitHub Actions", ...logo(SiGithubactions, "#2088FF") },
-      { name: "Playwright", ...logo(SiPlaywright, "#2EAD33") },
-      { name: "Prisma", ...logo(SiPrisma, "#0C344B") },
-      { name: "Postman", ...logo(SiPostman, "#FF6C37") },
-      { name: "Tableau", ...logo(SiTableau, "#E97627") },
-      { name: "AWS", ...logo(SiAmazonaws, "#FF9900") },
-      { name: "GCP", ...logo(SiGooglecloud, "#4285F4") },
-      { name: "VS Code", ...logo(SiVisualstudiocode, "#007ACC") },
-    ],
-  },
-  {
-    id: 1,
-    title: "Languages",
-    icon: Code,
-    skills: [
-      { name: "Python", ...logo(SiPython, "#3776AB") },
-      { name: "C++", ...logo(SiCplusplus, "#00599C") },
-      { name: "JavaScript", ...logo(SiJavascript, "#F7DF1E") },
-      { name: "TypeScript", ...logo(SiTypescript, "#3178C6") },
-      { name: "SQL", ...concept },
-      { name: "HTML5", ...logo(SiHtml5, "#E34C26") },
-      { name: "CSS3", ...logo(SiCss3, "#1572B6") },
-    ],
-  },
-  {
     id: 4,
     title: "Perception & Robotics",
     icon: Cpu,
@@ -107,6 +90,23 @@ const skillCategories = [
       { name: "PostgreSQL", ...logo(SiPostgresql, "#336791") },
       { name: "MySQL", ...logo(SiMysql, "#00758F") },
       { name: "MongoDB", ...logo(SiMongodb, "#13AA52") },
+    ],
+  },
+  {
+    id: 6,
+    title: "Tooling",
+    icon: Settings,
+    skills: [
+      { name: "Git", ...logo(SiGit, "#F1502F") },
+      { name: "GitHub", ...logo(SiGithub, "#181717") },
+      { name: "GitHub Actions", ...logo(SiGithubactions, "#2088FF") },
+      { name: "Playwright", ...logo(SiPlaywright, "#2EAD33") },
+      { name: "Prisma", ...logo(SiPrisma, "#0C344B") },
+      { name: "Postman", ...logo(SiPostman, "#FF6C37") },
+      { name: "Tableau", ...logo(SiTableau, "#E97627") },
+      { name: "AWS", ...logo(SiAmazonaws, "#FF9900") },
+      { name: "GCP", ...logo(SiGooglecloud, "#4285F4") },
+      { name: "VS Code", ...logo(SiVisualstudiocode, "#007ACC") },
     ],
   },
 ];
