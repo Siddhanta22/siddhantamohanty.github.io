@@ -29,14 +29,11 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
             About <span className="gradient-text">Me</span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Backend engineering, AI systems, and applied research.
-          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -58,7 +55,7 @@ const About = () => {
                 Across internships, research, team projects, and things I've built on my own, I've learned that I enjoy taking ownership, learning quickly, and turning ideas into something meaningful with a real use case and impact.
               </p>
               <p>
-                Outside of tech, I enjoy traveling, exploring new places, and following sports.
+                Outside of tech, I enjoy traveling and exploring new places.
               </p>
             </div>
 
