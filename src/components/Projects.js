@@ -297,29 +297,31 @@ const Projects = () => {
                     }`}
                   >
                     <div
-                      role="button"
-                      tabIndex={0}
-                      aria-expanded={isActive}
                       onClick={toggle}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          toggle();
-                        }
-                      }}
                       className="w-full flex items-center gap-5 p-6 text-left cursor-pointer select-none"
                     >
-                      <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0">
-                        <project.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" strokeWidth={2} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white truncate">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-300 truncate">
-                          {project.teaser}
-                        </p>
-                      </div>
+                      {/* The real toggle is a button (keyboard + screen readers); the row's own
+                          onClick just keeps the whole row clickable for mouse users. The
+                          GitHub/demo links sit beside it, never inside it. */}
+                      <h3 className="flex-1 min-w-0">
+                        <button
+                          type="button"
+                          aria-expanded={isActive}
+                          className="flex w-full min-w-0 items-center gap-5 text-left rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 focus-visible:ring-offset-4 dark:focus-visible:ring-offset-dark-700"
+                        >
+                          <span className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0">
+                            <project.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" strokeWidth={2} />
+                          </span>
+                          <span className="flex-1 min-w-0">
+                            <span className="block text-lg font-bold text-gray-900 dark:text-white truncate">
+                              {project.title}
+                            </span>
+                            <span className="block text-sm font-normal text-gray-500 dark:text-gray-300 truncate">
+                              {project.teaser}
+                            </span>
+                          </span>
+                        </button>
+                      </h3>
                       <div className="flex items-center gap-2 shrink-0">
                         {project.github ? (
                           <a
@@ -329,7 +331,7 @@ const Projects = () => {
                             onClick={(e) => e.stopPropagation()}
                             aria-label={`Open ${project.title} source code`}
                             title="Source Code"
-                            className="p-2.5 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                            className="p-2.5 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
                           >
                             <Github className="w-4 h-4" />
                           </a>
@@ -344,7 +346,7 @@ const Projects = () => {
                             onClick={(e) => e.stopPropagation()}
                             aria-label={`Open ${project.title} demo`}
                             title="Live Demo"
-                            className="p-2.5 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                            className="p-2.5 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
                           >
                             <ExternalLink className="w-4 h-4" />
                           </a>
@@ -352,6 +354,7 @@ const Projects = () => {
                           <span className="hidden sm:block w-9 h-9" aria-hidden="true" />
                         )}
                         <ChevronDown
+                          aria-hidden="true"
                           className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
                         />
                       </div>
