@@ -13,14 +13,14 @@ const NAV_ITEMS = [
 const Header = ({ scrollToSection, darkMode, toggleDarkMode }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('about');
+  const [activeSection, setActiveSection] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
       const scrollPos = window.scrollY + 140;
-      let current = NAV_ITEMS[0].id;
+      let current = null;
       for (const item of NAV_ITEMS) {
         const el = document.getElementById(item.id);
         if (el && el.offsetTop <= scrollPos) {

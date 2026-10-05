@@ -32,8 +32,8 @@ const COMMANDS = {
   whoami: () => ({ output: 'Siddhanta Mohanty — software engineer building backend systems, applied AI/ML, and autonomous perception software.' }),
   about: () => ({ output: "CS grad from Penn State ('26). I like taking ideas from concept to production — APIs, services, AI tooling, research." }),
   stack: () => ({ groups: STACK_GROUPS }),
-  projects: () => ({ output: 'Self-Heal System, yourAIbrief, AI Transcript, and more. Scrolling you there.', scrollTo: 'projects' }),
-  experience: () => ({ output: 'HCLTech · Penn State Research · Advanced Vehicle Team · Elevatoz Loyalty. Scrolling you there.', scrollTo: 'experience' }),
+  projects: () => ({ output: 'Self-Heal System, Rewind, yourAIbrief, and more. Scrolling you there.', scrollTo: 'projects' }),
+  experience: () => ({ output: 'Penn State Research · HCLTech · Advanced Vehicle Team · Elevatoz Loyalty. Scrolling you there.', scrollTo: 'experience' }),
   skills: () => ({ output: 'Python, TypeScript, React, FastAPI, LangChain, RAG, ROS2, and more. Scrolling you there.', scrollTo: 'skills' }),
   contact: () => ({ output: 'siddhantamohanty22@gmail.com · linkedin.com/in/siddhanta-mohanty-13aa92222. Scrolling you there.', scrollTo: 'contact' }),
   resume: () => {
@@ -74,10 +74,12 @@ const TerminalCard = () => {
   }, []);
 
   useEffect(() => {
-    if (scrollRef.current) {
+    // Follow new output only after the visitor runs a command, so the
+    // boot sequence never scrolls its own first line out of view.
+    if (lines.length > 0 && scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [lines, booted]);
+  }, [lines]);
 
   const runCommand = (raw) => {
     const cmd = raw.trim();
@@ -138,7 +140,7 @@ const TerminalCard = () => {
       <div
         ref={scrollRef}
         onClick={() => inputRef.current?.focus()}
-        className="p-5 space-y-4 max-h-[22rem] overflow-y-auto cursor-text"
+        className="p-5 space-y-4 max-h-[26rem] overflow-y-auto cursor-text"
       >
         {BOOT_LINES.map((block, index) => (
           <motion.div
@@ -195,10 +197,10 @@ const Hero = () => {
   const [currentTagline, setCurrentTagline] = useState(0);
 
   const taglines = [
-    "Building backend-first products people use",
-    "Shipping reliable, scalable software",
-    "Turning ML ideas into production features",
-    "Creating practical tools for engineers"
+    "Support RAG that halved resolution time",
+    "Agents that replay tasks 32x faster",
+    "Incident response that explains itself",
+    "AI newsletters from 50+ sources"
   ];
 
   useEffect(() => {
@@ -213,8 +215,11 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-50/90 via-white/90 to-gray-50/90 dark:from-dark-900/90 dark:via-dark-800/90 dark:to-dark-900/90 pt-36 pb-28">
+    <section className="relative overflow-hidden min-h-[100svh] flex items-center bg-gradient-to-br from-gray-50/90 via-white/90 to-gray-50/90 dark:from-dark-900/90 dark:via-dark-800/90 dark:to-dark-900/90 pt-28 pb-24 md:pt-36 md:pb-28">
       <FloatingOrbs />
+
+      {/* Fades the hero into the next section so there is no hard edge */}
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white/90 dark:to-dark-900/90 pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
@@ -232,13 +237,13 @@ const Hero = () => {
               className="space-y-4"
             >
               <motion.h1
-                className="text-5xl md:text-6xl xl:text-7xl font-bold leading-tight"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-7xl font-bold leading-tight"
               >
                 <span className="gradient-text">Siddhanta Mohanty</span>
               </motion.h1>
 
               {/* Rotating Tagline */}
-              <div className="min-h-[4.5rem] md:min-h-[3.5rem] flex items-center justify-center lg:justify-start px-2 lg:px-0 overflow-hidden">
+              <div className="min-h-[4.5rem] md:min-h-[3.5rem] lg:min-h-[4.5rem] xl:min-h-[3.5rem] flex items-center justify-center lg:justify-start px-2 lg:px-0 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentTagline}
@@ -246,19 +251,19 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -14 }}
                     transition={{ duration: 0.5 }}
-                    className="text-2xl md:text-3xl xl:text-4xl font-semibold text-gray-700 dark:text-gray-300 text-center lg:text-left leading-snug"
+                    className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-semibold text-gray-700 dark:text-gray-300 text-center lg:text-left leading-snug text-balance"
                   >
                     {taglines[currentTagline]}
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 sm:gap-x-3 text-sm sm:text-lg md:text-xl text-gray-600 dark:text-gray-400">
                 <span>Software Engineer</span>
-                <Sparkles className="w-4 h-4 text-primary-500" />
-                <span>AI and Robotics</span>
-                <Sparkles className="w-4 h-4 text-accent-500" />
-                <span>Full-Stack Developer</span>
+                <Sparkles className="hidden sm:block w-4 h-4 text-primary-500" />
+                <span>Applied AI</span>
+                <Sparkles className="hidden sm:block w-4 h-4 text-accent-500" />
+                <span>Backend Systems</span>
               </div>
 
             </motion.div>
@@ -268,9 +273,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
+              className="text-lg md:text-xl xl:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
-              I build <span className="font-semibold text-gray-900 dark:text-white">production-ready software</span> across <span className="font-semibold text-gray-900 dark:text-white">backend</span>, <span className="font-semibold text-gray-900 dark:text-white">applied ML</span>, and <span className="font-semibold text-gray-900 dark:text-white">autonomous perception</span> — from AI that fixes itself to vehicles that see the road.
+              I build backend and applied-AI systems that hold up in production. At HCLTech that meant a <span className="font-semibold text-gray-900 dark:text-white">RAG support system that halved resolution time</span>; at Penn State, research on <span className="font-semibold text-gray-900 dark:text-white">self-correcting LLM code verification</span>; on my own, tools like <span className="whitespace-nowrap">Self-Heal</span> and Rewind — built <span className="font-semibold text-gray-900 dark:text-white">end to end</span>, from the API to the model to the interface.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -278,13 +283,13 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-6"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center pt-2 sm:pt-6"
             >
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={scrollToProjects}
-                className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group"
+                className="px-8 py-3.5 sm:py-4 border-2 border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group"
               >
                 <span>View Projects</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -294,7 +299,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={downloadResume}
-                className="px-8 py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-lg font-semibold text-lg hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 flex items-center space-x-2"
+                className="px-8 py-3.5 sm:py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-lg font-semibold text-lg hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 flex items-center space-x-2"
               >
                 <Download className="w-5 h-5" />
                 <span>Download Résumé</span>
