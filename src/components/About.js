@@ -90,7 +90,7 @@ const About = () => {
             >
               <div className="w-full h-full rounded-2xl overflow-hidden relative group">
                 <img 
-                  src={`${process.env.PUBLIC_URL}/headshot-square.jpg`}
+                  src={`${process.env.PUBLIC_URL}/headshot-retouched.jpg`}
                   alt="Siddhanta Mohanty" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
