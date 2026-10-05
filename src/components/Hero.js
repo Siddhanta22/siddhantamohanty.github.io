@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, ArrowRight, Sparkles } from 'lucide-react';
+import { Download, ArrowDown, Sparkles } from 'lucide-react';
 import FloatingOrbs from './FloatingOrbs';
 
 const STACK_GROUPS = [
@@ -292,7 +292,7 @@ const Hero = () => {
                 className="px-8 py-3.5 sm:py-4 border-2 border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group"
               >
                 <span>View Projects</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
               </motion.button>
 
               <motion.button

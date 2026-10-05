@@ -49,7 +49,7 @@ const About = () => {
           >
             <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
               <p>
-                I'm a Computer Science graduate from Penn State, building backend systems, AI/ML tooling, and autonomous perception software. I like taking ideas from concept to implementation — designing APIs, shipping production services, or testing a research idea against real code and real sensors.
+                I'm a Computer Science graduate from Penn State who likes figuring out how things work and building them better. My experience spans backend development, applied AI, and research, from RAG and LLM systems to APIs and developer tools. I like working across the stack, solving complex problems, and taking ideas from rough prototypes to something people can rely on.
               </p>
               <p>
                 What keeps me engaged is the failure mode, not the demo: why a system breaks under load, why a model's output can't be trusted blindly, why a detector drops a frame at the wrong moment. That's shown up in agentic AI tooling at HCLTech, reinforcement-learning research at Penn State, and perception work with the Advanced Vehicle Team.
