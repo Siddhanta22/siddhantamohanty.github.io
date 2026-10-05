@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown, Rewind } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Calendar, Code, Mail, Mic, ChevronDown, Rewind, Compass } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
 
@@ -20,8 +20,8 @@ const Projects = () => {
       id: 1,
       title: "Self-Heal System",
       role: "Personal Project",
-      teaser: "Turns production errors into automated root-cause explanations and fixes.",
-      summary: "An AI-powered self-healing backend for production incidents. Captures database exceptions, embeds runtime error logs into FAISS, and retrieves similar historical incidents via semantic search to generate context-aware root-cause explanations and fixes.",
+      teaser: "Finds similar past incidents for a new production error, then explains it and suggests a fix.",
+      summary: "An AI-powered self-healing backend for production incidents. Captures database exceptions, embeds runtime error logs into FAISS, and retrieves similar past incidents via semantic search, using a calibrated similarity threshold so irrelevant history isn't forced into the answer, to generate context-aware explanations and fixes.",
       technologies: ["Flask", "LangChain", "FAISS", "PostgreSQL", "OpenAI", "Slack"],
       impact: "Ships as a Slack-integrated incident response system with severity-based alerts, LLM-generated diagnostics, and a chatbot with read-only (SELECT-only) SQL access to recent error logs and database stats.",
       github: "https://github.com/Siddhanta22/Self-Healing-System",
@@ -42,6 +42,31 @@ const Projects = () => {
       icon: Rewind,
     },
     {
+      id: 11,
+      title: "Scout",
+      role: "Personal Project",
+      teaser: "Finds and ranks nonprofits for student consulting clubs from public IRS 990 data.",
+      summary: "A prospecting tool for student consulting groups: search the public IRS Form 990 dataset through ProPublica's Nonprofit Explorer API, shortlist organizations, and track outreach status and notes. Each prospect gets a transparent 0–100 fit score built from revenue band, cause area, and revenue trend, with the reasons shown.",
+      technologies: ["TypeScript", "Express", "Prisma", "SQLite", "Vitest"],
+      impact: "Caches filings with a TTL and serves stale data if the upstream API fails, throttles and retries requests to ProPublica, and ships with 49 tests covering the cache, the API client, and the endpoints.",
+      github: "https://github.com/Siddhanta22/Scout",
+      live: null,
+      icon: Compass,
+    },
+    {
+      id: 6,
+      title: "Prompt Tracer",
+      role: "Personal Project",
+      teaser: "Scores your prompt as you type it, inside ChatGPT, Claude, Grok, and Gemini.",
+      summary: "A Chrome extension that grades prompts in real time against five plain-language checks (detail, clear action, specifics, audience, structure) and shows live feedback in a floating panel on ChatGPT, Claude, Grok, and Gemini.",
+      technologies: ["JavaScript", "Chrome Extension API", "Manifest V3"],
+      impact: "A privacy-first optimizer appends only what a prompt is missing, rule-based by default with optional OpenAI rewriting, and a dashboard charts score trends and platform usage. Everything runs in the browser.",
+      github: "https://github.com/Siddhanta22/prompt_tracer",
+      live: null,
+      icon: Zap,
+      screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
+    },
+    {
       id: 2,
       title: "yourAIbrief",
       role: "Personal Project",
@@ -52,56 +77,6 @@ const Projects = () => {
       github: "https://github.com/Siddhanta22/yourAIbrief",
       live: "https://your-a-ibrief.vercel.app",
       icon: Mail,
-    },
-    {
-      id: 3,
-      title: "AI Transcript",
-      role: "Personal Project",
-      teaser: "Turns raw recordings into polished, publish-ready transcripts.",
-      summary: "A speech pipeline that converts raw recordings into polished, publish-ready transcripts using FastAPI, Whisper transcription, and LLM-based rewriting.",
-      technologies: ["FastAPI", "OpenAI Whisper", "LLMs"],
-      impact: "Cuts manual editing by automating transcription and clean-up into publish-ready copy.",
-      github: "https://github.com/Siddhanta22/AI_transcript",
-      live: "https://www.loom.com/share/da220be0a60640dbbbe3ffa6c4182a31",
-      icon: Mic,
-    },
-    {
-      id: 4,
-      title: "Real-Time Collision Detection Engine",
-      role: "Personal Project",
-      teaser: "A 2D collision engine tuned for scale — 50x faster than brute force.",
-      summary: "A real-time collision engine for dense 2D simulations with large numbers of moving entities. Implemented spatial hashing and broad-phase partitioning to aggressively prune candidate pairs before narrow-phase checks.",
-      technologies: ["JavaScript", "Canvas API", "Spatial Hashing"],
-      impact: "Eliminated 98% of unnecessary checks and achieved 50x faster broad-phase performance versus brute force.",
-      github: "https://github.com/Siddhanta22/collision_detector",
-      live: null,
-      icon: Code,
-      screenshots: ["/collision-detector-1.png"]
-    },
-    {
-      id: 6,
-      title: "Prompt Tracer",
-      role: "Personal Project",
-      teaser: "Tracks and compares prompt performance across every major LLM.",
-      summary: "A prompt observability extension for tracking and improving prompts across major LLM tools. Built a Chrome extension with a real-time analytics dashboard for ChatGPT, Claude, Grok, and Gemini, comparing prompt variants and output quality to surface performance trends as they happen.",
-      technologies: ["JavaScript", "Chrome Extension API", "Manifest V3"],
-      impact: "Makes prompt iteration measurable and repeatable with side-by-side analytics across multiple model platforms.",
-      github: "https://github.com/Siddhanta22/prompt_tracer",
-      live: null,
-      icon: Zap,
-      screenshots: ["/prompt-tracer-1.png", "/prompt-tracer-2.png"]
-    },
-    {
-      id: 8,
-      title: "CourseScheduler",
-      role: "HackPSU Project",
-      teaser: "Builds conflict-free graduation paths from natural-language course data.",
-      summary: "An NLP academic planner that helps students build conflict-free graduation paths from natural-language course data.",
-      technologies: ["React", "Node.js", "MongoDB", "Python"],
-      impact: "Cut manual scheduling effort and planning errors via automated course-sequence recommendations.",
-      github: "https://github.com/Siddhanta22/course-scheduler",
-      live: null,
-      icon: Calendar,
     },
     {
       id: 9,
@@ -115,7 +90,43 @@ const Projects = () => {
       live: "https://swipeflix-alpha.vercel.app",
       icon: Film,
       screenshots: ["/swipeflix-1.jpg", "/swipeflix-2.jpg", "/swipeflix-3.jpg"]
-    }
+    },
+    {
+      id: 4,
+      title: "Broad-Phase Collision Detector",
+      role: "Personal Project",
+      teaser: "A 2D broad-phase collision library that runs ~98% fewer checks than brute force.",
+      summary: "A TypeScript library implementing grid-based spatial partitioning for 2D collision detection, following Andrew Petersen's broad-phase article, with a brute-force baseline and built-in test counters for benchmarking.",
+      technologies: ["TypeScript", "Spatial Partitioning", "AABB"],
+      impact: "Cuts AABB tests by about 98% versus brute force, roughly 50x fewer checks at 500–1,000 entities.",
+      github: "https://github.com/Siddhanta22/collision_detector",
+      live: null,
+      icon: Code,
+      screenshots: ["/collision-detector-1.png"]
+    },
+    {
+      id: 3,
+      title: "AI Transcript",
+      role: "Personal Project",
+      teaser: "Records or uploads audio, transcribes it, and strips the filler words.",
+      summary: "Record audio or upload a file, transcribe it with OpenAI Whisper, then clean the transcript with an LLM that removes filler words. A FastAPI backend serves a lightweight browser front end.",
+      technologies: ["FastAPI", "OpenAI Whisper", "GPT-4o mini", "JavaScript"],
+      impact: "Both models are configurable; the defaults are whisper-1 for transcription and gpt-4o-mini for cleanup.",
+      github: "https://github.com/Siddhanta22/AI_transcript",
+      live: "https://www.loom.com/share/da220be0a60640dbbbe3ffa6c4182a31",
+      icon: Mic,
+    },
+    {
+      id: 8,
+      title: "CourseScheduler",
+      role: "HackPSU Project",
+      teaser: "Builds conflict-free graduation paths from natural-language course data.",
+      summary: "An NLP academic planner that helps students build conflict-free graduation paths from natural-language course data.",
+      technologies: ["React", "Node.js", "MongoDB", "Python"],
+      github: null,
+      live: null,
+      icon: Calendar,
+    },
   ];
 
   const [activeId, setActiveId] = useState(projects[0].id);
@@ -298,9 +309,11 @@ const Projects = () => {
                               ))}
                             </div>
 
-                            <p className="pt-4 border-t border-gray-100 dark:border-dark-600 text-sm font-medium text-gray-800 dark:text-gray-200">
-                              {project.impact}
-                            </p>
+                            {project.impact && (
+                              <p className="pt-4 border-t border-gray-100 dark:border-dark-600 text-sm font-medium text-gray-800 dark:text-gray-200">
+                                {project.impact}
+                              </p>
+                            )}
                           </div>
                         </motion.div>
                       )}
