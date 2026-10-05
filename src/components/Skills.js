@@ -11,7 +11,7 @@ import {
   SiFlask, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiSqlalchemy, SiDocker, SiReact, SiPydantic,
   SiRos,
   SiPostgresql, SiMysql, SiMongodb,
-  SiGit, SiGithub, SiGithubactions, SiPlaywright, SiPrisma, SiPostman, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
+  SiGit, SiGithub, SiGithubactions, SiPlaywright, SiPrisma, SiPostman, SiTableau, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
 } from 'react-icons/si';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
@@ -106,6 +106,7 @@ const skillCategories = [
       { name: "Playwright", ...logo(SiPlaywright, "#2EAD33") },
       { name: "Prisma", ...logo(SiPrisma, "#0C344B") },
       { name: "Postman", ...logo(SiPostman, "#FF6C37") },
+      { name: "Tableau", ...logo(SiTableau, "#E97627") },
       { name: "AWS", ...logo(SiAmazonaws, "#FF9900") },
       { name: "GCP", ...logo(SiGooglecloud, "#4285F4") },
       { name: "VS Code", ...logo(SiVisualstudiocode, "#007ACC") },
