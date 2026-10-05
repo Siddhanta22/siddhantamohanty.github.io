@@ -1,10 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import {
-  Code, Brain, Server, Cpu, Settings, Database,
-  Sparkles, Boxes, Layers, Network, Bot, Wrench, MessageSquare,
-} from 'lucide-react';
+import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 import {
   SiPython, SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3,
   SiPytorch, SiNumpy, SiPandas, SiOpenai,
@@ -17,41 +14,27 @@ import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
 
 // Verified against the installed react-icons/si (Simple Icons) package — only
-// technologies with a real, published brand mark get a logo. Anything without
-// one (protocols, concepts, or libraries with no Simple Icons entry) falls
-// back to a plain, unbranded glyph instead of an invented logo.
+// technologies with a real, published brand mark get a logo tile. Anything
+// without one (protocols, concepts, or libraries with no Simple Icons entry)
+// is shown as a plain text pill instead of an invented logo.
 const logo = (Icon, color) => ({ icon: Icon, color });
-const fallback = (Icon) => ({ icon: Icon, color: null });
+const concept = { icon: null, color: null };
 
 const skillCategories = [
-  {
-    id: 1,
-    title: "Languages",
-    icon: Code,
-    skills: [
-      { name: "Python", ...logo(SiPython, "#3776AB") },
-      { name: "C++", ...logo(SiCplusplus, "#00599C") },
-      { name: "JavaScript", ...logo(SiJavascript, "#F7DF1E") },
-      { name: "TypeScript", ...logo(SiTypescript, "#3178C6") },
-      { name: "SQL", ...fallback(Database) },
-      { name: "HTML5", ...logo(SiHtml5, "#E34C26") },
-      { name: "CSS3", ...logo(SiCss3, "#1572B6") },
-    ],
-  },
   {
     id: 2,
     title: "Applied AI / ML",
     icon: Brain,
     skills: [
-      { name: "RAG", ...fallback(Network) },
-      { name: "LangChain", ...fallback(Boxes) },
-      { name: "FAISS", ...fallback(Layers) },
-      { name: "Pinecone", ...fallback(Database) },
-      { name: "LLMs", ...fallback(Sparkles) },
-      { name: "AI Agents", ...fallback(Bot) },
-      { name: "Tool Calling", ...fallback(Wrench) },
-      { name: "MCP", ...fallback(Network) },
-      { name: "Claude API", ...fallback(MessageSquare) },
+      { name: "RAG", ...concept },
+      { name: "LangChain", ...concept },
+      { name: "FAISS", ...concept },
+      { name: "Pinecone", ...concept },
+      { name: "LLMs", ...concept },
+      { name: "AI Agents", ...concept },
+      { name: "Tool Calling", ...concept },
+      { name: "MCP", ...concept },
+      { name: "Claude API", ...concept },
       { name: "OpenAI API", ...logo(SiOpenai, "#412991") },
       { name: "PyTorch", ...logo(SiPytorch, "#EE4C2C") },
       { name: "NumPy", ...logo(SiNumpy, "#013243") },
@@ -68,31 +51,11 @@ const skillCategories = [
       { name: "Django", ...logo(SiDjango, "#092E20") },
       { name: "Next.js", ...logo(SiNextdotjs, "#000000") },
       { name: "Node.js", ...logo(SiNodedotjs, "#339933") },
-      { name: "REST APIs", ...fallback(Network) },
+      { name: "REST APIs", ...concept },
       { name: "SQLAlchemy", ...logo(SiSqlalchemy, "#371C1C") },
       { name: "Pydantic", ...logo(SiPydantic, "#E92063") },
       { name: "Docker", ...logo(SiDocker, "#2496ED") },
       { name: "React", ...logo(SiReact, "#61DAFB") },
-    ],
-  },
-  {
-    id: 4,
-    title: "Perception & Robotics",
-    icon: Cpu,
-    skills: [
-      { name: "ROS2", ...logo(SiRos, "#22314E") },
-      { name: "Roboflow", ...fallback(Boxes) },
-      { name: "Computer Vision", ...fallback(Cpu) },
-    ],
-  },
-  {
-    id: 5,
-    title: "Databases",
-    icon: Database,
-    skills: [
-      { name: "PostgreSQL", ...logo(SiPostgresql, "#336791") },
-      { name: "MySQL", ...logo(SiMysql, "#00758F") },
-      { name: "MongoDB", ...logo(SiMongodb, "#13AA52") },
     ],
   },
   {
@@ -110,6 +73,40 @@ const skillCategories = [
       { name: "AWS", ...logo(SiAmazonaws, "#FF9900") },
       { name: "GCP", ...logo(SiGooglecloud, "#4285F4") },
       { name: "VS Code", ...logo(SiVisualstudiocode, "#007ACC") },
+    ],
+  },
+  {
+    id: 1,
+    title: "Languages",
+    icon: Code,
+    skills: [
+      { name: "Python", ...logo(SiPython, "#3776AB") },
+      { name: "C++", ...logo(SiCplusplus, "#00599C") },
+      { name: "JavaScript", ...logo(SiJavascript, "#F7DF1E") },
+      { name: "TypeScript", ...logo(SiTypescript, "#3178C6") },
+      { name: "SQL", ...concept },
+      { name: "HTML5", ...logo(SiHtml5, "#E34C26") },
+      { name: "CSS3", ...logo(SiCss3, "#1572B6") },
+    ],
+  },
+  {
+    id: 4,
+    title: "Perception & Robotics",
+    icon: Cpu,
+    skills: [
+      { name: "ROS2", ...logo(SiRos, "#22314E") },
+      { name: "Roboflow", ...concept },
+      { name: "Computer Vision", ...concept },
+    ],
+  },
+  {
+    id: 5,
+    title: "Databases",
+    icon: Database,
+    skills: [
+      { name: "PostgreSQL", ...logo(SiPostgresql, "#336791") },
+      { name: "MySQL", ...logo(SiMysql, "#00758F") },
+      { name: "MongoDB", ...logo(SiMongodb, "#13AA52") },
     ],
   },
 ];
@@ -180,29 +177,50 @@ const Skills = () => {
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                  {category.skills.map((skill, index) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ delay: 0.04 * index }}
-                      whileHover={{ y: -2 }}
-                      className="flex flex-col items-center gap-1.5 text-center"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 shadow-sm flex items-center justify-center shrink-0">
-                        {skill.color ? (
-                          <skill.icon className="w-5 h-5" style={{ color: skill.color }} />
-                        ) : (
-                          <skill.icon className="w-4 h-4 text-gray-400" strokeWidth={2} />
-                        )}
-                      </div>
-                      <span className="text-xs leading-tight font-medium text-gray-600 dark:text-gray-300">
-                        {skill.name}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
+                {(() => {
+                  const logos = category.skills.filter((skill) => skill.icon);
+                  const concepts = category.skills.filter((skill) => !skill.icon);
+                  return (
+                    <>
+                      {logos.length > 0 && (
+                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                          {logos.map((skill, index) => (
+                            <motion.div
+                              key={skill.name}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={inView ? { opacity: 1, y: 0 } : {}}
+                              transition={{ delay: 0.04 * index }}
+                              whileHover={{ y: -2 }}
+                              className="flex flex-col items-center gap-1.5 text-center"
+                            >
+                              <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 shadow-sm flex items-center justify-center shrink-0">
+                                <skill.icon className="w-5 h-5" style={{ color: skill.color }} />
+                              </div>
+                              <span className="text-xs leading-tight font-medium text-gray-600 dark:text-gray-300">
+                                {skill.name}
+                              </span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      )}
+                      {concepts.length > 0 && (
+                        <div className={`flex flex-wrap gap-2 ${logos.length > 0 ? 'mt-5 pt-5 border-t border-gray-100 dark:border-dark-600' : ''}`}>
+                          {concepts.map((skill, index) => (
+                            <motion.span
+                              key={skill.name}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={inView ? { opacity: 1, y: 0 } : {}}
+                              transition={{ delay: 0.04 * (logos.length + index) }}
+                              className="px-3 py-1.5 rounded-full bg-gray-100 dark:bg-dark-600 border border-gray-200 dark:border-dark-500 text-xs font-medium text-gray-700 dark:text-gray-200"
+                            >
+                              {skill.name}
+                            </motion.span>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
               </SpotlightCard>
             </motion.div>
           ))}
