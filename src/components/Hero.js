@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, ArrowDown, Sparkles } from 'lucide-react';
+import { FileText, ArrowDown, Sparkles } from 'lucide-react';
 import FloatingOrbs from './FloatingOrbs';
+import { viewResume } from '../utils/resume';
 
 const STACK_GROUPS = [
   { label: 'backend/', items: 'Python, FastAPI, Flask, Node.js' },
@@ -17,16 +18,6 @@ const BOOT_LINES = [
   { prompt: 'status', output: 'Open to new opportunities' },
 ];
 
-const downloadResume = () => {
-  const link = document.createElement('a');
-  link.href = 'https://siddhanta22.github.io/siddhantamohanty.github.io/Resume_main.pdf';
-  link.download = 'Siddhanta_Mohanty_Resume.pdf';
-  link.target = '_blank';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
-
 const COMMANDS = {
   help: () => ({ output: "Commands: whoami, about, stack, projects, experience, skills, contact, resume, clear" }),
   whoami: () => ({ output: 'Siddhanta Mohanty — software engineer building backend systems, applied AI/ML, and autonomous perception software.' }),
@@ -37,8 +28,8 @@ const COMMANDS = {
   skills: () => ({ output: 'Python, TypeScript, React, FastAPI, LangChain, RAG, ROS2, and more. Scrolling you there.', scrollTo: 'skills' }),
   contact: () => ({ output: 'siddhantamohanty22@gmail.com · linkedin.com/in/siddhanta-mohanty-13aa92222. Scrolling you there.', scrollTo: 'contact' }),
   resume: () => {
-    downloadResume();
-    return { output: 'Downloading résumé...' };
+    viewResume();
+    return { output: 'Opening résumé in a new tab...' };
   },
   sudo: () => ({ output: 'Nice try. Permission denied.' }),
 };
@@ -173,7 +164,6 @@ const TerminalCard = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              autoFocus
               spellCheck={false}
               autoComplete="off"
               aria-label="Terminal command input — try 'help'"
@@ -298,11 +288,11 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={downloadResume}
+                onClick={viewResume}
                 className="px-8 py-3.5 sm:py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-lg font-semibold text-lg hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 flex items-center space-x-2"
               >
-                <Download className="w-5 h-5" />
-                <span>Download Résumé</span>
+                <FileText className="w-5 h-5" />
+                <span>View Résumé</span>
               </motion.button>
             </motion.div>
           </motion.div>

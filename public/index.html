@@ -38,7 +38,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <title>Siddhanta Mohanty - Portfolio</title> 
+    <title>Siddhanta Mohanty - Portfolio</title>
+
+    <!-- Apply the saved theme before first paint so light-mode visitors never see a dark flash -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('darkMode') === 'false') {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

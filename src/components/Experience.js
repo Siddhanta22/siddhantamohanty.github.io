@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Download, ChevronDown } from 'lucide-react';
+import { FileText, ChevronDown } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
+import { viewResume } from '../utils/resume';
 
 const Experience = () => {
   const [ref, inView] = useInView({
@@ -73,16 +74,6 @@ const Experience = () => {
   ];
 
   const [activeId, setActiveId] = useState(experiences[0].id);
-
-  const downloadResume = () => {
-    const link = document.createElement('a');
-    link.href = 'https://siddhanta22.github.io/siddhantamohanty.github.io/Resume_main.pdf';
-    link.download = 'Siddhanta_Mohanty_Resume.pdf';
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   const rowVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -248,11 +239,11 @@ const Experience = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={downloadResume}
+            onClick={viewResume}
             className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300"
           >
-            <Download className="w-5 h-5 mr-2" />
-            Download Résumé PDF
+            <FileText className="w-5 h-5 mr-2" />
+            View Résumé
           </motion.button>
         </motion.div>
       </div>

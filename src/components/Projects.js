@@ -113,9 +113,9 @@ const Projects = () => {
       title: "Self-Heal System",
       role: "Personal Project",
       teaser: "Matches errors to past incidents, then explains and recommends a fix.",
-      summary: "An AI-powered self-healing backend for production incidents. Captures database exceptions, embeds runtime error logs into FAISS, and retrieves similar past incidents via semantic search, using a calibrated similarity threshold so irrelevant history isn't forced into the answer, to generate context-aware explanations and fixes.",
+      summary: "A prototype incident-response system for PostgreSQL errors. Captures database exceptions, embeds runtime error logs into FAISS, and retrieves similar past incidents via semantic search, using a calibrated similarity threshold so irrelevant history isn't forced into the answer, to generate context-aware explanations and recommended fixes.",
       technologies: ["Flask", "LangChain", "FAISS", "PostgreSQL", "OpenAI", "Slack"],
-      impact: "Ships as a Slack-integrated incident response system with severity-based alerts, LLM-generated diagnostics, and a chatbot with read-only (SELECT-only) SQL access to recent error logs and database stats.",
+      impact: "Includes severity-based Slack alerts, LLM-generated diagnostics, and a chatbot with read-only (SELECT-only) SQL access to recent error logs and database stats.",
       github: "https://github.com/Siddhanta22/Self-Healing-System",
       live: null,
       icon: Brain,
@@ -125,7 +125,7 @@ const Projects = () => {
       id: 10,
       title: "Rewind",
       role: "Personal Project",
-      teaser: "An LLM browser agent whose successful runs replay with zero LLM calls.",
+      teaser: "Replays agent workflows with zero LLM calls, 32x faster on the demo.",
       summary: "An LLM-driven browser agent built on Claude tool-calling and Playwright that completes multi-step workflows on a demo banking app from accessibility-tree snapshots, then compiles successful runs into typed, versioned replay artifacts.",
       technologies: ["Python", "Playwright", "Pydantic", "Claude API", "MCP"],
       impact: "The deterministic replay engine reruns recorded workflows with zero LLM calls — 0.41s versus 13.1s with an LLM in the loop, a 32x speedup — and is exposed to AI agents through an MCP server with action allowlisting, approval gating, and secret redaction.",
@@ -381,14 +381,14 @@ const Projects = () => {
                                     type="button"
                                     onClick={() => openLightbox(project, i)}
                                     aria-label={`Enlarge ${project.title} screenshot ${i + 1}`}
-                                    className="group relative aspect-[16/10] rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600 cursor-zoom-in focus-visible:ring-2 focus-visible:ring-primary-500"
+                                    className="group relative aspect-video rounded-lg overflow-hidden border border-gray-200 bg-gray-100 dark:border-dark-600 dark:bg-dark-900 cursor-zoom-in focus-visible:ring-2 focus-visible:ring-primary-500"
                                   >
                                     <img
                                       src={getImagePath(screenshot)}
                                       alt={`${project.title} screenshot ${i + 1}`}
                                       loading="lazy"
                                       decoding="async"
-                                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                                       onError={(e) => {
                                         e.target.style.display = 'none';
                                       }}

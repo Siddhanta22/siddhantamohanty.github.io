@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Linkedin, MapPin, Send } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, Copy, Check } from 'lucide-react';
 import FloatingOrbs from './FloatingOrbs';
 
 const Contact = () => {
@@ -9,6 +9,20 @@ const Contact = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const EMAIL = 'siddhantamohanty22@gmail.com';
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard unavailable (older browser / insecure context): fall back to opening a mail draft
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
 
   const contactLinks = [
     {
@@ -21,7 +35,13 @@ const Contact = () => {
       name: "LinkedIn",
       icon: Linkedin,
       url: "https://linkedin.com/in/siddhanta-mohanty-13aa92222",
-      label: "linkedin.com/in/siddhanta-mohanty-13aa92222"
+      label: "linkedin.com/in/siddhanta-mohanty-\u200b13aa92222"   // zero-width space: lets the long ID wrap cleanly
+    },
+    {
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/Siddhanta22",
+      label: "github.com/Siddhanta22"
     }
   ];
 
@@ -29,7 +49,7 @@ const Contact = () => {
     <section id="contact" className="py-24 bg-gradient-to-br from-gray-50/90 via-white/90 to-gray-50/90 dark:from-dark-900/90 dark:via-dark-800/90 dark:to-dark-900/90 relative overflow-hidden">
       <FloatingOrbs variant="subtle" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -59,7 +79,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid md:grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto"
+            className="grid sm:grid-cols-3 gap-5 mb-12 max-w-5xl mx-auto"
           >
             {contactLinks.map((contact, index) => (
               <motion.a
@@ -78,7 +98,7 @@ const Contact = () => {
                   <contact.icon className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{contact.name}</span>
-                <span className="text-xs text-gray-600 dark:text-gray-400 text-center">{contact.label}</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 text-center break-words">{contact.label}</span>
               </motion.a>
             ))}
           </motion.div>
@@ -93,18 +113,20 @@ const Contact = () => {
             <span>State College, PA, USA</span>
           </motion.div>
 
-          <motion.a
-            href="mailto:siddhantamohanty22@gmail.com"
+          <motion.button
+            type="button"
+            onClick={copyEmail}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 dark:bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-primary-700 dark:hover:bg-primary-400 transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 dark:bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-primary-700 dark:hover:bg-primary-400 transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-dark-900"
           >
-            <Send className="w-5 h-5" />
-            <span>Say hello</span>
-          </motion.a>
+            {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+            <span>{copied ? 'Copied!' : 'Copy email address'}</span>
+            <span className="sr-only" role="status" aria-live="polite">{copied ? 'Email address copied to clipboard' : ''}</span>
+          </motion.button>
         </motion.div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,20 +13,19 @@ import NetworkBackground from './components/NetworkBackground';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
-function App() {
-  const [darkMode, setDarkMode] = useState(true);
-
-  useEffect(() => {
-    // Check for saved dark mode preference or default to dark mode
+// Read the saved preference synchronously so the first render already matches it
+// (public/index.html applies the same class before React loads, so there is no flash).
+const getInitialDarkMode = () => {
+  try {
     const savedMode = localStorage.getItem('darkMode');
+    return savedMode === null ? true : savedMode === 'true';
+  } catch {
+    return true;
+  }
+};
 
-    if (savedMode !== null) {
-      setDarkMode(savedMode === 'true');
-    } else {
-      // Default to dark mode instead of system preference
-      setDarkMode(true);
-    }
-  }, []);
+function App() {
+  const [darkMode, setDarkMode] = useState(getInitialDarkMode);
 
   useEffect(() => {
     // Apply dark mode to document
@@ -34,7 +34,11 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    localStorage.setItem('darkMode', darkMode);
+    try {
+      localStorage.setItem('darkMode', darkMode);
+    } catch {
+      /* storage unavailable (private mode); the toggle still works for this visit */
+    }
   }, [darkMode]);
 
   const toggleDarkMode = () => {
@@ -49,6 +53,7 @@ function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 relative">
       <ScrollProgress />
       <NetworkBackground />
@@ -67,6 +72,7 @@ function App() {
       <Footer />
       <BackToTop />
     </div>
+    </MotionConfig>
   );
 }
 
