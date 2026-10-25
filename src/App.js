@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import NetworkBackground from './components/NetworkBackground';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
+import CommandPalette from './components/CommandPalette';
 
 // Read the saved preference synchronously so the first render already matches it
 // (public/index.html applies the same class before React loads, so there is no flash).
@@ -28,6 +29,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(getInitialDarkMode);
   // Set when a skill chip asks to open a project or role; a fresh object each time so re-clicks fire.
   const [openRequest, setOpenRequest] = useState(null);
+  const [paletteOpen, setPaletteOpen] = useState(false);
 
   useEffect(() => {
     // Apply dark mode to document
@@ -63,7 +65,7 @@ function App() {
       <NetworkBackground />
 
       {/* Main Content */}
-      <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onOpenPalette={() => setPaletteOpen(true)} />
       <main className="relative z-10">
         <Hero />
         <About />
@@ -75,6 +77,14 @@ function App() {
       </main>
       <Footer />
       <BackToTop />
+      <CommandPalette
+        open={paletteOpen}
+        setOpen={setPaletteOpen}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        scrollToSection={scrollToSection}
+        onOpenItem={openItem}
+      />
     </div>
     </MotionConfig>
   );

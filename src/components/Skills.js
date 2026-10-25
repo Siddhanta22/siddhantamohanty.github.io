@@ -21,7 +21,7 @@ import { projects, experiences } from '../data';
 const logo = (Icon, color) => ({ icon: Icon, color });
 const concept = { icon: null, color: null };
 
-const skillCategories = [
+export const skillCategories = [
   {
     id: 1,
     title: "Languages",
@@ -120,7 +120,7 @@ const norm = (name) => name.toLowerCase();
 
 // Where each skill was actually used, derived from the Projects and Experience data
 // so there is no second list to keep in sync. Experience comes first: work counts for more.
-const evidenceFor = (skillName) => {
+export const evidenceFor = (skillName) => {
   const names = [skillName, ...(ALIASES[skillName] || [])].map(norm);
   const uses = (item) => item.technologies.some((t) => names.includes(norm(t)));
   return [

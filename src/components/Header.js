@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, Search } from 'lucide-react';
+import { paletteShortcut } from '../utils/platform';
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
@@ -10,7 +11,7 @@ const NAV_ITEMS = [
   { id: 'contact', label: 'Contact' },
 ];
 
-const Header = ({ scrollToSection, darkMode, toggleDarkMode }) => {
+const Header = ({ scrollToSection, darkMode, toggleDarkMode, onOpenPalette }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
@@ -90,6 +91,16 @@ const Header = ({ scrollToSection, darkMode, toggleDarkMode }) => {
 
             {/* Controls */}
             <div className="flex items-center space-x-2">
+              <button
+                type="button"
+                onClick={onOpenPalette}
+                aria-label="Open command palette"
+                className="hidden md:inline-flex items-center gap-2 h-10 pl-3 pr-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:border-primary-400 dark:hover:border-primary-500"
+              >
+                <Search className="w-4 h-4" aria-hidden="true" />
+                <span>Search</span>
+                <kbd className="text-[11px] font-mono border border-gray-300 dark:border-dark-500 rounded px-1.5 py-0.5">{paletteShortcut()}</kbd>
+              </button>
               <button
                 onClick={toggleDarkMode}
                 className="p-2.5 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 transition-colors duration-200 hover:border-primary-400 dark:hover:border-primary-500"
