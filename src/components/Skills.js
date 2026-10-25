@@ -3,15 +3,16 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 import {
-  SiPython, SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3,
+  SiPython, SiCsharp, SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3,
   SiPytorch, SiNumpy, SiPandas, SiOpenai,
-  SiFlask, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiDocker, SiReact, SiPydantic,
+  SiFlask, SiDotnet, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiDocker, SiReact, SiPydantic,
   SiRos,
   SiPostgresql, SiMysql, SiMongodb,
   SiGit, SiGithub, SiGithubactions, SiPlaywright, SiPrisma, SiPostman, SiTableau, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
 } from 'react-icons/si';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
+import { projects, experiences } from '../data';
 
 // Verified against the installed react-icons/si (Simple Icons) package — only
 // technologies with a real, published brand mark get a logo tile. Anything
@@ -27,6 +28,7 @@ const skillCategories = [
     icon: Code,
     skills: [
       { name: "Python", ...logo(SiPython, "#3776AB") },
+      { name: "C#", ...logo(SiCsharp, "#512BD4") },
       { name: "C++", ...logo(SiCplusplus, "#00599C") },
       { name: "JavaScript", ...logo(SiJavascript, "#F7DF1E") },
       { name: "TypeScript", ...logo(SiTypescript, "#3178C6") },
@@ -61,6 +63,7 @@ const skillCategories = [
     icon: Server,
     skills: [
       { name: "Flask", ...logo(SiFlask, "#000000") },
+      { name: ".NET", ...logo(SiDotnet, "#512BD4") },
       { name: "FastAPI", ...logo(SiFastapi, "#009688") },
       { name: "Django", ...logo(SiDjango, "#092E20") },
       { name: "Next.js", ...logo(SiNextdotjs, "#000000") },
@@ -111,7 +114,73 @@ const skillCategories = [
   },
 ];
 
-const Skills = () => {
+// Chip label -> names it can appear under in the Projects/Experience tech lists.
+const ALIASES = { 'OpenAI API': ['OpenAI'] };
+const norm = (name) => name.toLowerCase();
+
+// Where each skill was actually used, derived from the Projects and Experience data
+// so there is no second list to keep in sync. Experience comes first: work counts for more.
+const evidenceFor = (skillName) => {
+  const names = [skillName, ...(ALIASES[skillName] || [])].map(norm);
+  const uses = (item) => item.technologies.some((t) => names.includes(norm(t)));
+  return [
+    ...experiences.filter(uses).map((e) => ({ section: 'experience', id: e.id, label: e.company, kind: 'Experience' })),
+    ...projects.filter(uses).map((p) => ({ section: 'projects', id: p.id, label: p.title, kind: 'Project' })),
+  ];
+};
+
+const SkillChip = ({ skill, onOpenItem }) => {
+  const evidence = evidenceFor(skill.name);
+  const linked = evidence.length > 0;
+  const base = 'inline-flex items-center gap-2 h-9 rounded-lg border border-gray-200 dark:border-dark-500 bg-gray-50 dark:bg-dark-800 text-sm font-medium text-gray-700 dark:text-gray-200';
+  const content = (
+    <>
+      {skill.icon && (
+        <span className="w-6 h-6 rounded-md bg-white flex items-center justify-center shrink-0">
+          <skill.icon className="w-4 h-4" style={{ color: skill.color }} />
+        </span>
+      )}
+      {skill.name}
+      {linked && <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-primary-500" />}
+    </>
+  );
+  const pad = skill.icon ? 'pl-1.5 pr-3' : 'px-3';
+
+  if (!linked) return <li className={`${base} ${pad}`}>{content}</li>;
+
+  return (
+    <li className="relative group">
+      <button
+        type="button"
+        aria-haspopup="true"
+        className={`${base} ${pad} cursor-default group-hover:border-primary-400 dark:group-hover:border-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 transition-colors`}
+      >
+        {content}
+      </button>
+      {/* pt-2 (not a margin) keeps the pointer inside the group while it moves onto the list */}
+      <div className="hidden group-hover:block group-focus-within:block absolute left-0 top-full z-30 pt-2">
+        <div className="min-w-[14rem] rounded-xl border border-gray-200 dark:border-dark-500 bg-white dark:bg-dark-800 shadow-xl p-2">
+          <p className="px-2 pt-1 pb-1.5 text-[11px] font-mono uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            {skill.name} · used in
+          </p>
+          {evidence.map((item) => (
+            <button
+              key={`${item.section}-${item.id}`}
+              type="button"
+              onClick={() => onOpenItem(item.section, item.id)}
+              className="w-full flex items-center justify-between gap-4 px-2 py-1.5 rounded-md text-left text-sm text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
+            >
+              <span>{item.label}</span>
+              <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400">{item.kind}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </li>
+  );
+};
+
+const Skills = ({ onOpenItem }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -122,7 +191,6 @@ const Skills = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
   };
 
-  const chipClass = 'inline-flex items-center gap-2 h-9 rounded-lg border border-gray-200 dark:border-dark-500 bg-gray-50 dark:bg-dark-800 text-sm font-medium text-gray-700 dark:text-gray-200';
 
   return (
     <section id="skills" className="py-24 bg-white/90 dark:bg-dark-900/90 relative overflow-hidden">
@@ -141,7 +209,7 @@ const Skills = () => {
           </h2>
         </motion.div>
 
-        <SpotlightCard className="rounded-2xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-700 shadow-md overflow-hidden">
+        <SpotlightCard className="rounded-2xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-700 shadow-md">
           <motion.div
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
@@ -160,14 +228,7 @@ const Skills = () => {
                 </div>
                 <ul className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <li key={skill.name} className={`${chipClass} ${skill.icon ? 'pl-1.5 pr-3' : 'px-3'}`}>
-                      {skill.icon && (
-                        <span className="w-6 h-6 rounded-md bg-white flex items-center justify-center shrink-0">
-                          <skill.icon className="w-4 h-4" style={{ color: skill.color }} />
-                        </span>
-                      )}
-                      {skill.name}
-                    </li>
+                    <SkillChip key={skill.name} skill={skill} onOpenItem={onOpenItem} />
                   ))}
                 </ul>
               </motion.div>

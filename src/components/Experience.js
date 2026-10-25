@@ -1,79 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FileText, ChevronDown } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
+import { experiences } from '../data';
 import { viewResume } from '../utils/resume';
 
-const Experience = () => {
+const Experience = ({ openRequest }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const experiences = [
-    {
-      id: 1,
-      company: "Penn State University",
-      role: "Research Assistant",
-      location: "University Park, PA, USA",
-      dates: "Sep 2025 – Dec 2025",
-      teaser: "Designed reinforcement-learning approaches for self-correcting LLM code verification.",
-      achievements: [
-        "Designed an RL feedback approach where reports from a secondary LLM improve the prompts of a primary LLM in a multi-stage code verification pipeline",
-        "Designed ways to combine RL with compilers and validation tools (Klee, CodeQL) to check LLM outputs before RL refinement",
-        "Researched RL approaches and studied academic papers, then proposed PPO as the final recommendation"
-      ],
-      technologies: ["Reinforcement Learning", "PPO", "LLMs", "Python", "Klee", "CodeQL", "Compilers"],
-      logo: "PSU"
-    },
-    {
-      id: 2,
-      company: "HCLTech",
-      role: "GenAI Intern — LLM Systems",
-      location: "Redmond, WA, USA",
-      dates: "May 2025 – Aug 2025",
-      teaser: "Built a RAG-based support system that cut resolution time in half.",
-      achievements: [
-        "Built a RAG-based support automation pipeline that turns production error logs into remediation recommendations and automated Slack alerts, cutting support resolution time 50%",
-        "Indexed internal documentation and historical incidents into FAISS with structured metadata, sharpening the relevance of retrieved recommendations",
-        "Orchestrated multi-agent workflows across APIs, file systems, databases, and Confluence using MCP and LangChain to automate knowledge retrieval and routine actions"
-      ],
-      technologies: ["LLMs", "RAG", "Flask", "FAISS", "MCP", "Python", "LangChain"],
-      logo: "HCL"
-    },
-    {
-      id: 3,
-      company: "Penn State Advanced Vehicle Team",
-      role: "Perception Team Member",
-      location: "State College, PA, USA",
-      dates: "Feb 2025 – Dec 2025",
-      teaser: "Curated and validated perception datasets for a competition-grade autonomous vehicle.",
-      achievements: [
-        "Curated and labeled perception datasets in Roboflow to support object-detection model training for vehicle and traffic scenarios",
-        "Ran ROS2 perception pipelines against recorded rosbag sessions to evaluate detection output and catch dataset issues before training",
-        "Worked alongside the perception team to turn raw sensor recordings into training-ready data for a competition-grade autonomous vehicle"
-      ],
-      technologies: ["Python", "ROS2", "Roboflow", "Computer Vision"],
-      logo: "AVT"
-    },
-    {
-      id: 4,
-      company: "Elevatoz Loyalty",
-      role: "Data Analytics Intern",
-      location: "Bengaluru, KA, India",
-      dates: "Jun 2024 – Aug 2024",
-      teaser: "Cleaned and analyzed structured customer datasets to surface behavioral trends.",
-      achievements: [
-        "Cleaned, transformed, and analyzed structured customer datasets using SQL and Python (pandas, NumPy)"
-      ],
-      technologies: ["SQL", "Python", "pandas", "NumPy"],
-      logo: "EL"
-    }
-  ];
-
   const [activeId, setActiveId] = useState(experiences[0].id);
+
+  // A skill chip asked to open one of these rows: expand it, then scroll once the
+  // previously open row has finished collapsing so the target lands in the right place.
+  useEffect(() => {
+    if (!openRequest) return undefined;
+    setActiveId(openRequest.id);
+    const timer = setTimeout(() => {
+      document.getElementById(`experience-${openRequest.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [openRequest]);
 
   const rowVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -122,7 +73,7 @@ const Experience = () => {
               const toggle = () => setActiveId(isActive ? null : experience.id);
 
               return (
-                <motion.div key={experience.id} variants={rowVariants} className="relative">
+                <motion.div key={experience.id} id={`experience-${experience.id}`} variants={rowVariants} className="relative">
                   {/* Branch node */}
                   <span className="hidden sm:flex absolute left-0 top-8 w-8 items-center justify-center z-10">
                     <motion.span

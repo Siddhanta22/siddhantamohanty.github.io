@@ -21,7 +21,7 @@ const SpotlightCard = ({ children, className = '' }) => {
       onMouseLeave={() => setOpacity(0)}
     >
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-500"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-500"
         style={{
           opacity,
           background: `radial-gradient(450px circle at ${pos.x}px ${pos.y}px, rgba(6, 182, 212, 0.10), transparent 70%)`,

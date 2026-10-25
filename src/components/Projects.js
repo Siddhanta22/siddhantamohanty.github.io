@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Mail, Mic, ChevronDown, Rewind, Compass, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, Github, ChevronDown, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
+import { projects } from '../data';
 
 const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
   const dialogRef = useRef(null);
@@ -82,7 +83,7 @@ const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
   );
 };
 
-const Projects = () => {
+const Projects = ({ openRequest }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -107,97 +108,18 @@ const Projects = () => {
     setLightbox((l) => (l ? { ...l, index: (l.index + delta + l.shots.length) % l.shots.length } : l));
   }, []);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Self-Heal System",
-      role: "Personal Project",
-      teaser: "Delivers each error to Slack with an explanation and a recommended fix.",
-      summary: "Engineers often find errors by digging through logs, working out what went wrong, and deciding how to fix it. Self-Heal automates that first pass. It classifies errors by SQLSTATE, retrieves similar past incidents with FAISS, and uses an LLM to explain the issue and recommend a fix before sending it to Slack with a severity level, so engineers can focus on preventing it next time. Each alert also links to a chatbot with read-only access to recent error logs and live stats.",
-      technologies: ["Flask", "LangChain", "FAISS", "PostgreSQL", "OpenAI", "Slack"],
-      impact: "Testing exposed two failure cases: message-based classification misfiled a lock timeout as a connection problem, and FAISS returned similar incidents even when none were relevant. I switched classification to SQLSTATE codes and added a similarity threshold, so unrelated incidents are filtered out and novel errors fall back to the model's own knowledge.",
-      github: "https://github.com/Siddhanta22/Self-Healing-System",
-      live: null,
-      icon: Brain,
-      screenshots: ["/self-healing-workflow.jpg", "/self-healing-dashboard.jpg", "/self-healing-errors.jpg"]
-    },
-    {
-      id: 10,
-      title: "Rewind",
-      role: "Personal Project",
-      teaser: "Replays agent workflows with zero LLM calls, 32x faster on the demo.",
-      summary: "An LLM-driven browser agent built on Claude tool-calling and Playwright that completes multi-step workflows on a demo banking app from accessibility-tree snapshots, then compiles successful runs into typed, versioned replay artifacts.",
-      technologies: ["Python", "Playwright", "Pydantic", "Claude API", "MCP"],
-      impact: "The deterministic replay engine reruns recorded workflows with zero LLM calls — 0.41s versus 13.1s with an LLM in the loop, a 32x speedup — and is exposed to AI agents through an MCP server with action allowlisting, approval gating, and secret redaction.",
-      github: "https://github.com/Siddhanta22/Rewind",
-      live: null,
-      icon: Rewind,
-    },
-    {
-      id: 11,
-      title: "Scout",
-      role: "Personal Project",
-      teaser: "Finds and ranks nonprofits for student consulting clubs from public IRS 990 data.",
-      summary: "A prospecting tool for student consulting groups: search the public IRS Form 990 dataset through ProPublica's Nonprofit Explorer API, shortlist organizations, and track outreach status and notes. Each prospect gets a transparent 0–100 fit score built from revenue band, cause area, and revenue trend, with the reasons shown.",
-      technologies: ["TypeScript", "Express", "Prisma", "SQLite", "Vitest"],
-      impact: "Caches filings with a TTL and serves stale data if the upstream API fails, throttles and retries requests to ProPublica, and ships with 49 tests covering the cache, the API client, and the endpoints.",
-      github: "https://github.com/Siddhanta22/Scout",
-      live: null,
-      icon: Compass,
-    },
-    {
-      id: 6,
-      title: "Prompt Tracer",
-      role: "Personal Project",
-      teaser: "Scores your prompt as you type it, inside ChatGPT, Claude, Grok, and Gemini.",
-      summary: "A Chrome extension that grades prompts in real time against five plain-language checks (detail, clear action, specifics, audience, structure) and shows live feedback in a floating panel on ChatGPT, Claude, Grok, and Gemini.",
-      technologies: ["JavaScript", "Chrome Extension API", "Manifest V3"],
-      impact: "A privacy-first optimizer appends only what a prompt is missing, rule-based by default with optional OpenAI rewriting, and a dashboard charts score trends and platform usage. Everything runs in the browser.",
-      github: "https://github.com/Siddhanta22/prompt_tracer",
-      live: null,
-      icon: Zap,
-      screenshots: ["/prompt-tracer-1.jpg", "/prompt-tracer-2.jpg"]
-    },
-    {
-      id: 2,
-      title: "yourAIbrief",
-      role: "Personal Project",
-      teaser: "A personalized AI newsletter platform with magic-link auth and 50+ sources.",
-      summary: "A full-stack AI newsletter platform with magic-link authentication and personalized topic preferences. Aggregates content from 50+ trusted sources and delivers structured briefs on a per-user schedule.",
-      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Resend", "Vercel"],
-      impact: "Tracks per-issue email open and click analytics to measure real engagement, not just delivery.",
-      github: "https://github.com/Siddhanta22/yourAIbrief",
-      live: "https://your-a-ibrief.vercel.app",
-      icon: Mail,
-    },
-    {
-      id: 9,
-      title: "Swipeflix",
-      role: "Personal Project",
-      teaser: "Swipe-based movie discovery with a custom weighted-scoring algorithm.",
-      summary: "A swipe-based movie and TV discovery app. Recommendations are driven by a weighted scoring algorithm — genre match, popularity, recency, and format — tuned by a 5-question onboarding quiz and live TMDB API data.",
-      technologies: ["React", "Vite", "Tailwind CSS", "TMDB API", "Vercel"],
-      impact: "Built custom gesture-driven swipe interactions with hand-rolled CSS transforms (no animation libraries), plus session recaps that surface swipe stats and inferred viewing preferences.",
-      github: "https://github.com/Siddhanta22/swipeflix",
-      live: "https://swipeflix-alpha.vercel.app",
-      icon: Film,
-      screenshots: ["/swipeflix-1.jpg", "/swipeflix-2.jpg", "/swipeflix-3.jpg"]
-    },
-    {
-      id: 3,
-      title: "AI Transcript",
-      role: "Personal Project",
-      teaser: "Records or uploads audio, transcribes it, and strips the filler words.",
-      summary: "Record audio or upload a file, transcribe it with OpenAI Whisper, then clean the transcript with an LLM that removes filler words. A FastAPI backend serves a lightweight browser front end.",
-      technologies: ["FastAPI", "OpenAI Whisper", "GPT-4o mini", "JavaScript"],
-      impact: "Both models are configurable; the defaults are whisper-1 for transcription and gpt-4o-mini for cleanup.",
-      github: "https://github.com/Siddhanta22/AI_transcript",
-      live: "https://www.loom.com/share/da220be0a60640dbbbe3ffa6c4182a31",
-      icon: Mic,
-    },
-  ];
-
   const [activeId, setActiveId] = useState(projects[0].id);
+
+  // A skill chip asked to open one of these rows: expand it, then scroll once the
+  // previously open row has finished collapsing so the target lands in the right place.
+  useEffect(() => {
+    if (!openRequest) return undefined;
+    setActiveId(openRequest.id);
+    const timer = setTimeout(() => {
+      document.getElementById(`project-${openRequest.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [openRequest]);
 
   const rowVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -246,7 +168,7 @@ const Projects = () => {
               const toggle = () => setActiveId(isActive ? null : project.id);
 
               return (
-                <motion.div key={project.id} variants={rowVariants} className="relative">
+                <motion.div key={project.id} id={`project-${project.id}`} variants={rowVariants} className="relative">
                   {/* Branch node */}
                   <span className="hidden sm:flex absolute left-0 top-8 w-8 items-center justify-center z-10">
                     <motion.span

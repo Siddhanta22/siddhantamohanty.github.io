@@ -26,6 +26,8 @@ const getInitialDarkMode = () => {
 
 function App() {
   const [darkMode, setDarkMode] = useState(getInitialDarkMode);
+  // Set when a skill chip asks to open a project or role; a fresh object each time so re-clicks fire.
+  const [openRequest, setOpenRequest] = useState(null);
 
   useEffect(() => {
     // Apply dark mode to document
@@ -45,6 +47,8 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  const openItem = (section, id) => setOpenRequest({ section, id });
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -63,10 +67,10 @@ function App() {
       <main className="relative z-10">
         <Hero />
         <About />
-        <Projects />
+        <Projects openRequest={openRequest?.section === 'projects' ? openRequest : null} />
         <Quote />
-        <Experience />
-        <Skills />
+        <Experience openRequest={openRequest?.section === 'experience' ? openRequest : null} />
+        <Skills onOpenItem={openItem} />
         <Contact />
       </main>
       <Footer />
