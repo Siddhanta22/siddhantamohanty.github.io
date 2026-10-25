@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Brain, Film, Zap, Code, Mail, Mic, ChevronDown, Rewind, Compass, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, Github, Brain, Film, Zap, Mail, Mic, ChevronDown, Rewind, Compass, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import FloatingOrbs from './FloatingOrbs';
 
@@ -182,19 +182,6 @@ const Projects = () => {
       live: "https://swipeflix-alpha.vercel.app",
       icon: Film,
       screenshots: ["/swipeflix-1.jpg", "/swipeflix-2.jpg", "/swipeflix-3.jpg"]
-    },
-    {
-      id: 4,
-      title: "Broad-Phase Collision Detector",
-      role: "Personal Project",
-      teaser: "A 2D broad-phase collision library that runs ~98% fewer checks than brute force.",
-      summary: "A TypeScript library implementing grid-based spatial partitioning for 2D collision detection, following Andrew Petersen's broad-phase article, with a brute-force baseline and built-in test counters for benchmarking.",
-      technologies: ["TypeScript", "Spatial Partitioning", "AABB"],
-      impact: "Cuts AABB tests by about 98% versus brute force, roughly 50x fewer checks at 500–1,000 entities.",
-      github: "https://github.com/Siddhanta22/collision_detector",
-      live: null,
-      icon: Code,
-      screenshots: ["/collision-detector-1.jpg"]
     },
     {
       id: 3,
