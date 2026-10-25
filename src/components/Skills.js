@@ -5,7 +5,7 @@ import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 import {
   SiPython, SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3,
   SiPytorch, SiNumpy, SiPandas, SiOpenai,
-  SiFlask, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiSqlalchemy, SiDocker, SiReact, SiPydantic,
+  SiFlask, SiFastapi, SiDjango, SiNextdotjs, SiNodedotjs, SiDocker, SiReact, SiPydantic,
   SiRos,
   SiPostgresql, SiMysql, SiMongodb,
   SiGit, SiGithub, SiGithubactions, SiPlaywright, SiPrisma, SiPostman, SiTableau, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
@@ -66,7 +66,7 @@ const skillCategories = [
       { name: "Next.js", ...logo(SiNextdotjs, "#000000") },
       { name: "Node.js", ...logo(SiNodedotjs, "#339933") },
       { name: "REST APIs", ...concept },
-      { name: "SQLAlchemy", ...logo(SiSqlalchemy, "#371C1C") },
+      { name: "SQLAlchemy", ...concept },
       { name: "Pydantic", ...logo(SiPydantic, "#E92063") },
       { name: "Docker", ...logo(SiDocker, "#2496ED") },
       { name: "React", ...logo(SiReact, "#61DAFB") },
@@ -117,32 +117,18 @@ const Skills = () => {
     threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
+  const rowVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
   };
 
-  const categoryVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
+  const chipClass = 'inline-flex items-center gap-2 h-9 rounded-lg border border-gray-200 dark:border-dark-500 bg-gray-50 dark:bg-dark-800 text-sm font-medium text-gray-700 dark:text-gray-200';
 
   return (
     <section id="skills" className="py-24 bg-white/90 dark:bg-dark-900/90 relative overflow-hidden">
       <FloatingOrbs variant="subtle" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
@@ -155,76 +141,39 @@ const Skills = () => {
           </h2>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
-        >
-          {skillCategories.map((category) => (
-            <motion.div
-              key={category.id}
-              variants={categoryVariants}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            >
-              <SpotlightCard className="group relative h-full bg-white dark:bg-dark-700 rounded-2xl border border-gray-200 dark:border-dark-600 p-6 shadow-md hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 overflow-hidden">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0 group-hover:scale-105 transition-transform duration-300">
-                    <category.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" strokeWidth={2} />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                    {category.title}
-                  </h3>
+        <SpotlightCard className="rounded-2xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-700 shadow-md overflow-hidden">
+          <motion.div
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            transition={{ staggerChildren: 0.08 }}
+            className="divide-y divide-gray-100 dark:divide-dark-600"
+          >
+            {skillCategories.map((category) => (
+              <motion.div
+                key={category.id}
+                variants={rowVariants}
+                className="grid md:grid-cols-[13rem_1fr] gap-x-8 gap-y-3 px-6 py-5 md:px-8"
+              >
+                <div className="flex items-center gap-3 md:h-9">
+                  <category.icon className="w-5 h-5 shrink-0 text-primary-600 dark:text-primary-400" strokeWidth={2} />
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white">{category.title}</h3>
                 </div>
-
-                {(() => {
-                  const logos = category.skills.filter((skill) => skill.icon);
-                  const concepts = category.skills.filter((skill) => !skill.icon);
-                  return (
-                    <>
-                      {logos.length > 0 && (
-                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                          {logos.map((skill, index) => (
-                            <motion.div
-                              key={skill.name}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={inView ? { opacity: 1, y: 0 } : {}}
-                              transition={{ delay: 0.04 * index }}
-                              whileHover={{ y: -2 }}
-                              className="flex flex-col items-center gap-1.5 text-center"
-                            >
-                              <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 shadow-sm flex items-center justify-center shrink-0">
-                                <skill.icon className="w-5 h-5" style={{ color: skill.color }} />
-                              </div>
-                              <span className="text-xs leading-tight font-medium text-gray-600 dark:text-gray-300">
-                                {skill.name}
-                              </span>
-                            </motion.div>
-                          ))}
-                        </div>
+                <ul className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <li key={skill.name} className={`${chipClass} ${skill.icon ? 'pl-1.5 pr-3' : 'px-3'}`}>
+                      {skill.icon && (
+                        <span className="w-6 h-6 rounded-md bg-white flex items-center justify-center shrink-0">
+                          <skill.icon className="w-4 h-4" style={{ color: skill.color }} />
+                        </span>
                       )}
-                      {concepts.length > 0 && (
-                        <div className={`flex flex-wrap gap-2 ${logos.length > 0 ? 'mt-5 pt-5 border-t border-gray-100 dark:border-dark-600' : ''}`}>
-                          {concepts.map((skill, index) => (
-                            <motion.span
-                              key={skill.name}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={inView ? { opacity: 1, y: 0 } : {}}
-                              transition={{ delay: 0.04 * (logos.length + index) }}
-                              className="px-3 py-1.5 rounded-full bg-gray-100 dark:bg-dark-600 border border-gray-200 dark:border-dark-500 text-xs font-medium text-gray-700 dark:text-gray-200"
-                            >
-                              {skill.name}
-                            </motion.span>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  );
-                })()}
-              </SpotlightCard>
-            </motion.div>
-          ))}
-        </motion.div>
+                      {skill.name}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+        </SpotlightCard>
       </div>
     </section>
   );
