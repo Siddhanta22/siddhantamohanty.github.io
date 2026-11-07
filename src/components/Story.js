@@ -177,16 +177,16 @@ const sampleTargets = (draw, W, H, count) => {
 
 const Caption = ({ scene, onOpenItem, first }) => (
   <>
-    <p className="font-mono text-xs sm:text-sm text-primary-600 dark:text-primary-400">{scene.kicker}</p>
-    <h2 className="mt-3 text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] text-gray-900 dark:text-white text-balance">
+    <p className="font-mono text-xs sm:text-sm tracking-wide text-accent">{scene.kicker}</p>
+    <h2 className="mt-3 font-display text-6xl sm:text-7xl xl:text-8xl leading-[0.92] text-fg text-balance">
       {scene.headline}
     </h2>
-    <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl">{scene.body}</p>
+    <p className="mt-5 text-lg text-muted leading-relaxed max-w-xl">{scene.body}</p>
     {scene.action && (
       <button
         type="button"
         onClick={() => onOpenItem(scene.action.section, scene.action.id)}
-        className="mt-5 inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 rounded"
+        className="mt-5 inline-flex items-center gap-2 text-accent font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
       >
         {scene.action.label} <span aria-hidden="true">→</span>
       </button>
@@ -196,14 +196,14 @@ const Caption = ({ scene, onOpenItem, first }) => (
         <button
           type="button"
           onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold shadow-lg hover:-translate-y-0.5 transition-transform"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-bg font-semibold hover:-translate-y-0.5 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
         >
           View Projects <ArrowDown className="w-5 h-5" />
         </button>
         <button
           type="button"
           onClick={viewResume}
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-semibold hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-fg/40 text-fg font-semibold hover:bg-fg hover:text-bg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
         >
           <FileText className="w-5 h-5" /> View Résumé
         </button>
@@ -215,7 +215,7 @@ const Caption = ({ scene, onOpenItem, first }) => (
             title={label}
             target={href.startsWith('http') ? '_blank' : undefined}
             rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="p-2.5 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
+            className="grid place-items-center w-11 h-11 rounded-full border border-line text-fg hover:text-accent hover:border-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
           >
             <Icon className="w-5 h-5" />
           </a>
@@ -332,9 +332,9 @@ const Story = ({ onOpenItem }) => {
           py[k] += (dy / d) * push;
         }
       }
-      ctx.fillStyle = dark ? 'rgba(34, 211, 238, 0.95)' : 'rgba(8, 145, 178, 0.95)';
+      ctx.fillStyle = dark ? 'rgba(255, 106, 61, 0.95)' : 'rgba(196, 48, 18, 0.95)';
       for (let k = 0; k < split; k += 1) ctx.fillRect(px[k], py[k], size[k], size[k]);
-      ctx.fillStyle = dark ? 'rgba(226, 232, 240, 0.9)' : 'rgba(30, 41, 59, 0.85)';
+      ctx.fillStyle = dark ? 'rgba(244, 239, 230, 0.9)' : 'rgba(20, 17, 15, 0.8)';
       for (let k = split; k < COUNT; k += 1) ctx.fillRect(px[k], py[k], size[k], size[k]);
     };
     raf = requestAnimationFrame(loop);
@@ -357,7 +357,7 @@ const Story = ({ onOpenItem }) => {
   // Reduced motion: the same story as plain, stacked content with no pinned canvas.
   if (reduced) {
     return (
-      <section className="min-h-screen pt-32 pb-16 bg-white dark:bg-dark-900">
+      <section className="min-h-screen pt-32 pb-16 bg-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-20">
           {SCENES.map((s, i) => (
             <div key={s.id}>
@@ -371,9 +371,9 @@ const Story = ({ onOpenItem }) => {
 
   return (
     <section ref={sectionRef} style={{ height: `${(SCENES.length - 1) * SCENE_HEIGHT_VH + 100}vh` }} className="relative">
-      <div className="sticky top-0 h-screen overflow-hidden bg-white dark:bg-[#0a0a0c]">
+      <div className="sticky top-0 h-screen overflow-hidden bg-bg">
         <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 w-full h-full" />
-        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-[#0a0a0c] dark:via-[#0a0a0c]/80 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-bg via-bg/80 to-transparent pointer-events-none" />
 
         {/* The visible caption shows one scene at a time; screen readers get the others here. */}
         <div className="sr-only">
@@ -407,8 +407,8 @@ const Story = ({ onOpenItem }) => {
                 onClick={() => jumpTo(i)}
                 aria-label={`Go to: ${s.headline}`}
                 aria-current={i === scene ? 'true' : undefined}
-                className={`block w-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 ${
-                  i === scene ? 'h-7 bg-primary-500' : 'h-2.5 bg-gray-300 dark:bg-dark-600 hover:bg-gray-400'
+                className={`block w-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
+                  i === scene ? 'h-7 bg-accent' : 'h-2.5 bg-fg/25 hover:bg-fg/50'
                 }`}
               />
             </li>

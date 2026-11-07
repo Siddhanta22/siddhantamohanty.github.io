@@ -1,102 +1,83 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import FloatingOrbs from './FloatingOrbs';
+import Kicker from './Kicker';
+
+const reveal = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.7, delay },
+});
+
+const tile = 'rounded-3xl border border-line bg-panel p-8';
+const label = 'font-mono text-xs uppercase tracking-[0.18em] text-accent';
 
 const About = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  const handlePhotoMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: py * -12, y: px * 12 });
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({ x: py * -10, y: px * 10 });
   };
 
-  const resetTilt = () => setTilt({ x: 0, y: 0 });
-
   return (
-    <section id="about" className="py-24 bg-white/90 dark:bg-dark-900/90 relative overflow-hidden">
-      <FloatingOrbs variant="subtle" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-            About <span className="gradient-text">Me</span>
+    <section id="about" className="relative py-28 md:py-36">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div {...reveal()} className="mb-14 md:mb-20">
+          <Kicker n="01" label="Hello" />
+          <h2 className="mt-4 font-display text-6xl md:text-8xl leading-[0.92] text-fg">
+            About <span className="italic text-accent">me</span>
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Story Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div className="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-              <p>
-                I'm a Computer Science graduate from Penn State who enjoys figuring out how things work, building things from scratch, and getting into problems I don't fully know how to solve yet.
-              </p>
-              <p>
-                Some of my best experiences have come from unfamiliar territory. At HCLTech, I had a week to learn RAG from scratch, and that learning eventually helped me come up with and build Self-Heal. At Penn State, I stepped into reinforcement learning with little prior experience and worked my way toward proposing an approach for improving LLM code verification.
-              </p>
-              <p>
-                Across internships, research, team projects, and things I've built on my own, I've learned that I enjoy taking ownership, learning quickly, and turning ideas into something meaningful with a real use case and impact.
-              </p>
-              <p>
-                Outside of tech, I enjoy traveling and exploring new places.
-              </p>
-            </div>
-
-            {/* Stacked below xl, where the single row no longer fits without wrapping mid-item */}
-            <div className="pt-2 flex flex-col xl:flex-row xl:items-center gap-x-3 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-400">
-              <span>B.S. Computer Science, Penn State</span>
-              <span className="hidden xl:inline text-gray-300 dark:text-dark-600">·</span>
-              <span>Class of 2026</span>
-              <span className="hidden xl:inline text-gray-300 dark:text-dark-600">·</span>
-              <span>Dean's List ×4</span>
-            </div>
+        <div className="grid lg:grid-cols-12 gap-5">
+          <motion.div {...reveal(0.05)} className={`${tile} lg:col-span-7 lg:row-span-2 p-8 md:p-12 flex flex-col gap-7`}>
+            <p className="font-display text-3xl md:text-4xl leading-[1.15] text-fg">
+              I'm a Computer Science graduate from Penn State who enjoys figuring out how things work, building things from scratch, and getting into problems I don't fully know how to solve yet.
+            </p>
+            <p className="text-lg text-muted leading-relaxed">
+              Some of my best experiences have come from unfamiliar territory. At HCLTech, I had a week to learn RAG from scratch, and that learning eventually helped me come up with and build Self-Heal. At Penn State, I stepped into reinforcement learning with little prior experience and worked my way toward proposing an approach for improving LLM code verification.
+            </p>
+            <p className="text-lg text-muted leading-relaxed">
+              Across internships, research, team projects, and things I've built on my own, I've learned that I enjoy taking ownership, learning quickly, and turning ideas into something meaningful with a real use case and impact.
+            </p>
           </motion.div>
 
-          {/* Headshot Photo */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative order-first lg:order-last"
-            style={{ perspective: 1000 }}
-          >
+          <motion.div {...reveal(0.12)} className="lg:col-span-5 lg:row-span-2 relative" style={{ perspective: 1000 }}>
             <motion.div
-              onMouseMove={handlePhotoMouseMove}
-              onMouseLeave={resetTilt}
-              animate={{ rotateX: tilt.x, rotateY: tilt.y, scale: tilt.x || tilt.y ? 1.03 : 1 }}
+              onMouseMove={onMove}
+              onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+              animate={{ rotateX: tilt.x, rotateY: tilt.y }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="aspect-square max-w-[13rem] sm:max-w-xs lg:max-w-md mx-auto bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-1 shadow-2xl"
+              className="h-full min-h-[22rem] rounded-3xl overflow-hidden border border-line bg-panel"
             >
-              <div className="w-full h-full rounded-2xl overflow-hidden relative group">
-                <img 
-                  src={`${process.env.PUBLIC_URL}/headshot-retouched.jpg`}
-                  alt="Siddhanta Mohanty" 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
+              <img
+                src={`${process.env.PUBLIC_URL}/headshot-retouched.jpg`}
+                alt="Siddhanta Mohanty"
+                className="w-full h-full object-cover"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
             </motion.div>
+          </motion.div>
+
+          <motion.div {...reveal(0.05)} className={`${tile} lg:col-span-4`}>
+            <p className={label}>Education</p>
+            <p className="mt-4 font-display text-3xl text-fg leading-tight">B.S. Computer Science</p>
+            <p className="mt-2 text-muted">Penn State · Class of 2026</p>
+            <p className="text-muted">Dean's List ×4</p>
+          </motion.div>
+
+          <motion.div {...reveal(0.1)} className={`${tile} lg:col-span-4`}>
+            <p className={label}>Outside of tech</p>
+            <p className="mt-4 font-display text-3xl text-fg leading-tight">Traveling and exploring new places.</p>
+          </motion.div>
+
+          <motion.div {...reveal(0.15)} className={`${tile} lg:col-span-4`}>
+            <p className={label}>Now</p>
+            <p className="mt-4 font-display text-3xl text-fg leading-tight">Building Promise Path, a learning platform for kids in NYC shelters.</p>
           </motion.div>
         </div>
       </div>

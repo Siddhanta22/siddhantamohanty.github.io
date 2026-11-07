@@ -1,34 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-white/90 dark:bg-dark-900/90 border-t border-gray-200 dark:border-dark-700 py-12 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center space-y-6">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm text-gray-600 dark:text-gray-400"
-          >
-            © {currentYear} Siddhanta Mohanty
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-sm text-gray-600 dark:text-gray-400 italic"
-          >
-            Built with curiosity, rigor, and clean engineering.
-          </motion.p>
-        </div>
-      </div>
-    </footer>
-  );
-};
+const Footer = () => (
+  <footer className="relative overflow-hidden border-t border-line">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
+      <p>© {new Date().getFullYear()} Siddhanta Mohanty</p>
+      <p className="italic">Built with curiosity, rigor, and clean engineering.</p>
+    </div>
+    <p className="mt-6 -mb-[0.18em] text-center font-display text-[12.5vw] leading-none whitespace-nowrap text-outline select-none" aria-hidden="true">
+      Siddhanta Mohanty
+    </p>
+  </footer>
+);
 
 export default Footer;

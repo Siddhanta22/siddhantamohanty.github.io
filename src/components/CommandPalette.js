@@ -182,10 +182,10 @@ const CommandPalette = ({ open, setOpen, darkMode, toggleDarkMode, scrollToSecti
             transition={{ duration: 0.15 }}
             onClick={(e) => e.stopPropagation()}
             onAnimationStart={() => inputRef.current?.focus()}
-            className="w-full max-w-xl rounded-xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-800 shadow-2xl overflow-hidden"
+            className="w-full max-w-xl rounded-xl border border-line bg-panel shadow-2xl overflow-hidden"
           >
-            <div className="flex items-center gap-3 px-4 border-b border-gray-200 dark:border-dark-600">
-              <Search className="w-4 h-4 text-gray-400 shrink-0" aria-hidden="true" />
+            <div className="flex items-center gap-3 px-4 border-b border-line">
+              <Search className="w-4 h-4 text-muted shrink-0" aria-hidden="true" />
               <input
                 ref={inputRef}
                 value={query}
@@ -199,14 +199,14 @@ const CommandPalette = ({ open, setOpen, darkMode, toggleDarkMode, scrollToSecti
                 placeholder="Search projects, skills, or run a command…"
                 spellCheck={false}
                 autoComplete="off"
-                className="flex-1 min-w-0 py-4 bg-transparent outline-none text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="flex-1 min-w-0 py-4 bg-transparent outline-none text-fg placeholder:text-muted"
               />
-              <kbd className="text-[11px] font-mono text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-dark-500 rounded px-1.5 py-0.5">esc</kbd>
+              <kbd className="text-[11px] font-mono text-muted border border-line rounded px-1.5 py-0.5">esc</kbd>
             </div>
 
             <ul id="palette-list" role="listbox" ref={listRef} className="max-h-[22rem] overflow-y-auto p-2">
               {results.length === 0 && (
-                <li className="px-3 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                <li className="px-3 py-8 text-center text-sm text-muted">
                   No matches for “{query}”.
                 </li>
               )}
@@ -218,7 +218,7 @@ const CommandPalette = ({ open, setOpen, darkMode, toggleDarkMode, scrollToSecti
                 return (
                   <React.Fragment key={item.id}>
                     {showHeading && (
-                      <li role="presentation" className="px-3 pt-3 pb-1 text-[11px] font-mono uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <li role="presentation" className="px-3 pt-3 pb-1 text-[11px] font-mono uppercase tracking-wide text-muted">
                         {item.group}
                       </li>
                     )}
@@ -230,21 +230,21 @@ const CommandPalette = ({ open, setOpen, darkMode, toggleDarkMode, scrollToSecti
                       onMouseMove={() => setActive(index)}
                       onClick={() => choose(item)}
                       className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer text-sm ${
-                        isActive ? 'bg-primary-50 dark:bg-primary-900/30 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
+                        isActive ? 'bg-accent/10 text-fg' : 'text-fg/80'
                       }`}
                     >
-                      {Icon && <Icon className="w-4 h-4 shrink-0 text-primary-600 dark:text-primary-400" aria-hidden="true" />}
+                      {Icon && <Icon className="w-4 h-4 shrink-0 text-accent" aria-hidden="true" />}
                       <span className="font-medium shrink-0">{item.label}</span>
-                      {item.detail && <span className="truncate text-gray-500 dark:text-gray-400">{item.detail}</span>}
+                      {item.detail && <span className="truncate text-muted">{item.detail}</span>}
                     </li>
                   </React.Fragment>
                 );
               })}
             </ul>
 
-            <div className="flex items-center justify-between gap-4 px-4 py-2.5 border-t border-gray-200 dark:border-dark-600 text-[11px] font-mono text-gray-500 dark:text-gray-400">
+            <div className="flex items-center justify-between gap-4 px-4 py-2.5 border-t border-line text-[11px] font-mono text-muted">
               <span>↑↓ navigate · ↵ select · esc close</span>
-              <span role="status" aria-live="polite" className="text-primary-600 dark:text-primary-400">{status}</span>
+              <span role="status" aria-live="polite" className="text-accent">{status}</span>
             </div>
           </motion.div>
         </motion.div>

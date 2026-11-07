@@ -1,6 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 import {
   SiPython, SiCsharp, SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3,
@@ -10,9 +9,8 @@ import {
   SiPostgresql, SiMysql, SiMongodb,
   SiGit, SiGithub, SiGithubactions, SiPlaywright, SiPrisma, SiPostman, SiTableau, SiAmazonaws, SiGooglecloud, SiVisualstudiocode,
 } from 'react-icons/si';
-import SpotlightCard from './SpotlightCard';
-import FloatingOrbs from './FloatingOrbs';
 import { projects, experiences } from '../data';
+import Kicker from './Kicker';
 
 // Verified against the installed react-icons/si (Simple Icons) package — only
 // technologies with a real, published brand mark get a logo tile. Anything
@@ -129,112 +127,121 @@ export const evidenceFor = (skillName) => {
   ];
 };
 
-const SkillChip = ({ skill, onOpenItem }) => {
+const CATEGORY_DOTS = ['#ff6a3d', '#8b9cff', '#34d399', '#f5c542', '#f472b6', '#22d3ee'];
+
+const SkillChip = ({ skill, dot, onOpenItem }) => {
   const evidence = evidenceFor(skill.name);
   const linked = evidence.length > 0;
-  const base = 'inline-flex items-center gap-2 h-9 rounded-lg border border-gray-200 dark:border-dark-500 bg-gray-50 dark:bg-dark-800 text-sm font-medium text-gray-700 dark:text-gray-200';
+  const base = 'inline-flex items-center gap-2.5 h-11 rounded-full border border-line bg-panel text-sm font-medium text-fg';
+  const pad = skill.icon ? 'pl-1.5 pr-4' : 'px-4';
   const content = (
     <>
-      {skill.icon && (
-        <span className="w-6 h-6 rounded-md bg-white flex items-center justify-center shrink-0">
+      {skill.icon ? (
+        <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0">
           <skill.icon className="w-4 h-4" style={{ color: skill.color }} />
         </span>
+      ) : (
+        <span className="w-2 h-2 rounded-full shrink-0" style={{ background: dot }} aria-hidden="true" />
       )}
       {skill.name}
-      {linked && <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-primary-500" />}
+      {linked && <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-accent" />}
     </>
   );
-  const pad = skill.icon ? 'pl-1.5 pr-3' : 'px-3';
 
-  if (!linked) return <li className={`${base} ${pad}`}>{content}</li>;
+  if (!linked) return <span className={`${base} ${pad}`}>{content}</span>;
 
   return (
-    <li className="relative group">
+    <span className="relative group inline-block">
       <button
         type="button"
         aria-haspopup="true"
-        className={`${base} ${pad} cursor-default group-hover:border-primary-400 dark:group-hover:border-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 transition-colors`}
+        className={`${base} ${pad} cursor-default group-hover:border-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70`}
       >
         {content}
       </button>
       {/* pt-2 (not a margin) keeps the pointer inside the group while it moves onto the list */}
       <div className="hidden group-hover:block group-focus-within:block absolute left-0 top-full z-30 pt-2">
-        <div className="min-w-[14rem] rounded-xl border border-gray-200 dark:border-dark-500 bg-white dark:bg-dark-800 shadow-xl p-2">
-          <p className="px-2 pt-1 pb-1.5 text-[11px] font-mono uppercase tracking-wide text-gray-500 dark:text-gray-400">
-            {skill.name} · used in
-          </p>
+        <div className="min-w-[14rem] rounded-2xl border border-line bg-panel shadow-2xl p-2">
+          <p className="px-2 pt-1 pb-1.5 font-mono text-[11px] uppercase tracking-wide text-muted">{skill.name} · used in</p>
           {evidence.map((item) => (
             <button
               key={`${item.section}-${item.id}`}
               type="button"
               onClick={() => onOpenItem(item.section, item.id)}
-              className="w-full flex items-center justify-between gap-4 px-2 py-1.5 rounded-md text-left text-sm text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
+              className="w-full flex items-center justify-between gap-4 px-2 py-1.5 rounded-lg text-left text-sm text-fg hover:bg-fg/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
             >
               <span>{item.label}</span>
-              <span className="text-[11px] font-mono text-gray-500 dark:text-gray-400">{item.kind}</span>
+              <span className="font-mono text-[11px] text-muted">{item.kind}</span>
             </button>
           ))}
         </div>
       </div>
-    </li>
+    </span>
   );
 };
 
 const Skills = ({ onOpenItem }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const rowVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
-  };
-
+  const [filter, setFilter] = useState('all');
+  const categories = skillCategories.map((c, i) => ({ ...c, dot: CATEGORY_DOTS[i % CATEGORY_DOTS.length] }));
+  const shown = filter === 'all' ? categories : categories.filter((c) => String(c.id) === filter);
+  const tab = (active) =>
+    `px-4 py-2 rounded-full text-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
+      active ? 'bg-fg text-bg border-fg' : 'border-line text-muted hover:text-fg hover:border-fg/40'
+    }`;
 
   return (
-    <section id="skills" className="py-24 bg-white/90 dark:bg-dark-900/90 relative overflow-hidden">
-      <FloatingOrbs variant="subtle" />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="skills" className="relative py-28 md:py-36 border-t border-line">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-            Technical <span className="gradient-text">Skills</span>
+          <Kicker n="04" label="Skills" />
+          <h2 className="mt-4 font-display text-6xl md:text-8xl leading-[0.92] text-fg">
+            Tools I <span className="italic text-accent">reach for</span>
           </h2>
+          <p className="mt-6 max-w-xl text-muted">
+            Filter by area. Chips with an <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent align-middle" aria-hidden="true" /> dot link to where I used them. Hover or focus one to see.
+          </p>
         </motion.div>
 
-        <SpotlightCard className="rounded-2xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-700 shadow-md">
-          <motion.div
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            transition={{ staggerChildren: 0.08 }}
-            className="divide-y divide-gray-100 dark:divide-dark-600"
-          >
-            {skillCategories.map((category) => (
+        <div className="flex flex-wrap gap-2 mb-12" role="group" aria-label="Filter skills by area">
+          <button type="button" onClick={() => setFilter('all')} aria-pressed={filter === 'all'} className={tab(filter === 'all')}>All</button>
+          {categories.map((c) => (
+            <button key={c.id} type="button" onClick={() => setFilter(String(c.id))} aria-pressed={filter === String(c.id)} className={tab(filter === String(c.id))}>
+              {c.title}
+            </button>
+          ))}
+        </div>
+
+        <div className="space-y-10">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {shown.map((category) => (
               <motion.div
                 key={category.id}
-                variants={rowVariants}
-                className="grid md:grid-cols-[13rem_1fr] gap-x-8 gap-y-3 px-6 py-5 md:px-8"
+                layout
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35 }}
+                className="grid md:grid-cols-[15rem_1fr] gap-x-10 gap-y-4"
               >
-                <div className="flex items-center gap-3 md:h-9">
-                  <category.icon className="w-5 h-5 shrink-0 text-primary-600 dark:text-primary-400" strokeWidth={2} />
-                  <h3 className="text-base font-bold text-gray-900 dark:text-white">{category.title}</h3>
+                <div className="flex items-center gap-3 md:h-11">
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ background: category.dot }} aria-hidden="true" />
+                  <h3 className="font-display text-3xl leading-none text-fg">{category.title}</h3>
                 </div>
-                <ul className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   {category.skills.map((skill) => (
-                    <SkillChip key={skill.name} skill={skill} onOpenItem={onOpenItem} />
+                    <SkillChip key={skill.name} skill={skill} dot={category.dot} onOpenItem={onOpenItem} />
                   ))}
-                </ul>
+                </div>
               </motion.div>
             ))}
-          </motion.div>
-        </SpotlightCard>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

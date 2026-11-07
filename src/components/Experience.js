@@ -1,202 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FileText, ChevronDown } from 'lucide-react';
-import SpotlightCard from './SpotlightCard';
-import FloatingOrbs from './FloatingOrbs';
+import { motion } from 'framer-motion';
+import { FileText } from 'lucide-react';
 import { experiences } from '../data';
 import { viewResume } from '../utils/resume';
+import Kicker from './Kicker';
 
 const Experience = ({ openRequest }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [flashId, setFlashId] = useState(null);
 
-  const [activeId, setActiveId] = useState(experiences[0].id);
-
-  // A skill chip asked to open one of these rows: expand it, then scroll once the
-  // previously open row has finished collapsing so the target lands in the right place.
+  // A skill, the terminal or the palette asked for one of these roles: scroll to it and
+  // let it glow for a moment so the eye finds it.
   useEffect(() => {
     if (!openRequest) return undefined;
-    setActiveId(openRequest.id);
-    const timer = setTimeout(() => {
-      document.getElementById(`experience-${openRequest.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 400);
+    document.getElementById(`experience-${openRequest.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setFlashId(openRequest.id);
+    const timer = setTimeout(() => setFlashId(null), 2200);
     return () => clearTimeout(timer);
   }, [openRequest]);
 
-  const rowVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
-  };
-
   return (
-    <section id="experience" className="py-24 bg-gray-50/90 dark:bg-dark-800/90 relative overflow-hidden">
-      <FloatingOrbs variant="subtle" />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="experience" className="relative py-28 md:py-36 border-t border-line">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-14"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7 }}
+          className="mb-16 md:mb-24"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-            Professional <span className="gradient-text">Experience</span>
+          <Kicker n="03" label="Experience" />
+          <h2 className="mt-4 font-display text-6xl md:text-8xl leading-[0.92] text-fg">
+            Where I've <span className="italic text-accent">worked</span>
           </h2>
         </motion.div>
 
-        <div className="relative">
-          {/* Branch line */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.1, ease: 'easeInOut' }}
-            style={{ transformOrigin: 'top' }}
-            className="hidden sm:block absolute left-4 top-0 bottom-0 w-px bg-gray-200 dark:bg-dark-600"
-          />
+        <div>
+          {experiences.map((exp) => (
+            <motion.article
+              key={exp.id}
+              id={`experience-${exp.id}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6 }}
+              className={`scroll-mt-24 grid md:grid-cols-[16rem_1fr] gap-x-14 gap-y-5 py-12 border-t border-line transition-colors duration-700 ${
+                flashId === exp.id ? 'bg-accent/10' : ''
+              }`}
+            >
+              <div>
+                <div className="md:sticky md:top-28">
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent">{exp.dates}</p>
+                  <h3 className="mt-3 font-display text-4xl leading-none text-fg">{exp.company}</h3>
+                  <p className="mt-2 text-sm text-muted">{exp.location}</p>
+                </div>
+              </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="space-y-5"
-          >
-            {experiences.map((experience) => {
-              const isActive = activeId === experience.id;
-              const toggle = () => setActiveId(isActive ? null : experience.id);
+              <div className="max-w-3xl">
+                <p className="text-2xl font-semibold text-fg tracking-tight">{exp.role}</p>
+                <p className="mt-3 text-xl text-muted leading-snug">{exp.teaser}</p>
 
-              return (
-                <motion.div key={experience.id} id={`experience-${experience.id}`} variants={rowVariants} className="relative">
-                  {/* Branch node */}
-                  <span className="hidden sm:flex absolute left-0 top-8 w-8 items-center justify-center z-10">
-                    <motion.span
-                      animate={
-                        isActive
-                          ? { boxShadow: ['0 0 0 0 rgba(6,182,212,0.45)', '0 0 0 8px rgba(6,182,212,0)', '0 0 0 0 rgba(6,182,212,0)'] }
-                          : {}
-                      }
-                      transition={isActive ? { duration: 2, repeat: Infinity, ease: 'easeInOut' } : {}}
-                      className={`w-3 h-3 rounded-full ring-4 ring-gray-50 dark:ring-dark-800 transition-colors duration-300 ${
-                        isActive ? 'bg-primary-500' : 'bg-gray-300 dark:bg-dark-500'
-                      }`}
-                    />
-                  </span>
+                <ul className="mt-7 space-y-4">
+                  {exp.achievements.map((achievement) => (
+                    <li key={achievement} className="flex gap-4 text-fg/85 leading-relaxed">
+                      <span className="mt-[0.7em] h-px w-5 shrink-0 bg-accent" aria-hidden="true" />
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                  <SpotlightCard
-                    className={`relative sm:ml-10 rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
-                      isActive
-                        ? 'border-primary-300 dark:border-primary-600 shadow-lg'
-                        : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
-                    }`}
-                  >
-                    <div
-                      onClick={toggle}
-                      className="w-full flex items-center gap-5 p-6 text-left cursor-pointer select-none"
-                    >
-                      {/* The real toggle is a button (keyboard + screen readers); the row's own
-                          onClick keeps the whole row clickable for mouse users. */}
-                      <h3 className="flex-1 min-w-0">
-                        <button
-                          type="button"
-                          aria-expanded={isActive}
-                          className="flex w-full min-w-0 items-center gap-5 text-left rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 focus-visible:ring-offset-4 dark:focus-visible:ring-offset-dark-700"
-                        >
-                          <span className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-600 dark:bg-primary-500 text-white font-bold text-xs shrink-0">
-                            {experience.logo}
-                          </span>
-                          <span className="flex-1 min-w-0">
-                            <span className="block text-lg font-bold text-gray-900 dark:text-white truncate">
-                              {experience.role}
-                            </span>
-                            <span className="block text-sm font-normal text-gray-600 dark:text-gray-300 truncate">
-                              {experience.company} · {experience.location}
-                            </span>
-                          </span>
-                        </button>
-                      </h3>
-                      <div className="flex items-center gap-3 shrink-0">
-                        <span className="hidden sm:block text-xs font-mono text-gray-600 dark:text-gray-300 whitespace-nowrap">
-                          {experience.dates}
-                        </span>
-                        <ChevronDown
-                          aria-hidden="true"
-                          className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
-                        />
-                      </div>
-                    </div>
-
-                    <AnimatePresence initial={false}>
-                      {isActive && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-6 pb-7 pt-4 border-t border-gray-100 dark:border-dark-600">
-                            <p className="sm:hidden text-xs font-mono text-gray-600 dark:text-gray-300 mb-2">
-                              {experience.dates}
-                            </p>
-                            <p className="text-base font-medium text-gray-800 dark:text-gray-100 leading-relaxed">
-                              {experience.teaser}
-                            </p>
-
-                            <ul className="space-y-3 mt-4 mb-4">
-                              {experience.achievements.map((achievement, index) => (
-                                <li key={index} className="flex items-start">
-                                  <div className="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 shrink-0"></div>
-                                  <span className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-                                    {achievement}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-
-                            <div className="flex flex-wrap gap-1.5">
-                              {experience.technologies.map((tech, index) => (
-                                <span
-                                  key={index}
-                                  className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </SpotlightCard>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                <ul className="mt-7 flex flex-wrap gap-2" aria-label="Technologies">
+                  {exp.technologies.map((tech) => (
+                    <li key={tech} className="px-3 py-1 rounded-full border border-line font-mono text-xs text-muted">{tech}</li>
+                  ))}
+                </ul>
+              </div>
+            </motion.article>
+          ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        <div className="pt-12 border-t border-line">
+          <button
+            type="button"
             onClick={viewResume}
-            className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-fg text-bg font-semibold hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
           >
-            <FileText className="w-5 h-5 mr-2" />
-            View Résumé
-          </motion.button>
-        </motion.div>
+            <FileText className="w-5 h-5" /> View Résumé
+          </button>
+        </div>
       </div>
     </section>
   );

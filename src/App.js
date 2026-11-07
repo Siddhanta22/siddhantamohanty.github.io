@@ -9,7 +9,8 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import NetworkBackground from './components/NetworkBackground';
+import Terminal from './components/Terminal';
+import Marquee from './components/Marquee';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import CommandPalette from './components/CommandPalette';
@@ -60,9 +61,8 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 relative">
+    <div className="min-h-screen bg-bg text-fg relative">
       <ScrollProgress />
-      <NetworkBackground />
 
       {/* Main Content */}
       <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onOpenPalette={() => setPaletteOpen(true)} />
@@ -73,6 +73,8 @@ function App() {
         <Quote />
         <Experience openRequest={openRequest?.section === 'experience' ? openRequest : null} />
         <Skills onOpenItem={openItem} />
+        <Marquee />
+        <Terminal onOpenItem={openItem} />
         <Contact />
       </main>
       <Footer />

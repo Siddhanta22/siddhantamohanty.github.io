@@ -5,197 +5,115 @@ import { paletteShortcut } from '../utils/platform';
 
 export const NAV_ITEMS = [
   { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
+  { id: 'projects', label: 'Work' },
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ];
 
+const iconButton =
+  'grid place-items-center w-10 h-10 rounded-full border border-line text-fg hover:border-accent hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70';
+
 const Header = ({ scrollToSection, darkMode, toggleDarkMode, onOpenPalette }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-
-      const scrollPos = window.scrollY + 140;
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80);
+      const pos = window.scrollY + window.innerHeight * 0.4;
       let current = null;
-      for (const item of NAV_ITEMS) {
-        const el = document.getElementById(item.id);
-        if (el && el.offsetTop <= scrollPos) {
-          current = item.id;
-        }
-      }
-      setActiveSection(current);
+      NAV_ITEMS.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= pos) current = id;
+      });
+      setActive(current);
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = (id) => {
+  const go = (id) => {
     scrollToSection(id);
-    setMobileMenuOpen(false);
+    setOpen(false);
   };
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/90 dark:bg-dark-900/90 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-dark-700'
-            : 'bg-transparent'
+      <header
+        className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
+          scrolled ? 'bg-bg/70 backdrop-blur-xl border-b border-line' : 'bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <motion.button
-              type="button"
-              aria-label="Siddhanta Mohanty — back to top"
-              whileHover={{ scale: 1.05 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center cursor-pointer"
-            >
-              <div className="w-9 h-9 bg-primary-600 dark:bg-primary-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SM</span>
-              </div>
-            </motion.button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="Siddhanta Mohanty — back to top"
+            className="font-display text-2xl italic leading-none text-fg hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
+          >
+            Siddhanta<span className="text-accent">.</span>
+          </button>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-2">
-              {NAV_ITEMS.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`nav-link relative ${activeSection === item.id ? 'active' : ''}`}
-                  aria-current={activeSection === item.id ? 'true' : undefined}
-                >
-                  {item.label}
-                  {activeSection === item.id && (
-                    <motion.span
-                      layoutId="nav-active-pill"
-                      className="absolute inset-x-2 -bottom-1 h-0.5 bg-primary-600 dark:bg-primary-400 rounded-full"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                </button>
-              ))}
-            </nav>
-
-            {/* Controls */}
-            <div className="flex items-center space-x-2">
+          <nav className="hidden md:flex items-center gap-1 rounded-full border border-line bg-bg/50 backdrop-blur-md px-2 py-1.5" aria-label="Primary">
+            {NAV_ITEMS.map((item) => (
               <button
+                key={item.id}
                 type="button"
-                onClick={onOpenPalette}
-                aria-label="Open command palette"
-                className="hidden md:inline-flex items-center gap-2 h-10 pl-3 pr-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200 hover:border-primary-400 dark:hover:border-primary-500"
+                onClick={() => go(item.id)}
+                aria-current={active === item.id ? 'true' : undefined}
+                className={`relative px-4 py-1.5 rounded-full text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
+                  active === item.id ? 'text-bg' : 'text-muted hover:text-fg'
+                }`}
               >
-                <Search className="w-4 h-4" aria-hidden="true" />
-                <span>Search</span>
-                <kbd className="text-[11px] font-mono border border-gray-300 dark:border-dark-500 rounded px-1.5 py-0.5">{paletteShortcut()}</kbd>
+                {active === item.id && (
+                  <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-fg" transition={{ type: 'spring', stiffness: 400, damping: 34 }} />
+                )}
+                <span className="relative">{item.label}</span>
               </button>
-              <button
-                onClick={toggleDarkMode}
-                className="p-2.5 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 transition-colors duration-200 hover:border-primary-400 dark:hover:border-primary-500"
-                aria-label="Toggle dark mode"
-              >
-                <AnimatePresence mode="wait">
-                  {darkMode ? (
-                    <motion.div
-                      key="sun"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Sun className="w-5 h-5 text-primary-400" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="moon"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Moon className="w-5 h-5 text-gray-700" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </button>
+            ))}
+          </nav>
 
-              <button
-                onClick={() => setMobileMenuOpen((open) => !open)}
-                className="p-2.5 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-600 transition-colors duration-200 hover:border-primary-400 dark:hover:border-primary-500 md:hidden"
-                aria-label="Toggle mobile menu"
-              >
-                <AnimatePresence mode="wait">
-                  {mobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </button>
-            </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onOpenPalette}
+              aria-label="Open command palette"
+              className="hidden md:inline-flex items-center gap-2 h-10 pl-3 pr-2 rounded-full border border-line text-sm text-muted hover:border-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+            >
+              <Search className="w-4 h-4" aria-hidden="true" />
+              <kbd className="font-mono text-[11px] border border-line rounded px-1.5 py-0.5">{paletteShortcut()}</kbd>
+            </button>
+            <button type="button" onClick={toggleDarkMode} aria-label="Toggle dark mode" className={iconButton}>
+              {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button type="button" onClick={() => setOpen((o) => !o)} aria-label="Toggle mobile menu" className={`${iconButton} md:hidden`}>
+              {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-30 bg-black/30 md:hidden"
-            />
-            <motion.div
-              initial={{ opacity: 0, x: -300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ duration: 0.3 }}
-              className="fixed top-16 left-0 z-30 w-64 bottom-0 bg-white dark:bg-dark-800 shadow-xl border-r border-gray-200 dark:border-dark-600 md:hidden"
-            >
-              <div className="flex flex-col p-6 space-y-2">
-                {NAV_ITEMS.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className="text-left px-4 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors duration-200"
-                  >
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-30 bg-bg/95 backdrop-blur-xl pt-24 px-6 md:hidden"
+          >
+            <ul className="space-y-2">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.id}>
+                  <button type="button" onClick={() => go(item.id)} className="font-display text-5xl text-fg hover:text-accent transition-colors">
                     {item.label}
                   </button>
-                ))}
-              </div>
-            </motion.div>
-          </>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

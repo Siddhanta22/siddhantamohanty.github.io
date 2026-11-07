@@ -1,133 +1,96 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Mail, Linkedin, Github, MapPin, Copy, Check } from 'lucide-react';
-import FloatingOrbs from './FloatingOrbs';
+import { Mail, Linkedin, Github, MapPin, FileText, Check } from 'lucide-react';
+import Magnetic from './Magnetic';
+import { viewResume } from '../utils/resume';
+import Kicker from './Kicker';
+
+const EMAIL = 'siddhantamohanty22@gmail.com';
+
+const LINKS = [
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/siddhanta-mohanty-13aa92222', label: 'linkedin.com/in/siddhanta-mohanty-​13aa92222' },
+  { name: 'GitHub', icon: Github, href: 'https://github.com/Siddhanta22', label: 'github.com/Siddhanta22' },
+  { name: 'Email', icon: Mail, href: `mailto:${EMAIL}`, label: 'Open in mail app' },
+];
+
+const pill =
+  'inline-flex items-center gap-2 px-5 py-3 rounded-full border border-line text-fg hover:border-accent hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70';
 
 const Contact = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const EMAIL = 'siddhantamohanty22@gmail.com';
   const [copied, setCopied] = useState(false);
 
-  const copyEmail = async () => {
+  const copy = async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 2200);
     } catch {
-      // Clipboard unavailable (older browser / insecure context): fall back to opening a mail draft
+      // Clipboard unavailable (older browser / insecure context): fall back to a mail draft
       window.location.href = `mailto:${EMAIL}`;
     }
   };
 
-  const contactLinks = [
-    {
-      name: "Email",
-      icon: Mail,
-      url: "mailto:siddhantamohanty22@gmail.com",
-      label: "siddhantamohanty22@gmail.com"
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      url: "https://linkedin.com/in/siddhanta-mohanty-13aa92222",
-      label: "linkedin.com/in/siddhanta-mohanty-\u200b13aa92222"   // zero-width space: lets the long ID wrap cleanly
-    },
-    {
-      name: "GitHub",
-      icon: Github,
-      url: "https://github.com/Siddhanta22",
-      label: "github.com/Siddhanta22"
-    }
-  ];
-
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-gray-50/90 via-white/90 to-gray-50/90 dark:from-dark-900/90 dark:via-dark-800/90 dark:to-dark-900/90 relative overflow-hidden">
-      <FloatingOrbs variant="subtle" />
-
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contact" className="relative overflow-hidden py-32 md:py-44 border-t border-line">
+      {/* First light: the page ends at dawn */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(70% 60% at 50% 110%, rgb(var(--accent) / 0.38), transparent 70%)' }}
+        aria-hidden="true"
+      />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8 }}
-          className="text-center"
         >
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
-          >
-            Let's <span className="gradient-text">Connect</span>
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto"
-          >
+          <Kicker n="06" label="Contact" />
+          <h2 className="mt-4 font-display text-7xl md:text-[9rem] leading-[0.9] text-fg">
+            Let's <span className="italic text-accent">connect.</span>
+          </h2>
+          <p className="mt-8 max-w-2xl text-xl text-muted leading-relaxed">
             I enjoy collaborating with engineers, building real-world systems, and exploring new opportunities in AI and software engineering.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid sm:grid-cols-3 gap-5 mb-12 max-w-5xl mx-auto"
-          >
-            {contactLinks.map((contact, index) => (
-              <motion.a
-                key={index}
-                href={contact.url}
-                target={contact.url.startsWith('http') ? '_blank' : undefined}
-                rel={contact.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex flex-col items-center p-6 bg-white dark:bg-dark-800 rounded-xl shadow-lg border border-gray-200 dark:border-dark-700 hover:shadow-xl transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center mb-4">
-                  <contact.icon className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{contact.name}</span>
-                <span className="text-xs text-gray-600 dark:text-gray-400 text-center break-words">{contact.label}</span>
-              </motion.a>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex items-center justify-center gap-2 text-gray-600 dark:text-gray-400 mb-8"
-          >
-            <MapPin className="w-5 h-5" />
-            <span>State College, PA, USA</span>
-          </motion.div>
-
-          <motion.button
-            type="button"
-            onClick={copyEmail}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.6, delay: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 dark:bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-primary-700 dark:hover:bg-primary-400 transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-dark-900"
-          >
-            {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-            <span>{copied ? 'Copied!' : 'Copy email address'}</span>
-            <span className="sr-only" role="status" aria-live="polite">{copied ? 'Email address copied to clipboard' : ''}</span>
-          </motion.button>
+          </p>
         </motion.div>
+
+        <Magnetic strength={0.12} className="mt-14 md:mt-20 inline-block max-w-full">
+          <button
+            type="button"
+            onClick={copy}
+            aria-label={`Copy email address ${EMAIL}`}
+            className="group relative text-left font-display text-4xl sm:text-5xl md:text-7xl leading-tight text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
+          >
+            <span className="bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_2px] bg-left-bottom group-hover:bg-[length:100%_2px] transition-[background-size] duration-500 break-all">
+              {EMAIL}
+            </span>
+            <span className="ml-4 inline-flex items-center gap-1.5 align-middle font-mono text-xs uppercase tracking-wide text-accent">
+              {copied ? <><Check className="w-4 h-4" /> Copied</> : 'Click to copy'}
+            </span>
+          </button>
+          <span className="sr-only" role="status" aria-live="polite">{copied ? 'Email address copied to clipboard' : ''}</span>
+        </Magnetic>
+
+        <div className="mt-14 flex flex-wrap items-center gap-3">
+          {LINKS.map(({ name, icon: Icon, href }) => (
+            <a
+              key={name}
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className={pill}
+            >
+              <Icon className="w-4 h-4" /> {name}
+            </a>
+          ))}
+          <button type="button" onClick={viewResume} className={pill}>
+            <FileText className="w-4 h-4" /> Résumé
+          </button>
+        </div>
+
+        <p className="mt-10 inline-flex items-center gap-2 text-muted">
+          <MapPin className="w-4 h-4" /> State College, PA, USA
+        </p>
       </div>
     </section>
   );

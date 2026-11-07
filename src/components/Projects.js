@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, ChevronDown, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import SpotlightCard from './SpotlightCard';
-import FloatingOrbs from './FloatingOrbs';
+import { ExternalLink, Github, ZoomIn, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { projects } from '../data';
+import Kicker from './Kicker';
 
-const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
+const imagePath = (filename) => `${process.env.PUBLIC_URL || ''}${filename}`;
+const pad = (n) => String(n).padStart(2, '0');
+
+const Lightbox = ({ title, shots, index, onClose, onNav }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
   }, [onClose, onNav]);
 
   const many = shots.length > 1;
-  const navButton = 'absolute top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-primary-400 transition-colors';
+  const nav = 'absolute top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-accent transition-colors';
 
   return (
     <motion.div
@@ -46,22 +47,15 @@ const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 sm:p-10"
+      className="fixed inset-0 z-[70] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-10"
     >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Close screenshot viewer"
-        className="absolute top-4 right-4 p-3 rounded-full bg-black/60 text-white hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-primary-400 transition-colors"
-      >
-        <X className="w-5 h-5" />
+      <button type="button" onClick={onClose} aria-label="Close screenshots" className="absolute top-5 right-5 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-accent">
+        <X className="w-6 h-6" />
       </button>
-
       <div onClick={(e) => e.stopPropagation()} className="relative flex flex-col items-center max-w-6xl w-full">
         <img
-          src={getImagePath(shots[index])}
+          src={imagePath(shots[index])}
           alt={`${title} screenshot ${index + 1} of ${shots.length}`}
           className="max-h-[80vh] w-auto max-w-full rounded-lg shadow-2xl object-contain"
         />
@@ -70,12 +64,8 @@ const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
         </p>
         {many && (
           <>
-            <button type="button" onClick={() => onNav(-1)} aria-label="Previous screenshot" className={`${navButton} left-2 sm:-left-14`}>
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button type="button" onClick={() => onNav(1)} aria-label="Next screenshot" className={`${navButton} right-2 sm:-right-14`}>
-              <ChevronRight className="w-6 h-6" />
-            </button>
+            <button type="button" onClick={() => onNav(-1)} aria-label="Previous screenshot" className={`${nav} left-2 sm:-left-14`}><ChevronLeft className="w-6 h-6" /></button>
+            <button type="button" onClick={() => onNav(1)} aria-label="Next screenshot" className={`${nav} right-2 sm:-right-14`}><ChevronRight className="w-6 h-6" /></button>
           </>
         )}
       </div>
@@ -83,18 +73,34 @@ const Lightbox = ({ title, shots, index, onClose, onNav, getImagePath }) => {
   );
 };
 
+const linkClass =
+  'inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line text-sm text-fg hover:border-accent hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70';
+
 const Projects = ({ openRequest }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const getImagePath = (filename) => {
-    return `${process.env.PUBLIC_URL || ''}${filename}`;
-  };
-
+  const [activeId, setActiveId] = useState(projects[0].id);
   const [lightbox, setLightbox] = useState(null);
   const lastFocus = useRef(null);
+
+  // Highlight the index entry for whichever project is crossing the middle of the viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveId(Number(entry.target.dataset.id));
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    document.querySelectorAll('[data-project]').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // A skill, the terminal or the palette asked for one of these projects
+  useEffect(() => {
+    if (!openRequest) return;
+    setActiveId(openRequest.id);
+    document.getElementById(`project-${openRequest.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [openRequest]);
 
   const openLightbox = (project, index) => {
     lastFocus.current = document.activeElement;
@@ -108,256 +114,136 @@ const Projects = ({ openRequest }) => {
     setLightbox((l) => (l ? { ...l, index: (l.index + delta + l.shots.length) % l.shots.length } : l));
   }, []);
 
-  const [activeId, setActiveId] = useState(projects[0].id);
-
-  // A skill chip asked to open one of these rows: expand it, then scroll once the
-  // previously open row has finished collapsing so the target lands in the right place.
-  useEffect(() => {
-    if (!openRequest) return undefined;
-    setActiveId(openRequest.id);
-    const timer = setTimeout(() => {
-      document.getElementById(`project-${openRequest.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 400);
-    return () => clearTimeout(timer);
-  }, [openRequest]);
-
-  const rowVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
-  };
-
   return (
-    <section id="projects" className="py-24 bg-gray-50/90 dark:bg-dark-800/90 relative overflow-hidden">
-      <FloatingOrbs variant="subtle" />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="projects" className="relative py-28 md:py-36 border-t border-line">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-14"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7 }}
+          className="mb-16 md:mb-24"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-            Featured <span className="gradient-text">Projects</span>
+          <Kicker n="02" label="Selected work" />
+          <h2 className="mt-4 font-display text-6xl md:text-8xl leading-[0.92] text-fg">
+            Things I've <span className="italic text-accent">built</span>
           </h2>
         </motion.div>
 
-        <div className="relative">
-          {/* Branch line */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.1, ease: 'easeInOut' }}
-            style={{ transformOrigin: 'top' }}
-            className="hidden sm:block absolute left-4 top-0 bottom-0 w-px bg-gray-200 dark:bg-dark-600"
-          />
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="space-y-5"
-          >
-            {projects.map((project) => {
-              const isActive = activeId === project.id;
-              const toggle = () => setActiveId(isActive ? null : project.id);
-
-              return (
-                <motion.div key={project.id} id={`project-${project.id}`} variants={rowVariants} className="relative">
-                  {/* Branch node */}
-                  <span className="hidden sm:flex absolute left-0 top-8 w-8 items-center justify-center z-10">
-                    <motion.span
-                      animate={
-                        isActive
-                          ? { boxShadow: ['0 0 0 0 rgba(6,182,212,0.45)', '0 0 0 8px rgba(6,182,212,0)', '0 0 0 0 rgba(6,182,212,0)'] }
-                          : {}
-                      }
-                      transition={isActive ? { duration: 2, repeat: Infinity, ease: 'easeInOut' } : {}}
-                      className={`w-3 h-3 rounded-full ring-4 ring-gray-50 dark:ring-dark-800 transition-colors duration-300 ${
-                        isActive ? 'bg-primary-500' : 'bg-gray-300 dark:bg-dark-500'
-                      }`}
-                    />
-                  </span>
-
-                  <SpotlightCard
-                    className={`relative sm:ml-10 rounded-xl border bg-white dark:bg-dark-700 overflow-hidden transition-colors duration-300 ${
-                      isActive
-                        ? 'border-primary-300 dark:border-primary-600 shadow-lg'
-                        : 'border-gray-200 dark:border-dark-600 hover:border-gray-300 dark:hover:border-dark-500'
-                    }`}
-                  >
-                    <div
-                      onClick={toggle}
-                      className="w-full flex items-center gap-5 p-6 text-left cursor-pointer select-none"
+        <div className="grid lg:grid-cols-[17rem_1fr] gap-12 xl:gap-20">
+          <nav aria-label="Projects index" className="hidden lg:block">
+            <ol className="sticky top-28 space-y-1">
+              {projects.map((p, i) => {
+                const on = activeId === p.id;
+                return (
+                  <li key={p.id}>
+                    <button
+                      type="button"
+                      onClick={() => document.getElementById(`project-${p.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                      aria-current={on ? 'true' : undefined}
+                      className={`group flex w-full items-baseline gap-3 py-1.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded ${on ? 'text-fg' : 'text-muted hover:text-fg'}`}
                     >
-                      {/* The real toggle is a button (keyboard + screen readers); the row's own
-                          onClick just keeps the whole row clickable for mouse users. The
-                          GitHub/demo links sit beside it, never inside it. */}
-                      <h3 className="flex-1 min-w-0">
+                      <span className={`font-mono text-xs transition-colors ${on ? 'text-accent' : ''}`}>{pad(i + 1)}</span>
+                      <span className={`font-display text-2xl leading-tight transition-all ${on ? 'translate-x-1' : ''}`}>{p.title}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+
+          <div>
+            {projects.map((project, i) => {
+              const shots = project.screenshots || [];
+              return (
+                <article
+                  key={project.id}
+                  id={`project-${project.id}`}
+                  data-project
+                  data-id={project.id}
+                  className="scroll-mt-24 py-14 md:py-20 border-t border-line first:border-t-0 first:pt-0"
+                >
+                  <div className="flex items-baseline justify-between gap-4 font-mono text-xs uppercase tracking-[0.18em] text-muted">
+                    <span><span className="text-accent">{pad(i + 1)}</span> / {pad(projects.length)}</span>
+                    <span>{project.role}</span>
+                  </div>
+
+                  <h3 className="mt-6 font-display text-5xl md:text-7xl leading-[0.95] text-fg">{project.title}</h3>
+                  <p className="mt-5 text-xl md:text-2xl text-muted max-w-2xl leading-snug">{project.teaser}</p>
+
+                  {shots.length > 0 && (
+                    <div className="mt-10 grid grid-cols-2 gap-3">
+                      {shots.map((shot, s) => (
                         <button
+                          key={shot}
                           type="button"
-                          aria-expanded={isActive}
-                          className="flex w-full min-w-0 items-center gap-5 text-left rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 focus-visible:ring-offset-4 dark:focus-visible:ring-offset-dark-700"
+                          onClick={() => openLightbox(project, s)}
+                          aria-label={`Enlarge ${project.title} screenshot ${s + 1}`}
+                          className={`group relative overflow-hidden rounded-2xl border border-line bg-panel cursor-zoom-in aspect-video focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
+                            shots.length !== 2 && s === 0 ? 'col-span-2' : ''
+                          }`}
                         >
-                          <span className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary-50 dark:bg-primary-900/30 shrink-0">
-                            <project.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" strokeWidth={2} />
-                          </span>
-                          <span className="flex-1 min-w-0">
-                            <span className="block text-lg font-bold text-gray-900 dark:text-white truncate">
-                              {project.title}
-                            </span>
-                            <span className="block text-sm font-normal text-gray-500 dark:text-gray-300 truncate">
-                              {project.teaser}
-                            </span>
+                          <img
+                            src={imagePath(shot)}
+                            alt={`${project.title} screenshot ${s + 1}`}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                            onError={(e) => { e.target.style.display = 'none'; }}
+                          />
+                          <span className="absolute bottom-3 right-3 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
+                            <ZoomIn className="w-4 h-4" />
                           </span>
                         </button>
-                      </h3>
-                      <div className="flex items-center gap-2 shrink-0">
-                        {project.github ? (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label={`Open ${project.title} source code`}
-                            title="Source Code"
-                            className="p-2.5 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
-                          >
-                            <Github className="w-4 h-4" />
-                          </a>
-                        ) : (
-                          <span className="hidden sm:block w-9 h-9" aria-hidden="true" />
-                        )}
-                        {project.live ? (
-                          <a
-                            href={project.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label={`Open ${project.title} demo`}
-                            title="Live Demo"
-                            className="p-2.5 bg-gray-100 dark:bg-dark-600 rounded-lg text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        ) : (
-                          <span className="hidden sm:block w-9 h-9" aria-hidden="true" />
-                        )}
-                        <ChevronDown
-                          aria-hidden="true"
-                          className={`w-5 h-5 text-gray-400 dark:text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
-                        />
-                      </div>
+                      ))}
                     </div>
+                  )}
 
-                    <AnimatePresence initial={false}>
-                      {isActive && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-6 pb-7 pt-4 border-t border-gray-100 dark:border-dark-600">
-                            <span className="text-xs font-mono uppercase tracking-wide text-gray-600 dark:text-gray-300">
-                              {project.role}
-                            </span>
-                            {project.screenshots && project.screenshots.length > 0 && (
-                              <div className={`grid gap-2 mt-4 mb-4 ${project.screenshots.length === 1 ? 'grid-cols-1' : 'grid-cols-3'}`}>
-                                {project.screenshots.map((screenshot, i) => (
-                                  <button
-                                    key={i}
-                                    type="button"
-                                    onClick={() => openLightbox(project, i)}
-                                    aria-label={`Enlarge ${project.title} screenshot ${i + 1}`}
-                                    className="group relative aspect-video rounded-lg overflow-hidden border border-gray-200 bg-gray-100 dark:border-dark-600 dark:bg-dark-900 cursor-zoom-in focus-visible:ring-2 focus-visible:ring-primary-500"
-                                  >
-                                    <img
-                                      src={getImagePath(screenshot)}
-                                      alt={`${project.title} screenshot ${i + 1}`}
-                                      loading="lazy"
-                                      decoding="async"
-                                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
-                                      onError={(e) => {
-                                        e.target.style.display = 'none';
-                                      }}
-                                    />
-                                    <span className="absolute bottom-2 right-2 p-1.5 rounded-md bg-black/55 text-white opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
-                                      <ZoomIn className="w-4 h-4" />
-                                    </span>
-                                  </button>
-                                ))}
-                              </div>
-                            )}
+                  <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">What it is</p>
+                  <p className="mt-2 text-lg text-fg/85 leading-relaxed max-w-2xl">{project.summary}</p>
 
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm mt-3 mb-4">
-                              {project.summary}
-                            </p>
+                  <ul className="mt-6 flex flex-wrap gap-2" aria-label="Technologies">
+                    {project.technologies.map((tech) => (
+                      <li key={tech} className="px-3 py-1 rounded-full border border-line font-mono text-xs text-muted">{tech}</li>
+                    ))}
+                  </ul>
 
-                            <div className="flex flex-wrap gap-1.5 mb-4">
-                              {project.technologies.map((tech, i) => (
-                                <span
-                                  key={i}
-                                  className="px-2.5 py-1 bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
+                  {project.impact && (
+                    <div className="mt-8 border-l-2 border-accent pl-5 max-w-2xl">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">Under the hood</p>
+                      <p className="mt-2 text-fg/90 leading-relaxed">{project.impact}</p>
+                    </div>
+                  )}
 
-                            {project.impact && (
-                              <p className="pt-4 border-t border-gray-100 dark:border-dark-600 text-sm font-medium text-gray-800 dark:text-gray-200">
-                                {project.impact}
-                              </p>
-                            )}
-                          </div>
-                        </motion.div>
+                  {(project.github || project.live) && (
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} source code`} className={linkClass}>
+                          <Github className="w-4 h-4" /> Source
+                        </a>
                       )}
-                    </AnimatePresence>
-                  </SpotlightCard>
-                </motion.div>
+                      {project.live && (
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} demo`} className={linkClass}>
+                          <ExternalLink className="w-4 h-4" /> Live demo
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </article>
               );
             })}
-          </motion.div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="https://github.com/Siddhanta22"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300"
-          >
-            <Github className="w-5 h-5 mr-2" />
-            View More on GitHub
-          </motion.a>
-        </motion.div>
+            <div className="pt-10 border-t border-line">
+              <a href="https://github.com/Siddhanta22" target="_blank" rel="noopener noreferrer" className={linkClass}>
+                <Github className="w-4 h-4" /> View more on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <AnimatePresence>
-        {lightbox && (
-          <Lightbox
-            title={lightbox.title}
-            shots={lightbox.shots}
-            index={lightbox.index}
-            onClose={closeLightbox}
-            onNav={navLightbox}
-            getImagePath={getImagePath}
-          />
-        )}
+        {lightbox && <Lightbox title={lightbox.title} shots={lightbox.shots} index={lightbox.index} onClose={closeLightbox} onNav={navLightbox} />}
       </AnimatePresence>
     </section>
   );
