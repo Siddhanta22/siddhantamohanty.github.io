@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, ArrowDown, Sparkles } from 'lucide-react';
-import FloatingOrbs from './FloatingOrbs';
+import { motion } from 'framer-motion';
+import { FileText, ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { paletteShortcut } from '../utils/platform';
 import { viewResume } from '../utils/resume';
 import { projects, experiences } from '../data';
 import { skillCategories } from './Skills';
@@ -251,145 +251,118 @@ const TerminalCard = ({ onOpenItem }) => {
   );
 };
 
+const SOCIALS = [
+  { label: 'GitHub', href: 'https://github.com/Siddhanta22', icon: Github },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/siddhanta-mohanty-13aa92222', icon: Linkedin },
+  { label: 'Email', href: 'mailto:siddhantamohanty22@gmail.com', icon: Mail },
+];
+
+const FACTS = [
+  { label: 'now', value: 'building Promise Path with Mentor A Promise' },
+  { label: 'looking for', value: 'backend and applied-AI engineering roles' },
+];
+
+const Keycaps = () => (
+  <span className="inline-flex items-center gap-1 align-middle">
+    {paletteShortcut().replace('⌘K', '⌘ K').split(' ').map((key) => (
+      <kbd key={key} className="min-w-[1.6rem] px-1.5 py-0.5 text-center rounded-md border border-gray-300 dark:border-dark-500 border-b-2 bg-white dark:bg-dark-800 font-mono text-xs text-gray-700 dark:text-gray-200">
+        {key}
+      </kbd>
+    ))}
+  </span>
+);
+
+const rise = (delay) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay },
+});
+
 const Hero = ({ onOpenItem }) => {
-  const [currentTagline, setCurrentTagline] = useState(0);
-
-  const taglines = [
-    "Support RAG that halved resolution time",
-    "Agents that replay tasks 32x faster",
-    "Incident response that explains itself",
-    "AI newsletters from 50+ sources"
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTagline((prev) => (prev + 1) % taglines.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [taglines.length]);
-
   const scrollToProjects = () => {
     document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section className="relative overflow-hidden min-h-[100svh] flex items-center bg-gradient-to-br from-gray-50/90 via-white/90 to-gray-50/90 dark:from-dark-900/90 dark:via-dark-800/90 dark:to-dark-900/90 pt-28 pb-24 md:pt-36 md:pb-28">
-      <FloatingOrbs />
-
-      {/* Fades the hero into the next section so there is no hard edge */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white/90 dark:to-dark-900/90 pointer-events-none" />
-
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 xl:gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-7 text-center lg:text-left"
-          >
-            {/* Main Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-4"
-            >
-              <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold leading-tight"
-              >
-                <span className="gradient-text">Siddhanta Mohanty</span>
-              </motion.h1>
-
-              {/* Rotating Tagline */}
-              <div className="min-h-[4.5rem] md:min-h-[3.5rem] lg:min-h-[4.5rem] xl:min-h-[3.5rem] flex items-center justify-center lg:justify-start px-2 lg:px-0 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentTagline}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-semibold text-gray-700 dark:text-gray-300 text-center lg:text-left leading-snug text-balance"
-                  >
-                    {taglines[currentTagline]}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 sm:gap-x-3 text-sm sm:text-lg md:text-xl text-gray-600 dark:text-gray-400">
-                <span>Software Engineer</span>
-                <Sparkles className="hidden sm:block w-4 h-4 text-primary-500" />
-                <span>Applied AI</span>
-                <Sparkles className="hidden sm:block w-4 h-4 text-accent-500" />
-                <span>Backend Systems</span>
-              </div>
-
-            </motion.div>
-
-            {/* Value Proposition */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl xl:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
-            >
-              I build backend and applied-AI systems that hold up in production. At HCLTech that meant a <span className="font-semibold text-gray-900 dark:text-white">RAG support system that halved resolution time</span>; at Penn State, research on <span className="font-semibold text-gray-900 dark:text-white">self-correcting LLM code verification</span>; and in personal projects like <span className="whitespace-nowrap">Self-Heal</span> and Rewind, I take the whole thing <span className="font-semibold text-gray-900 dark:text-white">end to end</span>, from the API to the model to the interface.
+          <div className="text-center lg:text-left">
+            <motion.p {...rise(0)} className="inline-flex items-center gap-2.5 rounded-full border border-gray-200 dark:border-dark-600 bg-white/70 dark:bg-dark-800/70 px-3.5 py-1.5 font-mono text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Open to new roles · State College, PA
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center pt-2 sm:pt-6"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={scrollToProjects}
-                className="px-8 py-3.5 sm:py-4 border-2 border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group"
-              >
-                <span>View Projects</span>
-                <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-              </motion.button>
+            <motion.h1 {...rise(0.1)} className="mt-6 text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Siddhanta Mohanty
+            </motion.h1>
 
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+            <motion.p {...rise(0.18)} className="mt-4 font-mono text-sm sm:text-base text-gray-500 dark:text-gray-400">
+              Software Engineer <span className="text-primary-500">/</span> Applied AI <span className="text-primary-500">/</span> Backend Systems
+            </motion.p>
+
+            <motion.p {...rise(0.26)} className="mt-8 text-2xl md:text-3xl font-semibold leading-snug text-gray-800 dark:text-gray-100 text-balance">
+              I like figuring out how things work, then building them.
+            </motion.p>
+
+            <motion.p {...rise(0.34)} className="mt-5 text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Penn State computer science grad building backend and applied-AI systems, from the API to the model to the interface.
+            </motion.p>
+
+            <motion.dl {...rise(0.42)} className="mt-6 space-y-1.5 font-mono text-sm text-left max-w-xl mx-auto lg:mx-0">
+              {FACTS.map((fact) => (
+                <div key={fact.label} className="flex gap-3">
+                  <dt className="w-24 shrink-0 text-primary-600 dark:text-primary-400">{fact.label}</dt>
+                  <dd className="text-gray-700 dark:text-gray-300">{fact.value}</dd>
+                </div>
+              ))}
+            </motion.dl>
+
+            <motion.div {...rise(0.5)} className="mt-9 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+              <button
+                type="button"
+                onClick={scrollToProjects}
+                className="group inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
+              >
+                View Projects
+                <ArrowDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+              </button>
+              <button
+                type="button"
                 onClick={viewResume}
-                className="px-8 py-3.5 sm:py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-lg font-semibold text-lg hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300 flex items-center space-x-2"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-semibold hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <FileText className="w-5 h-5" />
-                <span>View Résumé</span>
-              </motion.button>
+                View Résumé
+              </button>
+              {SOCIALS.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  title={label}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="p-2.5 rounded-lg border border-gray-200 dark:border-dark-600 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-400 dark:hover:border-primary-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </motion.div>
-          </motion.div>
+
+            <motion.p {...rise(0.58)} className="hidden md:block mt-6 text-sm text-gray-500 dark:text-gray-400">
+              Press <Keycaps /> to jump anywhere on the site.
+            </motion.p>
+          </div>
 
           <div className="hidden lg:block">
             <TerminalCard onOpenItem={onOpenItem} />
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-gray-400 dark:bg-gray-600 rounded-full mt-2"
-          ></motion.div>
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
