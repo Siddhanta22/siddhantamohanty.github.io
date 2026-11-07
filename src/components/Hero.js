@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, ArrowDown, Sparkles } from 'lucide-react';
 import FloatingOrbs from './FloatingOrbs';
 import { viewResume } from '../utils/resume';
+import { projects, experiences } from '../data';
+import { skillCategories } from './Skills';
 
 const STACK_GROUPS = [
   { label: 'backend/', items: 'Python, FastAPI, Flask, Node.js' },
@@ -18,15 +20,31 @@ const BOOT_LINES = [
   { prompt: 'status', output: 'Open to new opportunities' },
 ];
 
+const SKILL_LABELS = ['languages/', 'ai-ml/', 'backend/', 'vision/', 'databases/', 'tooling/'];
+
 const COMMANDS = {
-  help: () => ({ output: "Commands: whoami, about, stack, projects, experience, skills, contact, resume, clear" }),
+  help: () => ({ output: "Commands: whoami, about, stack, projects, experience, skills, contact, resume, clear. Or click one below." }),
   whoami: () => ({ output: 'Siddhanta Mohanty — software engineer building backend systems and applied AI/ML tools.' }),
   about: () => ({ output: "CS grad from Penn State ('26). I like taking ideas from concept to production — APIs, services, AI tooling, research." }),
   stack: () => ({ groups: STACK_GROUPS }),
-  projects: () => ({ output: 'Self-Heal System, Rewind, Scout, and more. Scrolling you there.', scrollTo: 'projects' }),
-  experience: () => ({ output: 'Penn State Research · HCLTech · Advanced Vehicle Team · Elevatoz Loyalty. Scrolling you there.', scrollTo: 'experience' }),
-  skills: () => ({ output: 'Python, TypeScript, React, FastAPI, LangChain, RAG, PostgreSQL, and more. Scrolling you there.', scrollTo: 'skills' }),
-  contact: () => ({ output: 'siddhantamohanty22@gmail.com · linkedin.com/in/siddhanta-mohanty-13aa92222. Scrolling you there.', scrollTo: 'contact' }),
+  projects: () => ({
+    output: `${projects.length} projects. Click one to open it:`,
+    items: projects.map((p) => ({ label: p.title, detail: p.teaser, section: 'projects', id: p.id })),
+  }),
+  experience: () => ({
+    output: 'Click a role to open it:',
+    items: experiences.map((e) => ({ label: e.company, detail: e.role, section: 'experience', id: e.id })),
+  }),
+  skills: () => ({
+    groups: skillCategories.map((c, i) => ({ label: SKILL_LABELS[i] || `${c.title}/`, items: c.skills.map((s) => s.name).join(', ') })),
+  }),
+  contact: () => ({
+    links: [
+      { label: 'siddhantamohanty22@gmail.com', href: 'mailto:siddhantamohanty22@gmail.com' },
+      { label: 'linkedin.com/in/siddhanta-mohanty-13aa92222', href: 'https://linkedin.com/in/siddhanta-mohanty-13aa92222' },
+      { label: 'github.com/Siddhanta22', href: 'https://github.com/Siddhanta22' },
+    ],
+  }),
   resume: () => {
     viewResume();
     return { output: 'Opening résumé in a new tab...' };
@@ -34,23 +52,58 @@ const COMMANDS = {
   sudo: () => ({ output: 'Nice try. Permission denied.' }),
 };
 
-const TerminalBody = ({ block }) => {
-  if (block.groups) {
-    return (
+// Shown as clickable chips under the prompt so visitors don't have to guess what to type.
+const CHIPS = ['projects', 'experience', 'stack', 'skills', 'contact', 'resume', 'help'];
+
+const TerminalBody = ({ block, onOpenItem }) => (
+  <>
+    {block.output && <div className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{block.output}</div>}
+    {block.groups && (
       <div className="mt-1">
         {block.groups.map((group) => (
           <div key={group.label} className="flex gap-3">
-            <span className="text-accent-600 dark:text-accent-400 shrink-0 w-20">{group.label}</span>
+            <span className="text-accent-600 dark:text-accent-400 shrink-0 w-24">{group.label}</span>
             <span className="text-gray-700 dark:text-gray-300">{group.items}</span>
           </div>
         ))}
       </div>
-    );
-  }
-  return <div className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{block.output}</div>;
-};
+    )}
+    {block.items && (
+      <ul className="mt-1.5 space-y-0.5" style={{ '--label-w': `${Math.max(...block.items.map((i) => i.label.length))}ch` }}>
+        {block.items.map((item) => (
+          <li key={`${item.section}-${item.id}`}>
+            <button
+              type="button"
+              onClick={() => onOpenItem(item.section, item.id)}
+              className="group w-full flex items-baseline gap-3 text-left rounded px-2 py-1 -mx-2 hover:bg-primary-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
+            >
+              <span className="text-primary-600 dark:text-primary-400 shrink-0 w-[var(--label-w)] group-hover:underline">{item.label}</span>
+              <span className="truncate text-gray-500 dark:text-gray-400">{item.detail}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    )}
+    {block.links && (
+      <ul className="mt-1.5 space-y-0.5">
+        {block.links.map((link) => (
+          <li key={link.href}>
+            <a
+              href={link.href}
+              target={link.href.startsWith('http') ? '_blank' : undefined}
+              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="text-primary-600 dark:text-primary-400 hover:underline"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </>
+);
 
-const TerminalCard = () => {
+const TerminalCard = ({ onOpenItem }) => {
   const [lines, setLines] = useState([]);
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState([]);
@@ -82,18 +135,17 @@ const TerminalCard = () => {
     const handler = COMMANDS[cmd.toLowerCase()];
     const result = handler ? handler() : { output: `command not found: ${cmd}. Type 'help' for a list of commands.` };
     setLines((prev) => [...prev, { prompt: cmd, ...result }]);
-    if (result.scrollTo) {
-      setTimeout(() => {
-        document.getElementById(result.scrollTo)?.scrollIntoView({ behavior: 'smooth' });
-      }, 500);
-    }
+  };
+
+  const submit = (cmd) => {
+    runCommand(cmd);
+    if (cmd.trim()) setCmdHistory((prev) => [...prev, cmd.trim()]);
+    setHistoryIndex(-1);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      runCommand(input);
-      if (input.trim()) setCmdHistory((prev) => [...prev, input.trim()]);
-      setHistoryIndex(-1);
+      submit(input);
       setInput('');
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
@@ -120,18 +172,18 @@ const TerminalCard = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5 }}
-      className="w-full max-w-md mx-auto lg:mx-0 rounded-xl border border-gray-200 dark:border-dark-700 bg-white/80 dark:bg-dark-800/80 backdrop-blur-sm shadow-xl overflow-hidden font-mono text-sm"
+      className="w-full max-w-xl mx-auto lg:mx-0 lg:ml-auto rounded-xl border border-gray-200 dark:border-dark-700 bg-white/80 dark:bg-dark-800/80 backdrop-blur-sm shadow-2xl overflow-hidden font-mono text-[15px] leading-relaxed"
     >
       <div className="flex items-center gap-1.5 px-4 py-3 border-b border-gray-200 dark:border-dark-700 bg-gray-50 dark:bg-dark-900/60">
         <span className="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-dark-600" />
         <span className="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-dark-600" />
         <span className="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-dark-600" />
-        <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">siddhanta@portfolio</span>
+        <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">siddhanta@portfolio — try it, it's interactive</span>
       </div>
       <div
         ref={scrollRef}
         onClick={() => inputRef.current?.focus()}
-        className="p-5 space-y-4 max-h-[26rem] overflow-y-auto cursor-text"
+        className="p-6 space-y-4 h-[28rem] overflow-y-auto cursor-text"
       >
         {BOOT_LINES.map((block, index) => (
           <motion.div
@@ -143,7 +195,7 @@ const TerminalCard = () => {
             <div className="text-primary-600 dark:text-primary-400">
               <span className="text-gray-400 dark:text-gray-500">$</span> {block.prompt}
             </div>
-            <TerminalBody block={block} />
+            <TerminalBody block={block} onOpenItem={onOpenItem} />
           </motion.div>
         ))}
 
@@ -152,7 +204,7 @@ const TerminalCard = () => {
             <div className="text-primary-600 dark:text-primary-400">
               <span className="text-gray-400 dark:text-gray-500">$</span> {block.prompt}
             </div>
-            <TerminalBody block={block} />
+            <TerminalBody block={block} onOpenItem={onOpenItem} />
           </div>
         ))}
 
@@ -179,11 +231,27 @@ const TerminalCard = () => {
           />
         )}
       </div>
+
+      {booted && (
+        <div className="flex flex-wrap items-center gap-1.5 px-5 py-3.5 border-t border-gray-200 dark:border-dark-700 bg-gray-50/70 dark:bg-dark-900/40">
+          <span className="text-xs text-gray-400 dark:text-gray-500 mr-0.5">run:</span>
+          {CHIPS.map((cmd) => (
+            <button
+              key={cmd}
+              type="button"
+              onClick={() => { submit(cmd); inputRef.current?.focus(); }}
+              className="px-2 py-1 rounded-md border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-800 text-xs text-primary-600 dark:text-primary-400 hover:border-primary-400 dark:hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70"
+            >
+              {cmd}
+            </button>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };
 
-const Hero = () => {
+const Hero = ({ onOpenItem }) => {
   const [currentTagline, setCurrentTagline] = useState(0);
 
   const taglines = [
@@ -212,7 +280,7 @@ const Hero = () => {
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white/90 dark:to-dark-900/90 pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 xl:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -227,7 +295,7 @@ const Hero = () => {
               className="space-y-4"
             >
               <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-7xl font-bold leading-tight"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold leading-tight"
               >
                 <span className="gradient-text">Siddhanta Mohanty</span>
               </motion.h1>
@@ -298,7 +366,7 @@ const Hero = () => {
           </motion.div>
 
           <div className="hidden lg:block">
-            <TerminalCard />
+            <TerminalCard onOpenItem={onOpenItem} />
           </div>
         </div>
       </div>

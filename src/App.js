@@ -67,7 +67,7 @@ function App() {
       {/* Main Content */}
       <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onOpenPalette={() => setPaletteOpen(true)} />
       <main className="relative z-10">
-        <Hero />
+        <Hero onOpenItem={openItem} />
         <About />
         <Projects openRequest={openRequest?.section === 'projects' ? openRequest : null} />
         <Quote />
