@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MotionConfig } from 'framer-motion';
 import Header from './components/Header';
-import Hero from './components/Hero';
+import Story from './components/Story';
 import About from './components/About';
 import Projects from './components/Projects';
 import Quote from './components/Quote';
@@ -67,7 +67,7 @@ function App() {
       {/* Main Content */}
       <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onOpenPalette={() => setPaletteOpen(true)} />
       <main className="relative z-10">
-        <Hero onOpenItem={openItem} />
+        <Story onOpenItem={openItem} />
         <About />
         <Projects openRequest={openRequest?.section === 'projects' ? openRequest : null} />
         <Quote />
