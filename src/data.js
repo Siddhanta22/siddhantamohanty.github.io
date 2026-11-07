@@ -94,6 +94,22 @@ export const projects = [
 
 export const experiences = [
   {
+    id: 5,
+    company: "Mentor A Promise",
+    role: "Backend Developer (Volunteer)",
+    location: "Remote",
+    dates: "Oct 2026 – Present",
+    teaser: "Building Promise Path, a learning platform that brings education and mentorship to children living in NYC shelters.",
+    achievements: [
+      "Developing REST APIs and database models in Django to support course management, instructor workflows, and role-based access control",
+      "Building responsive React and TypeScript components, translating Figma designs into interfaces integrated with the backend services",
+      "Contributing to architecture and product discussions, helping shape LMS workflows, feature implementations, and the overall user experience across frontend, backend, and product",
+      "Introducing AI-assisted development workflows and coding automation to speed up implementation"
+    ],
+    technologies: ["Django", "REST APIs", "React", "TypeScript", "Figma", "AI-assisted development"],
+    logo: "MAP"
+  },
+  {
     id: 1,
     company: "Penn State University",
     role: "Research Assistant",
