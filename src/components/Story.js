@@ -58,16 +58,24 @@ const SANS = 'Inter, system-ui, sans-serif';
 const MONO = '"JetBrains Mono", ui-monospace, monospace';
 
 const usableWidth = (W) => Math.min(W * 0.82, 1100);
+const NARROW = 700; // below this the shapes are re-laid-out for a phone
+
+const fitSize = (ctx, text, weight, family, maxW, maxSize) => {
+  ctx.font = `${weight} 100px ${family}`;
+  return Math.min(maxSize, Math.floor((100 * maxW) / ctx.measureText(text).width));
+};
 
 const drawBigText = (text) => (ctx, W, H) => {
-  let size = 200;
-  ctx.font = `700 ${size}px ${SANS}`;
+  const narrow = W < NARROW;
+  // On a phone a long name is stacked on two lines so it can be big enough to read
+  const lines = narrow && text.includes(' ') ? text.split(' ') : [text];
   const maxW = usableWidth(W);
-  size = Math.min(size, Math.floor((size * maxW) / ctx.measureText(text).width));
+  const size = Math.min(...lines.map((l) => fitSize(ctx, l, 700, SANS, maxW, narrow ? 150 : 200)));
   ctx.font = `700 ${size}px ${SANS}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, W / 2, H * 0.3);
+  const cy = narrow ? H * 0.27 : H * 0.3;
+  lines.forEach((line, i) => ctx.fillText(line, W / 2, cy + (i - (lines.length - 1) / 2) * size * 1.3));
 };
 
 const roundedRect = (ctx, x, y, w, h, r) => {
@@ -79,48 +87,87 @@ const roundedRect = (ctx, x, y, w, h, r) => {
 const drawPipeline = (ctx, W, H) => {
   const labels = ['error log', 'FAISS', 'LLM', 'Slack'];
   const usable = usableWidth(W);
-  const boxW = Math.min(usable * 0.21, 250);
-  const boxH = Math.min(132, H * 0.15);
-  const gap = (usable - boxW * labels.length) / (labels.length - 1);
-  const startX = (W - usable) / 2;
-  const cy = H * 0.3;
+  const minGap = 56;
   ctx.lineWidth = 5;
   ctx.lineCap = 'round';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.font = `800 ${Math.round(boxH * 0.3)}px ${MONO}`;
+
+  // Try a horizontal row first, shrinking the label size until every box fits its text
+  const boxH = Math.min(132, H * 0.15);
+  for (let fs = Math.round(boxH * 0.3); fs >= 18; fs -= 2) {
+    ctx.font = `800 ${fs}px ${MONO}`;
+    const need = Math.max(...labels.map((l) => ctx.measureText(l).width)) + 40;
+    const maxBox = (usable - minGap * 3) / 4;
+    if (need <= maxBox) {
+      const boxW = Math.min(Math.max(need, Math.min(usable * 0.21, 250)), maxBox);
+      const gap = (usable - boxW * 4) / 3;
+      const startX = (W - usable) / 2;
+      const cy = H * 0.3;
+      labels.forEach((label, i) => {
+        const x = startX + i * (boxW + gap);
+        roundedRect(ctx, x, cy - boxH / 2, boxW, boxH, 18);
+        ctx.stroke();
+        ctx.fillText(label, x + boxW / 2, cy);
+        if (i < 3) {
+          const ax = x + boxW + 14;
+          const bx = x + boxW + gap - 14;
+          ctx.beginPath();
+          ctx.moveTo(ax, cy);
+          ctx.lineTo(bx, cy);
+          ctx.moveTo(bx - 14, cy - 12);
+          ctx.lineTo(bx, cy);
+          ctx.lineTo(bx - 14, cy + 12);
+          ctx.stroke();
+        }
+      });
+      return;
+    }
+  }
+
+  // Too narrow for a row (phones, portrait tablets): stack the boxes top to bottom
+  const vh = Math.min(52, H * 0.06);
+  const fs = Math.round(vh * 0.38);
+  ctx.font = `800 ${fs}px ${MONO}`;
+  const bw = Math.min(usable, Math.max(...labels.map((l) => ctx.measureText(l).width)) + 60);
+  const top = H * 0.1;
+  const gap = (H * 0.4 - vh * 4) / 3;
   labels.forEach((label, i) => {
-    const x = startX + i * (boxW + gap);
-    roundedRect(ctx, x, cy - boxH / 2, boxW, boxH, 18);
+    const y = top + i * (vh + gap);
+    roundedRect(ctx, W / 2 - bw / 2, y, bw, vh, 14);
     ctx.stroke();
-    ctx.fillText(label, x + boxW / 2, cy);
-    if (i < labels.length - 1) {
-      const ax = x + boxW + 14;
-      const bx = x + boxW + gap - 14;
+    ctx.fillText(label, W / 2, y + vh / 2);
+    if (i < 3) {
+      const ay = y + vh + 6;
+      const by = y + vh + gap - 6;
       ctx.beginPath();
-      ctx.moveTo(ax, cy);
-      ctx.lineTo(bx, cy);
-      ctx.moveTo(bx - 14, cy - 12);
-      ctx.lineTo(bx, cy);
-      ctx.lineTo(bx - 14, cy + 12);
+      ctx.moveTo(W / 2, ay);
+      ctx.lineTo(W / 2, by);
+      ctx.moveTo(W / 2 - 10, by - 10);
+      ctx.lineTo(W / 2, by);
+      ctx.lineTo(W / 2 + 10, by - 10);
       ctx.stroke();
     }
   });
 };
 
 const drawBars = (ctx, W, H) => {
+  const narrow = W < NARROW;
   const usable = usableWidth(W);
   const x = (W - usable) / 2;
   const barH = Math.min(64, H * 0.075);
+  const l1 = narrow ? '13.1 s  with an LLM' : '13.1 s   with an LLM in the loop';
+  const l2 = narrow ? '0.41 s  replay' : '0.41 s   replay';
+  const fs = Math.min(Math.round(barH * 0.5), fitSize(ctx, l1, 800, MONO, usable, 99));
   ctx.lineWidth = 5;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
-  ctx.font = `800 ${Math.round(barH * 0.5)}px ${MONO}`;
+  ctx.font = `800 ${fs}px ${MONO}`;
   // The long bar is an outline so it doesn't swallow every particle; the short one is solid.
-  ctx.fillText('13.1 s   with an LLM in the loop', x, H * 0.19);
+  ctx.fillText(l1, x, H * 0.19);
   roundedRect(ctx, x, H * 0.21, usable, barH, 10);
   ctx.stroke();
-  ctx.fillText('0.41 s   replay', x, H * 0.36);
+  ctx.fillText(l2, x, H * 0.36);
   roundedRect(ctx, x, H * 0.38, Math.max(usable * (0.41 / 13.1), 28), barH, 10);
   ctx.fill();
 };
@@ -237,7 +284,7 @@ const Story = ({ onOpenItem }) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     const S = SCENES.length;
-    const COUNT = window.innerWidth < 768 ? 1400 : 4200;
+    const COUNT = window.innerWidth < 768 ? 2400 : 4200;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
 
     let W = 0;
@@ -399,7 +446,7 @@ const Story = ({ onOpenItem }) => {
           </div>
         </div>
 
-        <ol className="hidden md:flex flex-col gap-3 absolute right-6 lg:right-10 top-1/2 -translate-y-1/2" aria-label="Story progress">
+        <ol className="hidden md:flex flex-col gap-1 absolute right-4 lg:right-8 top-1/2 -translate-y-1/2" aria-label="Story progress">
           {SCENES.map((s, i) => (
             <li key={s.id}>
               <button
@@ -407,10 +454,10 @@ const Story = ({ onOpenItem }) => {
                 onClick={() => jumpTo(i)}
                 aria-label={`Go to: ${s.headline}`}
                 aria-current={i === scene ? 'true' : undefined}
-                className={`block w-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
-                  i === scene ? 'h-7 bg-accent' : 'h-2.5 bg-fg/25 hover:bg-fg/50'
-                }`}
-              />
+                className="group grid place-items-center w-8 h-8 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+              >
+                <span className={`block w-2.5 rounded-full transition-all duration-300 ${i === scene ? 'h-7 bg-accent' : 'h-2.5 bg-fg/25 group-hover:bg-fg/50'}`} />
+              </button>
             </li>
           ))}
         </ol>

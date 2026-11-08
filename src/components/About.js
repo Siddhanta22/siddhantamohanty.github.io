@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import Kicker from './Kicker';
+import ParticlePortrait from './ParticlePortrait';
 
 const reveal = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -13,15 +14,6 @@ const tile = 'rounded-3xl border border-line bg-panel p-8';
 const label = 'font-mono text-xs uppercase tracking-[0.18em] text-accent';
 
 const About = () => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  const onMove = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    setTilt({ x: py * -10, y: px * 10 });
-  };
-
   return (
     <section id="about" className="relative py-28 md:py-36">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,22 +37,8 @@ const About = () => {
             </p>
           </motion.div>
 
-          <motion.div {...reveal(0.12)} className="lg:col-span-5 lg:row-span-2 relative" style={{ perspective: 1000 }}>
-            <motion.div
-              onMouseMove={onMove}
-              onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-              animate={{ rotateX: tilt.x, rotateY: tilt.y }}
-              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-              style={{ transformStyle: 'preserve-3d' }}
-              className="h-full min-h-[22rem] rounded-3xl overflow-hidden border border-line bg-panel"
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/headshot-retouched.jpg`}
-                alt="Siddhanta Mohanty"
-                className="w-full h-full object-cover"
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            </motion.div>
+          <motion.div {...reveal(0.12)} className="lg:col-span-5 lg:row-span-2 relative min-h-[26rem] rounded-3xl overflow-hidden border border-line bg-panel">
+            <ParticlePortrait src={`${process.env.PUBLIC_URL}/headshot-retouched.jpg`} alt="Siddhanta Mohanty" />
           </motion.div>
 
           <motion.div {...reveal(0.05)} className={`${tile} lg:col-span-4`}>

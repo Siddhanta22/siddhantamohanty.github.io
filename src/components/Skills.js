@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Brain, Server, Cpu, Settings, Database } from 'lucide-react';
 import {
@@ -129,7 +129,7 @@ export const evidenceFor = (skillName) => {
 
 const CATEGORY_DOTS = ['#ff6a3d', '#8b9cff', '#34d399', '#f5c542', '#f472b6', '#22d3ee'];
 
-const SkillChip = ({ skill, dot, onOpenItem }) => {
+const SkillChip = ({ skill, dot, dimmed, onHot, onOpenItem }) => {
   const evidence = evidenceFor(skill.name);
   const linked = evidence.length > 0;
   const base = 'inline-flex items-center gap-2.5 h-11 rounded-full border border-line bg-panel text-sm font-medium text-fg';
@@ -148,10 +148,18 @@ const SkillChip = ({ skill, dot, onOpenItem }) => {
     </>
   );
 
-  if (!linked) return <span className={`${base} ${pad}`}>{content}</span>;
+  const fade = `transition-opacity duration-300 ${dimmed ? 'opacity-20' : ''}`;
+
+  if (!linked) return <span className={`${base} ${pad} ${fade}`}>{content}</span>;
 
   return (
-    <span className="relative group inline-block">
+    <span
+      className={`relative group inline-block ${fade}`}
+      onMouseEnter={() => onHot(skill.name)}
+      onMouseLeave={() => onHot(null)}
+      onFocus={() => onHot(skill.name)}
+      onBlur={() => onHot(null)}
+    >
       <button
         type="button"
         aria-haspopup="true"
@@ -182,10 +190,17 @@ const SkillChip = ({ skill, dot, onOpenItem }) => {
 
 const Skills = ({ onOpenItem }) => {
   const [filter, setFilter] = useState('all');
+  const [hot, setHot] = useState(null);
   const categories = skillCategories.map((c, i) => ({ ...c, dot: CATEGORY_DOTS[i % CATEGORY_DOTS.length] }));
+  // Which projects/roles each skill appears in, so hovering one can light up its neighbours
+  const keys = useMemo(
+    () => Object.fromEntries(skillCategories.flatMap((c) => c.skills).map((s) => [s.name, evidenceFor(s.name).map((e) => `${e.section}-${e.id}`)])),
+    [],
+  );
+  const related = (name) => hot === null || name === hot || keys[name].some((key) => keys[hot].includes(key));
   const shown = filter === 'all' ? categories : categories.filter((c) => String(c.id) === filter);
   const tab = (active) =>
-    `px-4 py-2 rounded-full text-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
+    `px-4 min-h-[44px] rounded-full text-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
       active ? 'bg-fg text-bg border-fg' : 'border-line text-muted hover:text-fg hover:border-fg/40'
     }`;
 
@@ -204,7 +219,7 @@ const Skills = ({ onOpenItem }) => {
             Tools I <span className="italic text-accent">reach for</span>
           </h2>
           <p className="mt-6 max-w-xl text-muted">
-            Filter by area. Chips with an <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent align-middle" aria-hidden="true" /> dot link to where I used them. Hover or focus one to see.
+            Filter by area, or hover a skill to light up the ones I used it alongside. Chips with an <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent align-middle" aria-hidden="true" /> dot link to where I used them.
           </p>
         </motion.div>
 
@@ -235,7 +250,7 @@ const Skills = ({ onOpenItem }) => {
                 </div>
                 <div className="flex flex-wrap gap-2.5">
                   {category.skills.map((skill) => (
-                    <SkillChip key={skill.name} skill={skill} dot={category.dot} onOpenItem={onOpenItem} />
+                    <SkillChip key={skill.name} skill={skill} dot={category.dot} dimmed={!related(skill.name)} onHot={setHot} onOpenItem={onOpenItem} />
                   ))}
                 </div>
               </motion.div>

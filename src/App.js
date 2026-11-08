@@ -62,11 +62,12 @@ function App() {
   return (
     <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-bg text-fg relative">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-accent focus:text-bg focus:font-semibold">Skip to content</a>
       <ScrollProgress />
 
       {/* Main Content */}
       <Header scrollToSection={scrollToSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onOpenPalette={() => setPaletteOpen(true)} />
-      <main className="relative z-10">
+      <main id="main" tabIndex={-1} className="relative z-10 outline-none">
         <Story onOpenItem={openItem} />
         <About />
         <Projects openRequest={openRequest?.section === 'projects' ? openRequest : null} />

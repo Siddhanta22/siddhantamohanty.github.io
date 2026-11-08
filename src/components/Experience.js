@@ -1,12 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { FileText } from 'lucide-react';
 import { experiences } from '../data';
 import { viewResume } from '../utils/resume';
 import Kicker from './Kicker';
 
+// A marker on the thread that lights up once you scroll past it
+const ThreadNode = () => {
+  const [lit, setLit] = useState(false);
+  return (
+    <motion.span
+      onViewportEnter={() => setLit(true)}
+      viewport={{ once: true, margin: '0px 0px -45% 0px' }}
+      aria-hidden="true"
+      className={`hidden md:block absolute top-[3.6rem] left-[17.75rem] -translate-x-1/2 w-3 h-3 rounded-full border transition-all duration-500 ${
+        lit ? 'bg-accent border-accent scale-125 shadow-[0_0_0_6px_rgb(var(--accent)/0.2)]' : 'bg-bg border-line'
+      }`}
+    />
+  );
+};
+
 const Experience = ({ openRequest }) => {
   const [flashId, setFlashId] = useState(null);
+  const trackRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: trackRef, offset: ['start 65%', 'end 55%'] });
+  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   // A skill, the terminal or the palette asked for one of these roles: scroll to it and
   // let it glow for a moment so the eye finds it.
@@ -34,7 +52,11 @@ const Experience = ({ openRequest }) => {
           </h2>
         </motion.div>
 
-        <div>
+        <div ref={trackRef} className="relative">
+          {/* The thread: a hairline that fills with accent as you read down the roles */}
+          <div className="hidden md:block absolute top-0 bottom-0 left-[17.75rem] w-px bg-line" aria-hidden="true">
+            <motion.div style={{ scaleY: fill }} className="origin-top w-full h-full bg-accent" />
+          </div>
           {experiences.map((exp) => (
             <motion.article
               key={exp.id}
@@ -43,10 +65,11 @@ const Experience = ({ openRequest }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6 }}
-              className={`scroll-mt-24 grid md:grid-cols-[16rem_1fr] gap-x-14 gap-y-5 py-12 border-t border-line transition-colors duration-700 ${
+              className={`relative scroll-mt-24 grid md:grid-cols-[16rem_1fr] gap-x-14 gap-y-5 py-12 border-t border-line transition-colors duration-700 ${
                 flashId === exp.id ? 'bg-accent/10' : ''
               }`}
             >
+              <ThreadNode />
               <div>
                 <div className="md:sticky md:top-28">
                   <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent">{exp.dates}</p>

@@ -35,6 +35,19 @@ const Header = ({ scrollToSection, darkMode, toggleDarkMode, onOpenPalette }) =>
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // An open menu covers the page, so the page behind it must not scroll
+  useEffect(() => {
+    if (!open) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const close = () => { if (window.innerWidth >= 768) setOpen(false); };
+    window.addEventListener('resize', close);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener('resize', close);
+    };
+  }, [open]);
+
   const go = (id) => {
     scrollToSection(id);
     setOpen(false);
@@ -52,7 +65,7 @@ const Header = ({ scrollToSection, darkMode, toggleDarkMode, onOpenPalette }) =>
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             aria-label="Siddhanta Mohanty — back to top"
-            className="font-display text-2xl italic leading-none text-fg hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
+            className="font-display text-2xl italic leading-none text-fg hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded px-1 -mx-1 py-3"
           >
             Siddhanta<span className="text-accent">.</span>
           </button>
@@ -64,7 +77,7 @@ const Header = ({ scrollToSection, darkMode, toggleDarkMode, onOpenPalette }) =>
                 type="button"
                 onClick={() => go(item.id)}
                 aria-current={active === item.id ? 'true' : undefined}
-                className={`relative px-4 py-1.5 rounded-full text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
+                className={`relative px-4 min-h-[40px] rounded-full text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
                   active === item.id ? 'text-bg' : 'text-muted hover:text-fg'
                 }`}
               >

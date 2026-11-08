@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, MapPin, FileText, Check } from 'lucide-react';
 import Magnetic from './Magnetic';
@@ -18,6 +18,13 @@ const pill =
 
 const Contact = () => {
   const [copied, setCopied] = useState(false);
+  const glow = useRef(null);
+
+  // A soft light that follows the cursor across the section
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    if (glow.current) glow.current.style.background = `radial-gradient(420px circle at ${e.clientX - r.left}px ${e.clientY - r.top}px, rgb(var(--accent) / 0.16), transparent 70%)`;
+  };
 
   const copy = async () => {
     try {
@@ -31,7 +38,8 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden py-32 md:py-44 border-t border-line">
+    <section id="contact" onMouseMove={onMove} className="relative overflow-hidden py-32 md:py-44 border-t border-line">
+      <div ref={glow} className="absolute inset-0 pointer-events-none" aria-hidden="true" />
       {/* First light: the page ends at dawn */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -59,12 +67,16 @@ const Contact = () => {
             type="button"
             onClick={copy}
             aria-label={`Copy email address ${EMAIL}`}
-            className="group relative text-left font-display text-4xl sm:text-5xl md:text-7xl leading-tight text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
+            className="group relative text-left font-display text-[clamp(1.4rem,7vw,2.6rem)] sm:text-5xl md:text-7xl leading-tight text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
           >
-            <span className="bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_2px] bg-left-bottom group-hover:bg-[length:100%_2px] transition-[background-size] duration-500 break-all">
-              {EMAIL}
+            <span className="bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_2px] bg-left-bottom group-hover:bg-[length:100%_2px] transition-[background-size] duration-500 [overflow-wrap:anywhere]">
+              {[...EMAIL].map((ch, i) => (
+                <span key={i} className="inline-block transition-transform duration-300 group-hover:-translate-y-1.5" style={{ transitionDelay: `${i * 16}ms` }}>
+                  {ch}
+                </span>
+              ))}
             </span>
-            <span className="ml-4 inline-flex items-center gap-1.5 align-middle font-mono text-xs uppercase tracking-wide text-accent">
+            <span className="mt-3 sm:mt-0 sm:ml-4 flex sm:inline-flex items-center gap-1.5 align-middle font-mono text-xs uppercase tracking-wide text-accent">
               {copied ? <><Check className="w-4 h-4" /> Copied</> : 'Click to copy'}
             </span>
           </button>

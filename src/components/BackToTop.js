@@ -5,10 +5,17 @@ import { ArrowUp } from 'lucide-react';
 const BackToTop = () => {
   const [visible, setVisible] = useState(false);
 
+  // Shown only while scrolling up, so it never sits over text you are reading downward
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 1.2);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight * 1.2) setVisible(false);
+      else if (y < last - 6) setVisible(true);
+      else if (y > last + 6) setVisible(false);
+      last = y;
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 

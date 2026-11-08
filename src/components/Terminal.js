@@ -239,7 +239,7 @@ const TerminalCard = ({ onOpenItem }) => {
               key={cmd}
               type="button"
               onClick={() => { submit(cmd); inputRef.current?.focus(); }}
-              className="px-2 py-1 rounded-md border border-line bg-bg text-xs text-accent hover:border-accent hover:bg-accent/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+              className="px-3 min-h-[40px] rounded-md border border-line bg-bg text-xs text-accent hover:border-accent hover:bg-accent/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
             >
               {cmd}
             </button>

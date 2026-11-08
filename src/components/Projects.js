@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, ZoomIn, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { projects } from '../data';
+import TechConstellation from './TechConstellation';
 import Kicker from './Kicker';
 
 const imagePath = (filename) => `${process.env.PUBLIC_URL || ''}${filename}`;
@@ -74,7 +75,7 @@ const Lightbox = ({ title, shots, index, onClose, onNav }) => {
 };
 
 const linkClass =
-  'inline-flex items-center gap-2 px-4 py-2 rounded-full border border-line text-sm text-fg hover:border-accent hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70';
+  'inline-flex items-center gap-2 px-4 min-h-[44px] rounded-full border border-line text-sm text-fg hover:border-accent hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70';
 
 const Projects = ({ openRequest }) => {
   const [activeId, setActiveId] = useState(projects[0].id);
@@ -170,6 +171,12 @@ const Projects = ({ openRequest }) => {
 
                   <h3 className="mt-6 font-display text-5xl md:text-7xl leading-[0.95] text-fg">{project.title}</h3>
                   <p className="mt-5 text-xl md:text-2xl text-muted max-w-2xl leading-snug">{project.teaser}</p>
+
+                  {shots.length === 0 && (
+                    <div className="mt-10">
+                      <TechConstellation title={project.title} tech={project.technologies} />
+                    </div>
+                  )}
 
                   {shots.length > 0 && (
                     <div className="mt-10 grid grid-cols-2 gap-3">
