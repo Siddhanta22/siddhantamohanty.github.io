@@ -187,7 +187,7 @@ const Projects = ({ openRequest }) => {
                           onClick={() => openLightbox(project, s)}
                           aria-label={`Enlarge ${project.title} screenshot ${s + 1}`}
                           className={`group relative overflow-hidden rounded-2xl border border-line bg-panel cursor-zoom-in aspect-video focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 ${
-                            shots.length !== 2 && s === 0 ? 'col-span-2' : ''
+                            s === 0 || (shots.length % 2 === 0 && s === shots.length - 1) ? 'col-span-2' : ''
                           }`}
                         >
                           <img

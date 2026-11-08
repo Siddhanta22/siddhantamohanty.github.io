@@ -39,6 +39,7 @@ export const projects = [
     github: "https://github.com/Siddhanta22/Scout",
     live: null,
     icon: Compass,
+    screenshots: ["/scout-2.jpg", "/scout-3.jpg"]
   },
   {
     id: 6,
@@ -64,6 +65,7 @@ export const projects = [
     github: "https://github.com/Siddhanta22/yourAIbrief",
     live: "https://your-a-ibrief.vercel.app",
     icon: Mail,
+    screenshots: ["/yourAIbrief-1.jpg", "/yourAIbrief-2.jpg"]
   },
   {
     id: 9,
